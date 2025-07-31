@@ -43,8 +43,8 @@
         kupo = lib.mkNixosSystem {
           system = "aarch64-linux";
           modules = [
-            ./nixos/hosts/kupo
-            ./nixos/users/belak
+            ./nixos/hosts/kupo.nix
+            ./nixos/users/belak.nix
           ];
         };
       };

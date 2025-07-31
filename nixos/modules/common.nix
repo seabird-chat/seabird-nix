@@ -22,6 +22,8 @@
     };
   };
 
+  services.openssh.enable = true;
+
   environment.systemPackages = with pkgs; [
     git
     htop
