@@ -29,12 +29,4 @@
   ];
 
   time.timeZone = lib.mkDefault "Etc/UTC";
-
-  programs.zsh = {
-    enable = true;
-
-    promptInit = "";
-    setOptions = [ ];
-    enableGlobalCompInit = false;
-  };
 }

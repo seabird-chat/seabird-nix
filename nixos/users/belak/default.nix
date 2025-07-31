@@ -9,7 +9,6 @@
       "wheel"
       "dialout"
     ];
-    shell = pkgs.zsh;
   };
 
   #age.secrets.belak-password.file = ../../../../secrets/belak-password.age;
