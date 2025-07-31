@@ -21,7 +21,8 @@
       modules = [
         self.nixosModules.default
         agenix.nixosModules.default
-      ] ++ modules;
+      ]
+      ++ modules;
 
       specialArgs = {
         inherit self;
@@ -47,7 +48,8 @@
       modules = [
         #self.homeModules.default
         agenix.homeManagerModules.default
-      ] ++ modules;
+      ]
+      ++ modules;
     };
 
   # mkNixosDeploy takes a nixosConfig, generated using mkNixosSystem, and
