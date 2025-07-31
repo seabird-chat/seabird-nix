@@ -27,6 +27,13 @@
     }:
     let
       lib = import ./lib.nix inputs;
+      nixosHosts = [
+        "kupo"
+        "stiltzkin"
+        "moguo"
+        "monty"
+        "artemicion"
+      ];
     in
     {
       # There are a number of different formatters available: nixfmt, alejandra,
@@ -39,27 +46,29 @@
       homeModules.default = import ./home/modules;
       nixosModules.default = import ./nixos/modules;
 
-      nixosConfigurations = {
-        kupo = lib.mkNixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            ./nixos/hosts/kupo.nix
-            ./nixos/users/belak.nix
-          ];
-        };
-      };
+      nixosConfigurations = builtins.listToAttrs (
+        map (f: {
+          name = f;
+          value = lib.mkNixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              ./nixos/hosts/${f}.nix
+              ./nixos/users/belak.nix
+            ];
+          };
+        }) nixosHosts
+      );
 
-      deploy.nodes = {
-        kupo = {
-          hostname = "kupo.elwert.dev";
-          profilesOrder = [
-            #"belak"
-            "system"
-          ];
-
-          #profiles.belak = lib.mkHomeManagerDeploy self.homeConfigurations.belak;
-          profiles.system = lib.mkNixosDeploy self.nixosConfigurations.kupo;
-        };
-      };
+      deploy.nodes = builtins.listToAttrs (
+        map
+        (f: {
+          name = f;
+          value = {
+            hostname = "${f}.elwert.dev";
+            profiles.system = lib.mkNixosDeploy self.nixosConfigurations.${f};
+          };
+        })
+          nixosHosts
+      );
     };
 }
