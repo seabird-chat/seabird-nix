@@ -1,6 +1,21 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -18,25 +33,32 @@
       # that rather than stock nixfmt.
       formatter = lib.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
-      overlays.default = final: _prev: {
-        seabird = final.lib.packagesFromDirectoryRecursive {
-          callPackage = final.callPackage;
-          directory = ./pkgs;
+      overlays = import ./overlays.nix inputs;
+
+      homeModules.default = import ./home/modules;
+      nixosModules.default = import ./nixos/modules;
+
+      nixosConfigurations = {
+        kupo = lib.mkNixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./nixos/hosts/kupo
+            ./nixos/users/belak
+          ];
         };
       };
 
-      packages = lib.forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-          };
-        in
-        nixpkgs.lib.packagesFromDirectoryRecursive {
-          callPackage = pkgs.callPackage;
-          directory = ./pkgs;
-        }
-      );
+      deploy.nodes = {
+        kupo = {
+          hostname = "kupo.elwert.dev";
+          profilesOrder = [
+            #"belak"
+            "system"
+          ];
 
+          #profiles.belak = lib.mkHomeManagerDeploy self.homeConfigurations.belak;
+          profiles.system = lib.mkNixosDeploy self.nixosConfigurations.kupo;
+        };
+      };
     };
 }
