@@ -22,7 +22,6 @@ in
       "uas" # usb_storage but newer
       "pcie_brcmstb" # needed for the PCIe bus to work
       "reset_raspberrypi" # needed to get the VL805 USB controller firmware to load
-
     ];
 
     boot.initrd.kernelModules = [ ];
