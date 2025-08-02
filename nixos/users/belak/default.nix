@@ -3,7 +3,7 @@
   users.users.belak = {
     home = "/home/belak";
     isNormalUser = true;
-    #hashedPasswordFile = config.age.secrets.belak-password.path;
+    hashedPasswordFile = config.age.secrets.belak-password.path;
     description = "Kaleb Elwert";
     extraGroups = [
       "wheel"
@@ -11,5 +11,5 @@
     ];
   };
 
-  #age.secrets.belak-password.file = ../../../../secrets/belak-password.age;
+  age.secrets.belak-password.file = ../../../secrets/belak-password.age;
 }
