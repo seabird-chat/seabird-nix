@@ -4,7 +4,6 @@
     ./nixpkgs.nix
     ./podman.nix
 
-    ./hardware
     ./services
   ];
 }

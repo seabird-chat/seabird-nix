@@ -1,11 +1,17 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   networking = {
-    hostName = "moguo";
+    hostName = "vivi";
     domain = "elwert.dev";
   };
 
-  seabird.hardware.raspberry-pi-4.enable = true;
+  seabird.services = {
+    seabird-core.enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

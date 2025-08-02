@@ -21,7 +21,6 @@ in
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers.seabird-core = {
       image = "ghcr.io/seabird-chat/seabird-core:${cfg.tag}";
-      podman.user = "seabird-core";
       environment = {
         DATABASE_URL = "sqlite:///data/seabird-core.db";
       };
@@ -33,12 +32,8 @@ in
       ];
     };
 
-    users.groups."seabird-core" = { };
-    users.users."seabird-core" = {
-      group = "seabird-core";
-      isSystemUser = true;
-      home = "/var/lib/seabird-core";
-      createHome = true;
-    };
+    systemd.tmpfiles.rules = [
+      "d /var/lib/seabird-core 0755 root root -"
+    ];
   };
 }
