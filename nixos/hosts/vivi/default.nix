@@ -11,6 +11,28 @@
 
   seabird.services = {
     seabird-core.enable = true;
+    seabird-irc-backend.whyte = {
+      enable = false;
+      ircHost = "ircs+unsafe://irc.hs.gy:9999";
+      ircChannels = [
+        "#adventofcode"
+        "#coffee"
+        "#encoded"
+        "#encoded-test"
+        "#gemini"
+        "#hamateurs"
+        "#homelab"
+        "#mtg"
+        "#osrs"
+        "#parenting"
+        "#politics"
+        "#music"
+        "#rocketcraft"
+        "#rust"
+        "#stonks"
+        "#weight-loss-challenge"
+      ];
+    };
   };
 
   # This value determines the NixOS release from which the default

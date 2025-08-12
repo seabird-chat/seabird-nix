@@ -17,4 +17,5 @@ let
 in
 {
   "secrets/belak-password.age".publicKeys = users ++ systems;
+  "secrets/seabird-irc-backend-whyte.age".publicKeys = users ++ systems;
 }
