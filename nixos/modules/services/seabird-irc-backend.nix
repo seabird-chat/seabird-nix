@@ -14,35 +14,43 @@ in
         lib.types.submodule (
           { name, config, ... }:
           {
-            enable = lib.mkEnableOption "seabird-irc-backend";
-            name = lib.mkOption {
-              default = name;
-              type = lib.types.str;
-            };
-            tag = lib.mkOption {
-              default = "0.2.1";
-              type = lib.types.str;
-            };
-            ircNick = lib.mkOption {
-              type = lib.types.str;
-            };
-            ircUser = lib.mkOption {
-              default = cfg.ircNick;
-              type = lib.types.str;
-            };
-            ircName = lib.mkOption {
-              default = cfg.ircUser;
-              type = lib.types.str;
-            };
-            ircHost = lib.mkOption {
-              type = lib.types.str;
-            };
-            ircChannels = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
-            };
-            ircCommandPrefix = lib.mkOption {
-              type = lib.types.str;
-              default = "!";
+            options = {
+              enable = lib.mkEnableOption "seabird-irc-backend";
+              name = lib.mkOption {
+                default = name;
+                type = lib.types.str;
+              };
+              tag = lib.mkOption {
+                default = "0.2.3";
+                type = lib.types.str;
+              };
+              irc = lib.mkOption {
+                type = lib.types.submodule {
+                  options = {
+                    nick = lib.mkOption {
+                      type = lib.types.str;
+                    };
+                    user = lib.mkOption {
+                      default = config.irc.nick;
+                      type = lib.types.str;
+                    };
+                    name = lib.mkOption {
+                      default = config.irc.user;
+                      type = lib.types.str;
+                    };
+                    host = lib.mkOption {
+                      type = lib.types.str;
+                    };
+                    channels = lib.mkOption {
+                      type = lib.types.listOf lib.types.str;
+                    };
+                    commandPrefix = lib.mkOption {
+                      type = lib.types.str;
+                      default = "!";
+                    };
+                  };
+                };
+              };
             };
           }
         )
@@ -50,28 +58,43 @@ in
     };
   };
 
-  config = lib.attrsets.concatMapAttrs (
-    name: backendCfg:
-    lib.mkIf backendCfg.enable {
-      virtualisation.oci-containers.containers."seabird-irc-backend-${name}" = {
-        image = "ghcr.io/seabird-chat/seabird-irc-backend:${cfg.tag}";
-        environment = {
-          SEABIRD_HOST = "http://seabird-core-{{ seabird_env }}:11235";
-          IRC_NICK = backendCfg.ircNick;
-          IRC_USER = backendCfg.ircUser;
-          IRC_NAME = backendCfg.ircName;
-          IRC_HOST = backendCfg.ircHost;
-          IRC_CHANNELS = lib.strings.concatStringsSep "," backendCfg.ircChannels;
-          IRC_COMMAND_PREFIX = backendCfg.ircCommandPrefix;
+  config = {
+    systemd.services = lib.attrsets.concatMapAttrs (
+      name: value:
+      lib.mkIf value.enable {
+        "seabird-irc-backend-${name}" = {
+          wantedBy = [ "multi-user.target" ];
+          wants = [ "network-online.target" ];
+          after = [ "network-online.target" ];
+
+          environment = {
+            SEABIRD_HOST = "http://localhost:8080";
+            IRC_NICK = value.irc.nick;
+            IRC_USER = value.irc.user;
+            IRC_NAME = value.irc.name;
+            IRC_HOST = value.irc.host;
+            IRC_CHANNELS = lib.strings.concatStringsSep "," value.irc.channels;
+            IRC_COMMAND_PREFIX = value.irc.commandPrefix;
+          };
+
+          serviceConfig = {
+            DynamicUser = true;
+            Restart = "always";
+            ExecStart = "${pkgs.seabird.seabird-irc-backend}/bin/seabird-irc-backend";
+            EnvironmentFile = [
+              config.age.secrets."seabird-irc-backend-${name}".path
+            ];
+          };
+
         };
+      }
+    ) cfg;
 
-        environmentFiles = [
-          config.age.secrets."seabird-irc-backend-${name}".path
-        ];
-      };
-
-      age.secrets."seabird-irc-backend-${name}".file = ../../../secrets
-      + "/seabird-irc-backend-${name}.age";
-    }
-  ) cfg;
+    age.secrets = lib.attrsets.concatMapAttrs (
+      name: value:
+      lib.mkIf value.enable {
+        "seabird-irc-backend-${name}".file = ../../../secrets + "/seabird-irc-backend-${name}.age";
+      }
+    ) cfg;
+  };
 }

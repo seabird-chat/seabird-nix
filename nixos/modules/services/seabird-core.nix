@@ -11,29 +11,24 @@ in
   options = {
     seabird.services.seabird-core = {
       enable = lib.mkEnableOption "seabird-core";
-      tag = lib.mkOption {
-        default = "0.3.2";
-        type = lib.types.str;
-      };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.oci-containers.containers.seabird-core = {
-      image = "ghcr.io/seabird-chat/seabird-core:${cfg.tag}";
+    systemd.services.seabird-core = {
+      wantedBy = [ "multi-user.target" ];
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
       environment = {
-        DATABASE_URL = "sqlite:///data/seabird-core.db";
+        DATABASE_URL = "sqlite:///var/lib/seabird-core/seabird-core.db";
+        SEABIRD_BIND_HOST = "127.0.0.1:8080";
       };
-      volumes = [
-        "/var/lib/seabird-core:/data"
-      ];
-      ports = [
-        "127.0.0.1:8080:11235"
-      ];
+      serviceConfig = {
+        DynamicUser = true;
+        Restart = "always";
+        ExecStart = "${pkgs.seabird.seabird-core}/bin/seabird-core";
+        StateDirectory = "seabird-core";
+      };
     };
-
-    systemd.tmpfiles.rules = [
-      "d /var/lib/seabird-core 0755 root root -"
-    ];
   };
 }

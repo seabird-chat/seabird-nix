@@ -45,6 +45,14 @@
         }
       );
 
+      packages = lib.forAllSystems (
+        system:
+        nixpkgs.lib.packagesFromDirectoryRecursive {
+          callPackage = nixpkgs.legacyPackages.${system}.callPackage;
+          directory = ./pkgs;
+        }
+      );
+
       overlays = import ./overlays.nix inputs;
 
       nixosModules.default = import ./nixos/modules;

@@ -1,4 +1,5 @@
 {
+  self,
   nixpkgs-unstable,
   agenix,
   deploy-rs,
@@ -6,10 +7,7 @@
 }:
 {
   seabird = final: _prev: {
-    seabird = final.lib.packagesFromDirectoryRecursive {
-      callPackage = final.callPackage;
-      directory = ./pkgs;
-    };
+    seabird = self.packages.${final.system};
   };
 
   agenix = agenix.overlays.default;
