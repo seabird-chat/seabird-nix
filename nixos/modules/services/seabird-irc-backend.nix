@@ -20,10 +20,6 @@ in
                 default = name;
                 type = lib.types.str;
               };
-              tag = lib.mkOption {
-                default = "0.2.3";
-                type = lib.types.str;
-              };
               irc = lib.mkOption {
                 type = lib.types.submodule {
                   options = {
