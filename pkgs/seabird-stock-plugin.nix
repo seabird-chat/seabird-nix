@@ -7,19 +7,19 @@
 
 buildGoModule rec {
   pname = "seabird-stock-plugin";
-  version = "0.3.3";
+  version = "0.4.1";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-+eF6qeZ5AnqbDLTEIYBdFysCt4g9uWoYOmiFLg3AB5k=";
+    hash = lib.fakeHash;
   };
 
-  vendorHash = "sha256-0ih5UrfTrjdqEXlC8PSgskjpLcY/aNYALlI4NHkH85M=";
+  vendorHash = lib.fakeHash;
 
   subPackages = [
-    "cmd/seabird-stock-plugin"
+    "cmd/${pname}"
   ];
 
   ldflags = [

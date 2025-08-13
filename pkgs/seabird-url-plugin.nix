@@ -7,19 +7,19 @@
 
 buildGoModule rec {
   pname = "seabird-url-plugin";
-  version = "0.1.1";
+  version = "0.1.2";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-7xly0XN2v3OKB8gXipww0RSn0XOoPlaiUz/W3dIErsg=";
+    hash = "sha256-H7CWs1HmQ0RCIrgDfPowAWGW+uzn/5v+LZ4Ctb5bQvY=";
   };
 
-  vendorHash = "sha256-0p2fbo9Bxo153Jf0vlqmMLT/pHysPxt1mA+z4Pim4rI=";
+  vendorHash = "sha256-chseg0rLYi1j4AA9i4uqbMmvL+n3xTotQPPN5fr/2bc=";
 
   subPackages = [
-    "cmd/seabird-url-plugin"
+    "cmd/${pname}"
   ];
 
   ldflags = [

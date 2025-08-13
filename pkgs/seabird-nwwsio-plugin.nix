@@ -6,17 +6,17 @@
 }:
 
 buildGoModule rec {
-  pname = "seabird-irc-backend";
-  version = "0.2.0";
+  pname = "seabird-nwwsio-plugin";
+  version = "0.1.0";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-a+4Z9VnO8PsM8kZdCjVk8D0w0v/DH+Ev+z0kWCBABc4=";
+    hash = lib.fakeHash;
   };
 
-  vendorHash = "sha256-TJAeHtQP9lxrWguGoBQQBEUzTdvG5NJA/JNXVAEGbVw=";
+  vendorHash = lib.fakeHash;
 
   subPackages = [
     "cmd/${pname}"
