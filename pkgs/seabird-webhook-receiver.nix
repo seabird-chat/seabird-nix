@@ -13,10 +13,10 @@ buildGoModule rec {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = lib.fakeHash;
+    hash = "sha256-93RTNFWiMQ7fKv31HTP6cNPdX1DeN7vPFh1MxM+O9JE=";
   };
 
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-ZSX2CD6fLlYsi9IS5i6+A8WlefafXt6zcg6yZQ8oA7Q=";
 
   subPackages = [
     "cmd/${pname}"
