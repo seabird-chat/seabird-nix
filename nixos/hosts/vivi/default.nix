@@ -37,6 +37,8 @@
         ];
       };
     };
+
+    seabird-plugin-bundle.enable = true;
   };
 
   environment.systemPackages = [
