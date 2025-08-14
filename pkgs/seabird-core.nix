@@ -17,7 +17,6 @@ rustPlatform.buildRustPackage rec {
     fetchSubmodules = true;
   };
 
-  useFetchCargoVendor = true;
   cargoLock.lockFile = src + /Cargo.lock;
 
   nativeBuildInputs = [
