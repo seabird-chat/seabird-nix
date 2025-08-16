@@ -11,7 +11,37 @@
 
   seabird.services = {
     seabird-core.prod.enable = true;
-    seabird-irc-backend.whyte.enable = true;
+
+    seabird-proxy-plugin = {
+      enable = true;
+
+      channelConfig = [
+
+      ];
+    };
+
+    seabird-irc-backend.whyte = {
+      enable = true;
+      channels = [
+        "#adventofcode"
+        "#coffee"
+        "#encoded"
+        "#encoded-test"
+        "#gemini"
+        "#hamateurs"
+        "#homelab"
+        "#mtg"
+        "#osrs"
+        "#parenting"
+        "#politics"
+        "#music"
+        "#rocketcraft"
+        "#rust"
+        "#stonks"
+        "#weight-loss-challenge"
+      ];
+    };
+
     seabird-plugin-bundle.enable = false;
   };
 

@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+
 let
   cfg = config.seabird.services.seabird-core;
 in

@@ -20,6 +20,13 @@ in
                 default = name;
                 type = lib.types.str;
               };
+              channels = lib.mkOption {
+                type = lib.types.listOf lib.types.str;
+              };
+              commandPrefix = lib.mkOption {
+                type = lib.types.str;
+                default = "!";
+              };
             };
           }
         )
@@ -31,13 +38,15 @@ in
     systemd.services = lib.attrsets.concatMapAttrs (
       name: value:
       lib.mkIf value.enable {
-        "seabird-irc-backend-${name}" = {
+        "seabird-irc-backend-${value.name}" = {
           wantedBy = [ "multi-user.target" ];
           wants = [ "network-online.target" ];
           after = [ "network-online.target" ];
 
           environment = {
             SEABIRD_HOST = "http://localhost:8080";
+            IRC_CHANNELS = lib.strings.concatStringsSep "," value.channels;
+            IRC_COMMAND_PREFIX = value.commandPrefix;
           };
 
           serviceConfig = {
@@ -45,10 +54,9 @@ in
             Restart = "always";
             ExecStart = "${pkgs.seabird.seabird-irc-backend}/bin/seabird-irc-backend";
             EnvironmentFile = [
-              config.age.secrets."seabird-irc-backend-${name}".path
+              config.age.secrets."seabird-irc-backend-${value.name}".path
             ];
           };
-
         };
       }
     ) cfg;
@@ -56,7 +64,7 @@ in
     age.secrets = lib.attrsets.concatMapAttrs (
       name: value:
       lib.mkIf value.enable {
-        "seabird-irc-backend-${name}".file = ../../../secrets + "/seabird-irc-backend-${name}.age";
+        "seabird-irc-backend-${value.name}".file = ../../../secrets + "/seabird-irc-backend-${value.name}.age";
       }
     ) cfg;
   };
