@@ -64,7 +64,8 @@ in
     age.secrets = lib.attrsets.concatMapAttrs (
       name: value:
       lib.mkIf value.enable {
-        "seabird-irc-backend-${value.name}".file = ../../../secrets + "/seabird-irc-backend-${value.name}.age";
+        "seabird-irc-backend-${value.name}".file = ../../../secrets
+        + "/seabird-irc-backend-${value.name}.age";
       }
     ) cfg;
   };

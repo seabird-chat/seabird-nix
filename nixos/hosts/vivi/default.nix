@@ -10,18 +10,34 @@
   };
 
   seabird.services = {
-    seabird-core.prod.enable = true;
+    seabird-core.enable = true;
 
     seabird-proxy-plugin = {
       enable = true;
 
-      channelConfig = [
-
+      channelGroups = [
+        [
+          {
+            id = "irc://seabird/%23minecraft";
+            name = "IRC";
+            format = "irc";
+          }
+          {
+            id = "discord://seabird/854033690669744148";
+            name = "Discord";
+            format = "discord";
+          }
+          {
+            id = "minecraft://minecraft/minecraft";
+            name = "Minecraft";
+            format = "minecraft";
+          }
+        ]
       ];
     };
 
     seabird-irc-backend.whyte = {
-      enable = true;
+      enable = false;
       channels = [
         "#adventofcode"
         "#coffee"
