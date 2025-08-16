@@ -1,10 +1,7 @@
 {
-  lib,
   buildGoModule,
   fetchFromGitHub,
-  stdenv,
 }:
-
 buildGoModule rec {
   pname = "seabird-github-plugin";
   version = "0.3.1";

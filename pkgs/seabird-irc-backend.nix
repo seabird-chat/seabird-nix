@@ -1,10 +1,7 @@
 {
-  lib,
   buildGoModule,
   fetchFromGitHub,
-  stdenv,
 }:
-
 buildGoModule rec {
   pname = "seabird-irc-backend";
   version = "0.2.0";

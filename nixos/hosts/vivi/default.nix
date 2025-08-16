@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -38,7 +38,7 @@
       };
     };
 
-    seabird-plugin-bundle.enable = true;
+    seabird-plugin-bundle.enable = false;
   };
 
   environment.systemPackages = [
