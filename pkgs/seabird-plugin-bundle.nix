@@ -3,6 +3,7 @@
   rustPlatform,
   pkgs,
 }:
+
 rustPlatform.buildRustPackage rec {
   pname = "seabird-plugin-bundle";
   version = "0.2.1";

@@ -10,34 +10,8 @@
   };
 
   seabird.services = {
-    seabird-core.enable = true;
-
-    seabird-irc-backend.whyte = {
-      enable = false;
-      irc = {
-        host = "ircs+unsafe://irc.hs.gy:9999";
-        nick = "seabird-beta-2";
-        channels = [
-          "#adventofcode"
-          "#coffee"
-          "#encoded"
-          "#encoded-test"
-          "#gemini"
-          "#hamateurs"
-          "#homelab"
-          "#mtg"
-          "#osrs"
-          "#parenting"
-          "#politics"
-          "#music"
-          "#rocketcraft"
-          "#rust"
-          "#stonks"
-          "#weight-loss-challenge"
-        ];
-      };
-    };
-
+    seabird-core.prod.enable = true;
+    seabird-irc-backend.whyte.enable = true;
     seabird-plugin-bundle.enable = false;
   };
 

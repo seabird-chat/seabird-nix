@@ -20,33 +20,6 @@ in
                 default = name;
                 type = lib.types.str;
               };
-              irc = lib.mkOption {
-                type = lib.types.submodule {
-                  options = {
-                    nick = lib.mkOption {
-                      type = lib.types.str;
-                    };
-                    user = lib.mkOption {
-                      default = config.irc.nick;
-                      type = lib.types.str;
-                    };
-                    name = lib.mkOption {
-                      default = config.irc.user;
-                      type = lib.types.str;
-                    };
-                    host = lib.mkOption {
-                      type = lib.types.str;
-                    };
-                    channels = lib.mkOption {
-                      type = lib.types.listOf lib.types.str;
-                    };
-                    commandPrefix = lib.mkOption {
-                      type = lib.types.str;
-                      default = "!";
-                    };
-                  };
-                };
-              };
             };
           }
         )
@@ -65,12 +38,6 @@ in
 
           environment = {
             SEABIRD_HOST = "http://localhost:8080";
-            IRC_NICK = value.irc.nick;
-            IRC_USER = value.irc.user;
-            IRC_NAME = value.irc.name;
-            IRC_HOST = value.irc.host;
-            IRC_CHANNELS = lib.strings.concatStringsSep "," value.irc.channels;
-            IRC_COMMAND_PREFIX = value.irc.commandPrefix;
           };
 
           serviceConfig = {
