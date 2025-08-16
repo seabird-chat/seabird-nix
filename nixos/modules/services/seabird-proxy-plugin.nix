@@ -13,27 +13,7 @@ in
     seabird.services.seabird-proxy-plugin = {
       enable = lib.mkEnableOption "seabird-proxy-plugin";
       channelGroups = lib.mkOption {
-        type = lib.types.listOf (
-          lib.types.listOf (
-            lib.types.submodule {
-              options = {
-                id = lib.mkOption {
-                  type = lib.types.str;
-                };
-                name = lib.mkOption {
-                  type = lib.types.str;
-                };
-                format = lib.mkOption {
-                  type = lib.types.enum [
-                    "discord"
-                    "irc"
-                    "minecraft"
-                  ];
-                };
-              };
-            }
-          )
-        );
+        type = lib.types.listOf (lib.types.listOf lib.types.str);
       };
     };
   };
@@ -41,20 +21,31 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services.seabird-proxy-plugin =
       let
+        formatForId = (
+          id:
+          if lib.strings.hasPrefix "discord://" id then
+            "Discord"
+          else if lib.strings.hasPrefix "irc://" id then
+            "IRC"
+          else if lib.strings.hasPrefix "minecraft://" id then
+            "Minecraft"
+          else
+            abort "id prefix is invalid"
+        );
         lookupUserPrefix =
           format: name:
           {
-            discord = "**";
-            irc = "\\u0002";
-            minecraft = "";
+            Discord = "**";
+            IRC = "\\u0002";
+            Minecraft = "";
           }
           ."${format}";
         lookupUserSuffix =
           format: name:
           {
-            discord = " (${name})**";
-            irc = "[${name}]\\u000f";
-            minecraft = " (${name})";
+            Discord = " (${name})**";
+            IRC = "[${name}]\\u000f";
+            Minecraft = " (${name})";
           }
           ."${format}";
         channelConfig = builtins.filter (x: x.source != x.target) (
@@ -64,11 +55,15 @@ in
               lib.mapCartesianProduct
                 (
                   { source, target }:
+                  let
+                    targetFormat = formatForId target;
+                    sourceFormat = formatForId source;
+                  in
                   {
                     source = source.id;
                     target = target.id;
-                    user_prefix = lookupUserPrefix target.format source.name;
-                    user_suffix = lookupUserSuffix target.format source.name;
+                    user_prefix = lookupUserPrefix targetFormat sourceFormat;
+                    user_suffix = lookupUserSuffix targetFormat sourceFormat;
                   }
                 )
                 {

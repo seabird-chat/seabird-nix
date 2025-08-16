@@ -17,21 +17,57 @@
 
       channelGroups = [
         [
-          {
-            id = "irc://seabird/%23minecraft";
-            name = "IRC";
-            format = "irc";
-          }
-          {
-            id = "discord://seabird/854033690669744148";
-            name = "Discord";
-            format = "discord";
-          }
-          {
-            id = "minecraft://minecraft/minecraft";
-            name = "Minecraft";
-            format = "minecraft";
-          }
+          "irc://seabird/%23minecraft"
+          "discord://seabird/854033690669744148"
+          "minecraft://minecraft/minecraft"
+        ]
+        [
+          "irc://seabird/%23main"
+          "discord://seabird/1314229653170290718"
+        ]
+        [
+          "irc://seabird/%23parenting"
+          "discord://seabird/1259864065673531565"
+        ]
+        [
+          "irc://seabird/%23osrs"
+          "discord://seabird/1308611261449113671"
+        ]
+        [
+          "irc://seabird/%23rocketcraft"
+          "discord://seabird/695070284935593998"
+        ]
+        [
+          "irc://seabird/%23encoded%2Dtest"
+          "discord://seabird/721047808077070446"
+        ]
+        [
+          "irc://seabird/%23encoded"
+          "discord://seabird/708529666251554868"
+        ]
+        [
+          "irc://seabird/%23hamateurs"
+          "discord://seabird/1368239310322794567"
+        ]
+        [
+          "irc://seabird/%23homelab"
+          "discord://seabird/739188060171927633"
+        ]
+        [
+          "irc://seabird/%23mtg"
+          "discord://seabird/759988791510695976"
+        ]
+        [
+          "irc://seabird/%23rust"
+          "discord://seabird/779077982916444299"
+        ]
+        [
+          "irc://seabird/%23politics"
+          "discord://seabird/773402198222307332"
+        ]
+        [
+          "irc://seabird/%23music"
+          "discord://seabird/788837956101865472"
         ]
       ];
     };
