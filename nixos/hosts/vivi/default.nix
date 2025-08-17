@@ -12,6 +12,31 @@
   seabird.services = {
     seabird-core.enable = true;
 
+    seabird-discord-backend.enable = false;
+
+    seabird-irc-backend.whyte = {
+      enable = false;
+      channels = [
+        "#adventofcode"
+        "#coffee"
+        "#encoded"
+        "#encoded-test"
+        "#gemini"
+        "#hamateurs"
+        "#homelab"
+        "#mtg"
+        "#osrs"
+        "#parenting"
+        "#politics"
+        "#music"
+        "#rocketcraft"
+        "#rust"
+        "#stonks"
+        "#weight-loss-challenge"
+      ];
+    };
+
+
     seabird-proxy-plugin = {
       enable = true;
 
@@ -72,29 +97,7 @@
       ];
     };
 
-    seabird-irc-backend.whyte = {
-      enable = false;
-      channels = [
-        "#adventofcode"
-        "#coffee"
-        "#encoded"
-        "#encoded-test"
-        "#gemini"
-        "#hamateurs"
-        "#homelab"
-        "#mtg"
-        "#osrs"
-        "#parenting"
-        "#politics"
-        "#music"
-        "#rocketcraft"
-        "#rust"
-        "#stonks"
-        "#weight-loss-challenge"
-      ];
-    };
-
-    seabird-plugin-bundle.enable = false;
+    seabird-plugin-bundle.enable = true;
   };
 
   environment.systemPackages = [
