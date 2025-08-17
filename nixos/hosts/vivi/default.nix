@@ -14,10 +14,10 @@
 
     # Backends
 
-    seabird-discord-backend.enable = false;
+    seabird-discord-backend.enable = true;
 
     seabird-irc-backend.whyte = {
-      enable = false;
+      enable = true;
       channels = [
         "#adventofcode"
         "#coffee"
