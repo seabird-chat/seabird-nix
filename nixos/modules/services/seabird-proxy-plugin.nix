@@ -60,8 +60,8 @@ in
                     sourceFormat = formatForId source;
                   in
                   {
-                    source = source.id;
-                    target = target.id;
+                    source = source;
+                    target = target;
                     user_prefix = lookupUserPrefix targetFormat sourceFormat;
                     user_suffix = lookupUserSuffix targetFormat sourceFormat;
                   }
