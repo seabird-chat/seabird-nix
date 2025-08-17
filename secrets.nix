@@ -17,8 +17,17 @@ let
 in
 {
   "secrets/belak-password.age".publicKeys = users ++ systems;
+
+  # Backends
   "secrets/seabird-discord-backend.age".publicKeys = users ++ systems;
   "secrets/seabird-irc-backend-whyte.age".publicKeys = users ++ systems;
+
+  # Plugins
+  "secrets/seabird-github-plugin.age".publicKeys = users ++ systems;
   "secrets/seabird-plugin-bundle.age".publicKeys = users ++ systems;
   "secrets/seabird-proxy-plugin.age".publicKeys = users ++ systems;
+  "secrets/seabird-stock-plugin.age".publicKeys = users ++ systems;
+  "secrets/seabird-url-plugin.age".publicKeys = users ++ systems;
+
+  # TODO: move common API keys into separate files
 }

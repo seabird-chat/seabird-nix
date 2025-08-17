@@ -12,6 +12,8 @@
   seabird.services = {
     seabird-core.enable = true;
 
+    # Backends
+
     seabird-discord-backend.enable = false;
 
     seabird-irc-backend.whyte = {
@@ -36,6 +38,29 @@
       ];
     };
 
+    # Plugins
+
+    seabird-github-plugin = {
+      enable = true;
+
+      repos = {
+        default = "seabird-chat/seabird-plugin-bundle";
+        core = "seabird-chat/seabird-core";
+        datadog = "seabird-chat/seabird-datadog-plugin";
+        discord = "seabird-chat/seabird-discord-backend";
+        irc = "seabird-chat/seabird-irc-backend";
+        minecraft = "seabird-chat/seabird-minecraft-backend";
+        adventofcode = "seabird-chat/seabird-adventofcode-plugin";
+        github = "seabird-chat/seabird-github-plugin";
+        proxy = "seabird-chat/seabird-proxy-plugin";
+        stock = "seabird-chat/seabird-stock-plugin";
+        url = "seabird-chat/seabird-url-plugin";
+        webhook = "seabird-chat/seabird-webhook-receiver";
+        test = "seabird-chat/integrations-test";
+      };
+    };
+
+    seabird-plugin-bundle.enable = true;
 
     seabird-proxy-plugin = {
       enable = true;
@@ -97,7 +122,9 @@
       ];
     };
 
-    seabird-plugin-bundle.enable = true;
+    seabird-stock-plugin.enable = true;
+
+    seabird-url-plugin.enable = true;
   };
 
   environment.systemPackages = [
