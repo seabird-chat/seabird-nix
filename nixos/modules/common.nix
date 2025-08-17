@@ -22,10 +22,6 @@
     };
   };
 
-  # Podman stores a number of files in /tmp and has issues when machines reboot,
-  # so it's easiest to make sure they get cleared.
-  boot.tmp.cleanOnBoot = true;
-
   users.mutableUsers = false;
 
   services.openssh.enable = true;
