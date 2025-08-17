@@ -34,17 +34,23 @@ in
         );
         lookupUserPrefix =
           format: name:
+          let
+            ircBold = builtins.fromJSON ''"\u0002" '';
+          in
           {
             Discord = "**";
-            IRC = "\\u0002";
+            IRC = "${ircBold}";
             Minecraft = "";
           }
           ."${format}";
         lookupUserSuffix =
           format: name:
+          let
+            ircReset = builtins.fromJSON ''"\u000f" '';
+          in
           {
             Discord = " (${name})**";
-            IRC = "[${name}]\\u000f";
+            IRC = "[${name}]${ircReset}";
             Minecraft = " (${name})";
           }
           ."${format}";
