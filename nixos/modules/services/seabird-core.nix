@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-core = {
       enable = lib.mkEnableOption "seabird-core";
+      domain = lib.mkOption {
+        type = lib.types.str;
+        default = "api.seabird.chat";
+      };
     };
   };
 
@@ -30,6 +34,13 @@ in
         ExecStart = "${pkgs.seabird.seabird-core}/bin/seabird-core";
         StateDirectory = "seabird-core";
       };
+    };
+
+    seabird.haproxy.backends.seabird-core = {
+      servers.seabird-core = "localhost:8080";
+      matchers = [
+        "if { req.hdr(host) -i api.seabird.chat }"
+      ];
     };
   };
 }

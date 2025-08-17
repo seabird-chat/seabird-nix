@@ -9,6 +9,8 @@
     domain = "elwert.dev";
   };
 
+  seabird.haproxy.enable = true;
+
   seabird.services = {
     seabird-core.enable = true;
 
