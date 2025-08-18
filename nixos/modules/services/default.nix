@@ -14,6 +14,6 @@
     ./seabird-url-plugin.nix
 
     # Other
-    #./seabird-webhook-receiver.nix
+    ./seabird-webhook-receiver.nix
   ];
 }

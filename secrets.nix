@@ -29,5 +29,8 @@ in
   "secrets/seabird-stock-plugin.age".publicKeys = users ++ systems;
   "secrets/seabird-url-plugin.age".publicKeys = users ++ systems;
 
+  # Other
+  "secrets/seabird-webhook-receiver.age".publicKeys = users ++ systems;
+
   # TODO: move common API keys into separate files
 }

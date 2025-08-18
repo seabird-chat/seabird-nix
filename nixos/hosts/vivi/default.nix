@@ -127,6 +127,14 @@
     seabird-stock-plugin.enable = true;
 
     seabird-url-plugin.enable = true;
+
+    # Other
+
+    seabird-webhook-receiver = {
+      enable = true;
+
+      target = "discord://seabird/721047808077070446";
+    };
   };
 
   environment.systemPackages = [
