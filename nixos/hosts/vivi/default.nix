@@ -10,6 +10,7 @@
   };
 
   seabird.haproxy.enable = true;
+  seabird.haproxy.package = pkgs.unstable.haproxy;
 
   seabird.services = {
     seabird-core = {

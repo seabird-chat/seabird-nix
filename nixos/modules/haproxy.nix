@@ -13,6 +13,8 @@ in
     seabird.haproxy = {
       enable = lib.mkEnableOption "haproxy";
 
+      package = lib.mkPackageOption pkgs "haproxy" { };
+
       backends = lib.mkOption {
         type = lib.types.attrsOf (
           lib.types.submodule (
@@ -66,9 +68,11 @@ in
       {
         enable = true;
 
+        package = cfg.package;
+
         config = ''
           global
-            log /dev/log local0 info
+            log /dev/log local0 debug
 
           defaults
             log global
