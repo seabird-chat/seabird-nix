@@ -133,6 +133,12 @@
     seabird-webhook-receiver = {
       enable = true;
 
+      host = "webhooks.seabird.chat";
+
+      extraHosts = [
+        "seabird-webhooks.elwert.cloud"
+      ];
+
       target = "discord://seabird/721047808077070446";
     };
   };

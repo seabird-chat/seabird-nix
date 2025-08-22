@@ -29,8 +29,10 @@
   environment.systemPackages = with pkgs; [
     git
     htop
+    jq
     tmux
     vim
+    yq
   ];
 
   time.timeZone = lib.mkDefault "Etc/UTC";

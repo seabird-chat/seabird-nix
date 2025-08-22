@@ -26,7 +26,7 @@ in
       after = [ "network-online.target" ];
       environment = {
         DATABASE_URL = "sqlite:///var/lib/seabird-core/seabird-core.db";
-        SEABIRD_BIND_HOST = "127.0.0.1:8080";
+        SEABIRD_BIND_HOST = "0.0.0.0:8080";
       };
       serviceConfig = {
         DynamicUser = true;
@@ -36,11 +36,6 @@ in
       };
     };
 
-    seabird.haproxy.backends.seabird-core = {
-      servers.seabird-core = "localhost:8080";
-      matchers = [
-        "if { req.hdr(host) -i api.seabird.chat }"
-      ];
-    };
+    networking.firewall.allowedTCPPorts = [ 8080 ];
   };
 }

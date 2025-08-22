@@ -15,7 +15,11 @@ in
 
       host = lib.mkOption {
         type = lib.types.str;
-        default = "seabird-webhooks.elwert.cloud";
+      };
+
+      extraHosts = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
       };
 
       target = lib.mkOption {
@@ -48,9 +52,8 @@ in
 
     seabird.haproxy.backends.seabird-webhook-receiver = {
       servers.seabird-webhook-receiver = "localhost:3000"; # TODO: this is hard coded
-      matchers = [
-        "if { var(req.fhost) -i -m str ${cfg.host} }"
-      ];
+
+      matchers = map (host: "if { var(req.fhost) -m str -i ${host} }") ([ cfg.host ] ++ cfg.extraHosts);
     };
   };
 }

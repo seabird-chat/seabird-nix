@@ -83,6 +83,8 @@ in
 
             option httplog
 
+            http-response add-header X-Backend-Hostname %[hostname]
+
             #http-request set-var(req.fhost) req.hdr(forwarded),rfc7239_field(host)
             http-request set-var(req.fhost) req.hdr(x-forwarded-host)
             http-request capture var(req.fhost) len 50
