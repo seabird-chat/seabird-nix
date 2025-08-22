@@ -13,13 +13,8 @@ in
     seabird.services.seabird-webhook-receiver = {
       enable = lib.mkEnableOption "seabird-core";
 
-      host = lib.mkOption {
-        type = lib.types.str;
-      };
-
-      extraHosts = lib.mkOption {
+      hosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ ];
       };
 
       target = lib.mkOption {
@@ -51,9 +46,9 @@ in
     age.secrets."seabird-webhook-receiver".file = ../../../secrets + "/seabird-webhook-receiver.age";
 
     seabird.haproxy.backends.seabird-webhook-receiver = {
-      servers.seabird-webhook-receiver = "localhost:3000"; # TODO: this is hard coded
+      inherit (cfg) hosts;
 
-      matchers = map (host: "if { var(req.fhost) -m str -i ${host} }") ([ cfg.host ] ++ cfg.extraHosts);
+      servers.seabird-webhook-receiver = "localhost:3000"; # TODO: this is hard coded
     };
   };
 }

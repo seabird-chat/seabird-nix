@@ -12,7 +12,13 @@
   seabird.haproxy.enable = true;
 
   seabird.services = {
-    seabird-core.enable = true;
+    seabird-core = {
+      enable = true;
+
+      hosts = [
+        "api.seabird.chat"
+      ];
+    };
 
     # Backends
 
@@ -133,9 +139,8 @@
     seabird-webhook-receiver = {
       enable = true;
 
-      host = "webhooks.seabird.chat";
-
-      extraHosts = [
+      hosts = [
+        "webhooks.seabird.chat"
         "seabird-webhooks.elwert.cloud"
       ];
 

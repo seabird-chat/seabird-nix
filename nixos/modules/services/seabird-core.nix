@@ -12,9 +12,8 @@ in
   options = {
     seabird.services.seabird-core = {
       enable = lib.mkEnableOption "seabird-core";
-      domain = lib.mkOption {
-        type = lib.types.str;
-        default = "api.seabird.chat";
+      hosts = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
       };
     };
   };
@@ -34,6 +33,12 @@ in
         ExecStart = "${pkgs.seabird.seabird-core}/bin/seabird-core";
         StateDirectory = "seabird-core";
       };
+    };
+
+    seabird.haproxy.backends.seabird-core = {
+      inherit (cfg) hosts;
+
+      servers.seabird-webhook-receiver = "localhost:8080 proto h2"; # TODO: this is hard coded
     };
 
     networking.firewall.allowedTCPPorts = [ 8080 ];

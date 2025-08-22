@@ -28,7 +28,7 @@ in
                   type = with lib.types; attrsOf str;
                 };
 
-                matchers = lib.mkOption {
+                hosts = lib.mkOption {
                   type = with lib.types; listOf str;
                 };
               };
@@ -44,7 +44,8 @@ in
       let
         backendMatchers = lib.flatten (
           lib.mapAttrsToList (
-            name: backend: (map (matcher: "use_backend ${name} ${matcher}") backend.matchers)
+            name: backend:
+            (map (host: "use_backend ${name} if { var(req.fhost) -m str -i ${host} }") backend.hosts)
           ) cfg.backends
         );
 
@@ -80,6 +81,7 @@ in
           frontend http
             mode http
             bind :80
+            bind :81 proto h2
 
             option httplog
 
@@ -95,6 +97,9 @@ in
         '';
       };
 
-    networking.firewall.allowedTCPPorts = [ 80 ];
+    networking.firewall.allowedTCPPorts = [
+      80
+      81
+    ];
   };
 }
