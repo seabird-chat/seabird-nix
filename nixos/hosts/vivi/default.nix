@@ -9,8 +9,11 @@
     domain = "elwert.dev";
   };
 
-  seabird.haproxy.enable = true;
-  seabird.haproxy.package = pkgs.unstable.haproxy;
+  #seabird.haproxy.enable = true;
+  #seabird.haproxy.package = pkgs.unstable.haproxy;
+
+  seabird.caddy.enable = true;
+  seabird.caddy.package = pkgs.unstable.caddy;
 
   seabird.services = {
     seabird-core = {

@@ -35,12 +35,10 @@ in
       };
     };
 
-    seabird.haproxy.backends.seabird-core = {
+    seabird.caddy.virtualHosts.seabird-core = {
       inherit (cfg) hosts;
 
-      servers.seabird-webhook-receiver = "localhost:8080 proto h2"; # TODO: this is hard coded
+      backend = "h2c://localhost:8080"; # TODO: this is hard coded
     };
-
-    networking.firewall.allowedTCPPorts = [ 8080 ];
   };
 }

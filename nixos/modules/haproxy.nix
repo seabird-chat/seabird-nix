@@ -85,7 +85,6 @@ in
           frontend http
             mode http
             bind :80
-            bind :81 proto h2
 
             option httplog
 
@@ -103,7 +102,6 @@ in
 
     networking.firewall.allowedTCPPorts = [
       80
-      81
     ];
   };
 }

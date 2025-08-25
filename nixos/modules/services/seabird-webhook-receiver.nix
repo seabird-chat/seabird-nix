@@ -45,10 +45,10 @@ in
 
     age.secrets."seabird-webhook-receiver".file = ../../../secrets + "/seabird-webhook-receiver.age";
 
-    seabird.haproxy.backends.seabird-webhook-receiver = {
+    seabird.caddy.virtualHosts.seabird-webhook-receiver = {
       inherit (cfg) hosts;
 
-      servers.seabird-webhook-receiver = "localhost:3000"; # TODO: this is hard coded
+      backend = "http://localhost:3000"; # TODO: this is hard coded
     };
   };
 }
