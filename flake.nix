@@ -18,6 +18,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-unstable,
       ...
     }:
     let
@@ -64,15 +65,31 @@
           modules = [
             ./nixos/hosts/vivi
             ./nixos/users/belak
+            ./nixos/users/ghavil
           ];
         };
       };
 
       deploy.nodes = {
         "vivi" = {
-          hostname = "vivi.elwert.dev";
+          hostname = "homelab.elwert.dev";
+          sshOpts = [ "-p" "11237" ];
           profiles.system = lib.mkNixosDeploy self.nixosConfigurations."vivi";
         };
       };
+
+      devShells = lib.forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs-unstable.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              deploy-rs
+            ];
+          };
+        }
+      );
     };
 }
