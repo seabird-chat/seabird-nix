@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -7,6 +7,17 @@
   networking = {
     hostName = "vivi";
     domain = "elwert.dev";
+  };
+
+  services.datadog-agent = {
+    enable = true;
+    site = "datadoghq.com";
+    apiKeyFile = config.age.secrets.datadog-api-key.path;
+  };
+
+  age.secrets.datadog-api-key = {
+    file = ../../../secrets/datadog-key-vivi.age;
+    owner = "datadog";
   };
 
   #seabird.haproxy.enable = true;
