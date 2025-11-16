@@ -11,7 +11,7 @@ in
 {
   options = {
     seabird.services.seabird-webhook-receiver = {
-      enable = lib.mkEnableOption "seabird-core";
+      enable = lib.mkEnableOption "seabird-webhook-receiver";
 
       hosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;

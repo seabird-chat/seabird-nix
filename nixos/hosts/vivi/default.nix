@@ -13,6 +13,9 @@
     enable = true;
     site = "datadoghq.com";
     apiKeyFile = config.age.secrets.datadog-api-key.path;
+    extraConfig = {
+      dogstatsd_port = 8125;
+    };
   };
 
   age.secrets.datadog-api-key = {
@@ -62,6 +65,8 @@
     };
 
     # Plugins
+
+    seabird-datadog-plugin.enable = true;
 
     seabird-github-plugin = {
       enable = true;
