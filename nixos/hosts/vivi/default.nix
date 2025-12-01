@@ -66,6 +66,8 @@
 
     # Plugins
 
+    seabird-adventofcode-plugin.enable = true;
+
     seabird-datadog-plugin.enable = true;
 
     seabird-github-plugin = {

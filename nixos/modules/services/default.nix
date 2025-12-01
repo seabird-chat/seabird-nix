@@ -7,6 +7,7 @@
     ./seabird-irc-backend.nix
 
     # Plugins
+    ./seabird-adventofcode-plugin.nix
     ./seabird-datadog-plugin.nix
     ./seabird-github-plugin.nix
     ./seabird-plugin-bundle.nix

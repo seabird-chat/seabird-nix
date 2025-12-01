@@ -26,6 +26,7 @@ in
   "secrets/seabird-irc-backend-whyte.age".publicKeys = users ++ systems;
 
   # Plugins
+  "secrets/seabird-adventofcode-plugin.age".publicKeys = users ++ systems;
   "secrets/seabird-datadog-plugin.age".publicKeys = users ++ systems;
   "secrets/seabird-github-plugin.age".publicKeys = users ++ systems;
   "secrets/seabird-plugin-bundle.age".publicKeys = users ++ systems;
