@@ -149,6 +149,10 @@
           "irc://seabird/%23music"
           "discord://seabird/788837956101865472"
         ]
+        [
+          "irc://seabird/%23adventofcode"
+          "discord://seabird/779077086244503623"
+        ]
       ];
     };
 
