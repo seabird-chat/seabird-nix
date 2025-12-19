@@ -59,9 +59,8 @@
       nixosModules.default = import ./nixos/modules;
 
       nixosConfigurations = {
-        # ThinkPad X13s Gen 1
         "vivi" = lib.mkNixosSystem {
-          system = "aarch64-linux";
+          system = "x86_64-linux";
           modules = [
             ./nixos/hosts/vivi
             ./nixos/users/belak
