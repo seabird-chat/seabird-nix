@@ -150,6 +150,10 @@
           "discord://seabird/788837956101865472"
         ]
         [
+          "irc://seabird/%23weight-loss-challenge"
+          "discord://seabird/1453170802404102174"
+        ]
+        [
           "irc://seabird/%23adventofcode"
           "discord://seabird/779077086244503623"
         ]
