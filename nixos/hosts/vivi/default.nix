@@ -150,7 +150,7 @@
           "discord://seabird/788837956101865472"
         ]
         [
-          "irc://seabird/%23weight-loss-challenge"
+          "irc://seabird/%23weight%2Dloss%2Dchallenge"
           "discord://seabird/1453170802404102174"
         ]
         [
