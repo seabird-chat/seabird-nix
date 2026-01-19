@@ -6,13 +6,13 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "seabird-core";
-  version = "0.3.2";
+  version = "0.3.3";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-O2gctivrUbrSdfNHuqTA2HsHz8XpdR9Vtq0T/wSO+AY=";
+    hash = "sha256-+EUjCPHNPHJxk/d6Nx17Y2yYk8QfiPZPTM1lfs8G/MI=";
     fetchSubmodules = true;
   };
 
