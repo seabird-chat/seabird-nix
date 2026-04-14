@@ -46,6 +46,7 @@
       enable = true;
       channels = [
         "#adventofcode"
+        "#ai"
         "#coffee"
         "#encoded"
         "#encoded-test"
@@ -156,6 +157,10 @@
         [
           "irc://seabird/%23adventofcode"
           "discord://seabird/779077086244503623"
+        ]
+        [
+          "irc://seabird/%23ai"
+          "discord://seabird/1493422104593301524"
         ]
       ];
     };
