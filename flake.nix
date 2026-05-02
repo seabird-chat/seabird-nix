@@ -48,8 +48,11 @@
 
       packages = lib.forAllSystems (
         system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system}.extend self.overlays.go;
+        in
         nixpkgs.lib.packagesFromDirectoryRecursive {
-          callPackage = nixpkgs.legacyPackages.${system}.callPackage;
+          callPackage = pkgs.callPackage;
           directory = ./pkgs;
         }
       );

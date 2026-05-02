@@ -1,10 +1,9 @@
 {
   buildGoModule,
   fetchFromGitHub,
-  go_1_26,
 }:
 
-(buildGoModule.override { go = go_1_26; }) rec {
+buildGoModule rec {
   pname = "seabird-stock-plugin";
   version = "0.5.0";
 

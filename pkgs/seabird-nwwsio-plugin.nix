@@ -1,10 +1,9 @@
 {
   buildGoModule,
   fetchFromGitHub,
-  go_1_26,
 }:
 
-(buildGoModule.override { go = go_1_26; }) rec {
+buildGoModule rec {
   pname = "seabird-nwwsio-plugin";
   version = "0.2.0";
 
