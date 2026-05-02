@@ -11,7 +11,6 @@
   };
 
   go = _final: prev: {
-    go = prev.go_1_26;
     buildGoModule = prev.buildGoModule.override { go = prev.go_1_26; };
   };
 
