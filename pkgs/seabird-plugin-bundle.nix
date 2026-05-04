@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage rec {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-gEnG7jUKW+FAlYHKYJKohpM3qWZPBmbwUOyXTVVAs+w=";
+    hash = "sha256-T1W9Ps7CvBv24inX5C8t0R7kyxewTWbU8OMzauhc+S4=";
     leaveDotGit = true;
   };
 
