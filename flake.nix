@@ -74,7 +74,7 @@
         {
           _module.args.pkgs = import nixpkgs {
             inherit system;
-            overlays = [ self.overlays.go ];
+            overlays = builtins.attrValues self.overlays;
             config = { };
           };
 
@@ -100,6 +100,7 @@
 
           devShells.default = pkgs.mkShell {
             packages = [
+              pkgs.agenix
               pkgs.deploy-rs
             ];
           };
