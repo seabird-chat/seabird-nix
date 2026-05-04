@@ -1,20 +1,20 @@
 {
-  buildGoModule,
+  seabirdBuildGoModule,
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+seabirdBuildGoModule rec {
   pname = "seabird-datadog-plugin";
-  version = "0.2.4";
+  version = "0.3.0";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-cTqP//FhCvYUQaThyiTYDumXUWef/Jdt7qkydAgobJI=";
+    hash = "sha256-AUkfHDQJtt2SPyHITG/+e2VJzzQ6AXgH/O4YLMGzSZM=";
   };
 
-  vendorHash = "sha256-Ja8qvJH5oWpWiJMsB0WTjK3z3k60jOmslJ0iwFsiwBc=";
+  vendorHash = "sha256-8VFxh/htBJzvqklRtK4phGki/tM6sjkPEH0pZmJkmZo=";
 
   subPackages = [
     "cmd/${pname}"

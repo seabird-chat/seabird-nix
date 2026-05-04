@@ -10,6 +10,10 @@
     seabird = self.packages.${final.system};
   };
 
+  go = _final: prev: {
+    seabirdBuildGoModule = prev.buildGoModule.override { go = prev.go_1_26; };
+  };
+
   agenix = agenix.overlays.default;
 
   deploy-rs = deploy-rs.overlays.default;

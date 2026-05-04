@@ -1,20 +1,20 @@
 {
-  buildGoModule,
+  seabirdBuildGoModule,
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+seabirdBuildGoModule rec {
   pname = "seabird-stock-plugin";
-  version = "0.4.1";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-CPM0jVwrJd2HywBcTepR2O2HI6uhBe6g34fYNjKcglw=";
+    hash = "sha256-BkXm2fciJr+SrgEQqP58bZ+JfCUZvRgvxnIhFIw6AmM=";
   };
 
-  vendorHash = "sha256-JFRa8HHKhPGcSkL3S+00TTO4fBwYqq33N57XL8WaS68=";
+  vendorHash = "sha256-0L6NrMkLPRuRDo+thRUYHNp4yGWC2+S48ttTsHJqwYE=";
 
   subPackages = [
     "cmd/${pname}"

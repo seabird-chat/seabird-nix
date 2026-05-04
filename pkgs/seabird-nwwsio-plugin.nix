@@ -1,20 +1,20 @@
 {
-  buildGoModule,
+  seabirdBuildGoModule,
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+seabirdBuildGoModule rec {
   pname = "seabird-nwwsio-plugin";
-  version = "0.1.0";
+  version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "seabird-chat";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-bEU7JQ3PHE5lzMEHFIDvCbAACWeK9yup47tKXtVJ/oM=";
+    hash = "sha256-mmvw4qPGfBN6y25JefQvmdfstBQ1nuczTmDj5hCfzRY=";
   };
 
-  vendorHash = "sha256-/0G3EDjpfXCb6SNME3sMfO7oRH+bsbXKzwqDvOr2zVc=";
+  vendorHash = "sha256-v2J5MJSC9iDSbEiypWilOmbHBcDo9Q31ofz+uLKLcj0=";
 
   subPackages = [
     "cmd/${pname}"
