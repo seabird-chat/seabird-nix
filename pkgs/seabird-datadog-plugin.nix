@@ -1,9 +1,9 @@
 {
-  buildGoModule,
+  seabirdBuildGoModule,
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+seabirdBuildGoModule rec {
   pname = "seabird-datadog-plugin";
   version = "0.3.0";
 

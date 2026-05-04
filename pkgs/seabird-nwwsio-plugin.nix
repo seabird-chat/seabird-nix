@@ -1,9 +1,9 @@
 {
-  buildGoModule,
+  seabirdBuildGoModule,
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+seabirdBuildGoModule rec {
   pname = "seabird-nwwsio-plugin";
   version = "0.2.0";
 

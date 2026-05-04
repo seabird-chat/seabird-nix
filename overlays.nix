@@ -11,7 +11,7 @@
   };
 
   go = _final: prev: {
-    buildGoModule = prev.buildGoModule.override { go = prev.go_1_26; };
+    seabirdBuildGoModule = prev.buildGoModule.override { go = prev.go_1_26; };
   };
 
   agenix = agenix.overlays.default;

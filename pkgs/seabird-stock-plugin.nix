@@ -1,9 +1,9 @@
 {
-  buildGoModule,
+  seabirdBuildGoModule,
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+seabirdBuildGoModule rec {
   pname = "seabird-stock-plugin";
   version = "0.5.0";
 
