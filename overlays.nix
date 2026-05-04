@@ -7,7 +7,7 @@
 }:
 {
   seabird = final: _prev: {
-    seabird = self.packages.${final.system};
+    seabird = self.packages.${final.stdenv.hostPlatform.system};
   };
 
   go = _final: prev: {
@@ -18,7 +18,12 @@
 
   deploy-rs = deploy-rs.overlays.default;
 
-  unstable = final: _prev: { unstable = import nixpkgs-unstable { inherit (final) config system; }; };
+  unstable = final: _prev: {
+    unstable = import nixpkgs-unstable {
+      inherit (final) config;
+      inherit (final.stdenv.hostPlatform) system;
+    };
+  };
 
   # This is a modified version of what's in the deploy-rs readme. For some
   # reason overriding deploy-rs entirely seems to clobber the needed `lib` attr,
