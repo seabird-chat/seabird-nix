@@ -167,6 +167,10 @@
           "irc://seabird/%23botspam"
           "discord://seabird/1503211422522413297"
         ]
+        [
+          "irc://seabird/%23stonks"
+          "discord://seabird/1519542812293730314"
+        ]
       ];
     };
 
