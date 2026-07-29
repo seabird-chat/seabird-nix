@@ -11,6 +11,15 @@ in
   options = {
     seabird.services.seabird-plugin-bundle = {
       enable = lib.mkEnableOption "seabird-plugin-bundle";
+
+      enabledPlugins = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+      };
+      disabledPlugins = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+      };
     };
   };
 
@@ -23,6 +32,8 @@ in
       environment = {
         DATABASE_URL = "sqlite:///var/lib/seabird-plugin-bundle/seabird-plugin-bundle.db";
         SEABIRD_HOST = "http://localhost:8080";
+        SEABIRD_ENABLED_PLUGINS = lib.concatStringsSep "," cfg.enabledPlugins;
+        SEABIRD_DISABLED_PLUGINS = lib.concatStringsSep "," cfg.disabledPlugins;
       };
 
       serviceConfig = {
