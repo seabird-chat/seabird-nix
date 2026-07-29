@@ -6,19 +6,17 @@
 }:
 {
   mkNixosSystem =
-    { modules, system }:
+    { modules }:
     nixpkgs.lib.nixosSystem {
-      inherit system;
+      specialArgs = {
+        inherit self;
+      };
 
       modules = [
         self.nixosModules.default
         agenix.nixosModules.default
       ]
       ++ modules;
-
-      specialArgs = {
-        inherit self;
-      };
     };
 
   # mkNixosDeploy takes a nixosConfig, generated using mkNixosSystem, and

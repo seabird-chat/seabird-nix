@@ -9,9 +9,11 @@ let
     user-belak-zagreus
   ];
 
+  system-kupo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmN1AAbtIiTH+p4wNm8Fck09MRmTSsk/qNsIPUtBGbG";
   system-vivi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDx5Y7VvA9CUdrsiVpNbRufBdJdvJZEfRQXIGnPgqynH";
 
   systems = [
+    system-kupo
     system-vivi
   ];
 in
@@ -19,6 +21,7 @@ in
   "secrets/belak-password.age".publicKeys = users ++ systems;
   "secrets/ghavil-password.age".publicKeys = users ++ systems;
 
+  "secrets/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
   "secrets/datadog-key-vivi.age".publicKeys = users ++ [ system-vivi ];
 
   # Backends

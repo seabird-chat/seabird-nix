@@ -51,8 +51,15 @@
         nixosModules.default = import ./nixos/modules;
 
         nixosConfigurations = {
+          "kupo" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/kupo
+              ./nixos/users/belak
+              ./nixos/users/ghavil
+            ];
+          };
+
           "vivi" = myLib.mkNixosSystem {
-            system = "x86_64-linux";
             modules = [
               ./nixos/hosts/vivi
               ./nixos/users/belak
@@ -62,8 +69,17 @@
         };
 
         deploy.nodes = {
+          "kupo" = {
+            hostname = "kupo.infra.seabird.chat";
+            sshOpts = [
+              "-p"
+              "11239"
+            ];
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
+          };
+
           "vivi" = {
-            hostname = "homelab.elwert.dev";
+            hostname = "vivi.infra.seabird.chat";
             sshOpts = [
               "-p"
               "11237"
@@ -88,7 +104,7 @@
           };
 
           formatter = pkgs.treefmt.withConfig {
-            runtimeInputs = [ pkgs.nixfmt-rfc-style ];
+            runtimeInputs = [ pkgs.nixfmt ];
 
             settings = {
               # Log level for files treefmt won't format

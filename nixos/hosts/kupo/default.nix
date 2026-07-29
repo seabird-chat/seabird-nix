@@ -5,7 +5,7 @@
   ];
 
   networking = {
-    hostName = "vivi";
+    hostName = "kupo";
     domain = "infra.seabird.chat";
   };
 
@@ -19,14 +19,14 @@
   };
 
   age.secrets.datadog-api-key = {
-    file = ../../../secrets/datadog-key-vivi.age;
+    file = ../../../secrets/datadog-key-kupo.age;
     owner = "datadog";
   };
 
   #seabird.haproxy.enable = true;
   #seabird.haproxy.package = pkgs.unstable.haproxy;
 
-  seabird.caddy.enable = true;
+  seabird.caddy.enable = false;
   seabird.caddy.package = pkgs.unstable.caddy;
 
   seabird.services = {
@@ -40,10 +40,10 @@
 
     # Backends
 
-    seabird-discord-backend.enable = true;
+    seabird-discord-backend.enable = false;
 
     seabird-irc-backend.whyte = {
-      enable = true;
+      enable = false;
       channels = [
         "#adventofcode"
         "#ai"
@@ -68,7 +68,7 @@
 
     # Plugins
 
-    seabird-adventofcode-plugin.enable = true;
+    seabird-adventofcode-plugin.enable = false;
 
     seabird-datadog-plugin.enable = true;
 
@@ -202,5 +202,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 }
