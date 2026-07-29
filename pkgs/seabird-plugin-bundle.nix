@@ -17,7 +17,7 @@ rustPlatform.buildRustPackage rec {
     leaveDotGit = true;
   };
 
-  cargoLock.lockFile = src + /Cargo.lock;
+  cargoHash = "sha256-+MBsQ1UH0/Wi0N7eQNV1F+3gyDtS4LFkMRE28ZiZ0ZY=";
 
   nativeBuildInputs = [
     pkgs.git

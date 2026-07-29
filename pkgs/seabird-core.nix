@@ -16,7 +16,7 @@ rustPlatform.buildRustPackage rec {
     fetchSubmodules = true;
   };
 
-  cargoLock.lockFile = src + /Cargo.lock;
+  cargoHash = "sha256-M/jncfud4U4n4UBnXGcW1uMBgxBMG9WZefSFEsDSKso=";
 
   nativeBuildInputs = [
     pkgs.protobuf
