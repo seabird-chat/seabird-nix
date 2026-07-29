@@ -26,6 +26,8 @@
 
   services.openssh.enable = true;
 
+  environment.enableAllTerminfo = true;
+
   environment.systemPackages = with pkgs; [
     git
     htop
