@@ -194,7 +194,27 @@
 
   environment.systemPackages = [
     pkgs.sqlite
+    pkgs.stress-ng
   ];
+
+  # Stock power limits (25W/28s long, 30W short) let sustained all-core
+  # load (e.g. Rust builds) run hotter than this chassis can dissipate.
+  # Testing a lower PL1 to see if it holds temperature under load.
+  services.undervolt = {
+    enable = true;
+    # Stock target is 100C, which appears to be where the panics happen.
+    # Throttle at 85C instead, as a backstop independent of the power cap.
+    # NB: this is an absolute Celsius target, not an offset from 100.
+    temp = 85;
+    p1 = {
+      limit = 15;
+      window = 28;
+    };
+    p2 = {
+      limit = 25;
+      window = 0.00244140625;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
