@@ -1,0 +1,31 @@
+# Activate the built configs on the seabird hosts (manual deployment event).
+when:
+  - event: deployment
+
+# Route to an aarch64 agent (quina); the seabird hosts are aarch64.
+labels:
+  platform: linux/arm64
+
+steps:
+  - name: deploy
+    image: nixos/nix:latest
+    environment:
+      NIX_CONFIG: |
+        experimental-features = nix-command flakes
+        accept-flake-config = true
+      DEPLOY_SSH_KEY:
+        from_secret: deploy_ssh_key
+    commands:
+      - |
+        nix develop .#deploy --command bash -euo pipefail -c '
+          case "$CI_PIPELINE_DEPLOY_TARGET" in
+            staging)    nodes=".#stiltzkin" ;;
+            production) nodes=".#kupo .#vivi" ;;
+            *) echo "unknown deploy target: $CI_PIPELINE_DEPLOY_TARGET" >&2; exit 1 ;;
+          esac
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "$DEPLOY_SSH_KEY"
+          deploy --remote-build --skip-checks \
+            --ssh-opts "-o StrictHostKeyChecking=accept-new" \
+            $nodes
+        '

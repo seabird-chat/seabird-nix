@@ -148,6 +148,15 @@
               pkgs.attic-client
             ];
           };
+
+          # Toolchain for the deploy-rs CD pipeline (see .woodpecker.yml).
+          # openssh provides ssh-agent/ssh-add for the deploy key.
+          devShells.deploy = pkgs.mkShell {
+            packages = [
+              pkgs.deploy-rs
+              pkgs.openssh
+            ];
+          };
         };
     };
 }
