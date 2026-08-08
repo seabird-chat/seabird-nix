@@ -24,6 +24,9 @@ in
   "secrets/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
   "secrets/datadog-key-vivi.age".publicKeys = users ++ [ system-vivi ];
 
+  # nix daemon netrc, holding the seabird attic cache pull token
+  "secrets/nix-netrc.age".publicKeys = users ++ systems;
+
   # Backends
   "secrets/seabird-discord-backend.age".publicKeys = users ++ systems;
   "secrets/seabird-irc-backend-whyte.age".publicKeys = users ++ systems;

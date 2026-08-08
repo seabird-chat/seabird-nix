@@ -23,6 +23,8 @@
     owner = "datadog";
   };
 
+  seabird.atticCache.enable = true;
+
   #seabird.haproxy.enable = true;
   #seabird.haproxy.package = pkgs.unstable.haproxy;
 
