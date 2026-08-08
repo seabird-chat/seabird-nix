@@ -59,6 +59,14 @@
             ];
           };
 
+          "stiltzkin" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/stiltzkin
+              ./nixos/users/belak
+              ./nixos/users/ghavil
+            ];
+          };
+
           "vivi" = myLib.mkNixosSystem {
             modules = [
               ./nixos/hosts/vivi
@@ -77,6 +85,12 @@
             ];
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
           };
+
+          "stiltzkin" = {
+            hostname = "stiltzkin.infra.seabird.chat";
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."stiltzkin";
+          };
+
 
           "vivi" = {
             hostname = "vivi.infra.seabird.chat";

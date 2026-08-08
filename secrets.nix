@@ -10,10 +10,12 @@ let
   ];
 
   system-kupo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmN1AAbtIiTH+p4wNm8Fck09MRmTSsk/qNsIPUtBGbG";
+  system-stiltzkin = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII6/yjXq3OwnaDtzHplrS3QgkPtkEUodusA9F1Sb+a/S";
   system-vivi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDx5Y7VvA9CUdrsiVpNbRufBdJdvJZEfRQXIGnPgqynH";
 
   systems = [
     system-kupo
+    system-stiltzkin
     system-vivi
   ];
 in
@@ -22,6 +24,7 @@ in
   "secrets/ghavil-password.age".publicKeys = users ++ systems;
 
   "secrets/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
+  "secrets/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
   "secrets/datadog-key-vivi.age".publicKeys = users ++ [ system-vivi ];
 
   # nix daemon netrc, holding the seabird attic cache pull token
