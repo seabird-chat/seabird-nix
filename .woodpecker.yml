@@ -1,0 +1,36 @@
+# Build every seabird package and push it to the attic cache.
+#
+# Requires a repo/org secret named `attic_token` holding a token with
+# pull + push access to the seabird cache (atticadm make-token --pull
+# seabird --push seabird ...).
+when:
+  - event: push
+    branch: main
+  - event: manual
+
+# Route to an aarch64 agent (quina); the seabird hosts are aarch64.
+labels:
+  platform: linux/arm64
+
+steps:
+  - name: build-and-push
+    image: nixos/nix:latest
+    environment:
+      NIX_CONFIG: |
+        experimental-features = nix-command flakes
+        accept-flake-config = true
+        # Build independent packages concurrently (default max-jobs is 1).
+        max-jobs = auto
+      ATTIC_ENDPOINT: https://attic.elwert.cloud
+      ATTIC_TOKEN:
+        from_secret: attic_token
+    commands:
+      # attic-client comes from the pinned `ci` devshell. `attic use` adds the
+      # cache as a substituter so already-built paths aren't rebuilt.
+      - |
+        nix develop .#ci --command bash -euo pipefail -c '
+          attic login elwert "$ATTIC_ENDPOINT" "$ATTIC_TOKEN"
+          attic use elwert:seabird
+          nix build .#all
+          attic push elwert:seabird ./result
+        '

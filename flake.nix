@@ -87,7 +87,6 @@
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."stiltzkin";
           };
 
-
           "vivi" = {
             hostname = "vivi.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."vivi";
@@ -102,6 +101,12 @@
           lib,
           ...
         }:
+        let
+          seabirdPackages = lib.packagesFromDirectoryRecursive {
+            inherit (pkgs) callPackage;
+            directory = ./pkgs;
+          };
+        in
         {
           _module.args.pkgs = import nixpkgs {
             inherit system;
@@ -124,15 +129,23 @@
             };
           };
 
-          packages = lib.packagesFromDirectoryRecursive {
-            inherit (pkgs) callPackage;
-            directory = ./pkgs;
+          packages = seabirdPackages // {
+            # Aggregate target so CI can build every seabird package (and
+            # push their closures to the attic cache) in one derivation.
+            all = pkgs.linkFarmFromDrvs "seabird-all" (lib.attrValues seabirdPackages);
           };
 
           devShells.default = pkgs.mkShell {
             packages = [
               pkgs.agenix
               pkgs.deploy-rs
+            ];
+          };
+
+          # Pinned toolchain for the attic push pipeline (see .woodpecker.yml).
+          devShells.ci = pkgs.mkShell {
+            packages = [
+              pkgs.attic-client
             ];
           };
         };
