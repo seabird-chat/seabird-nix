@@ -79,10 +79,6 @@
         deploy.nodes = {
           "kupo" = {
             hostname = "kupo.infra.seabird.chat";
-            sshOpts = [
-              "-p"
-              "11239"
-            ];
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
           };
 
@@ -94,10 +90,6 @@
 
           "vivi" = {
             hostname = "vivi.infra.seabird.chat";
-            sshOpts = [
-              "-p"
-              "11237"
-            ];
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."vivi";
           };
         };
