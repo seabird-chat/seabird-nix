@@ -19,13 +19,13 @@ steps:
       - |
         nix develop .#deploy --command bash -euo pipefail -c '
           case "$CI_PIPELINE_DEPLOY_TARGET" in
-            staging)    nodes=".#stiltzkin" ;;
-            production) nodes=".#kupo .#vivi" ;;
+            staging)    node=".#stiltzkin" ;;
+            production) node=".#kupo" ;;
             *) echo "unknown deploy target: $CI_PIPELINE_DEPLOY_TARGET" >&2; exit 1 ;;
           esac
           eval "$(ssh-agent -s)"
           ssh-add - <<< "$DEPLOY_SSH_KEY"
           deploy --remote-build --skip-checks \
             --ssh-opts "-o StrictHostKeyChecking=accept-new" \
-            $nodes
+            "$node"
         '
