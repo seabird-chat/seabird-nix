@@ -45,7 +45,7 @@
 
     seabird-discord-backend.enable = true;
 
-    seabird-irc-backend.whyte = {
+    seabird-irc-backend.instances.whyte = {
       enable = true;
       channels = [
         "#adventofcode"

@@ -9,32 +9,40 @@ let
 in
 {
   options = {
-    seabird.services.seabird-irc-backend = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.submodule (
-          { name, config, ... }:
-          {
-            options = {
-              enable = lib.mkEnableOption "seabird-irc-backend";
-              package = lib.mkOption {
-                type = lib.types.package;
-                default = pkgs.seabird.seabird-irc-backend;
+    seabird.services.seabird-irc-backend = {
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-irc-backend;
+      };
+
+      instances = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule (
+            { name, config, ... }:
+            {
+              options = {
+                enable = lib.mkEnableOption "seabird-irc-backend";
+                package = lib.mkOption {
+                  type = lib.types.package;
+                  default = cfg.package;
+                };
+                name = lib.mkOption {
+                  default = name;
+                  type = lib.types.str;
+                };
+                channels = lib.mkOption {
+                  type = lib.types.listOf lib.types.str;
+                };
+                commandPrefix = lib.mkOption {
+                  type = lib.types.str;
+                  default = "!";
+                };
               };
-              name = lib.mkOption {
-                default = name;
-                type = lib.types.str;
-              };
-              channels = lib.mkOption {
-                type = lib.types.listOf lib.types.str;
-              };
-              commandPrefix = lib.mkOption {
-                type = lib.types.str;
-                default = "!";
-              };
-            };
-          }
-        )
-      );
+            }
+          )
+        );
+        default = { };
+      };
     };
   };
 
@@ -63,7 +71,7 @@ in
           };
         };
       }
-    ) cfg;
+    ) cfg.instances;
 
     age.secrets = lib.attrsets.concatMapAttrs (
       name: value:
@@ -71,6 +79,6 @@ in
         "seabird-irc-backend-${value.name}".file =
           ../../../secrets + "/seabird-irc-backend-${value.name}.age";
       }
-    ) cfg;
+    ) cfg.instances;
   };
 }
