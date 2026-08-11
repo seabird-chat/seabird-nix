@@ -39,6 +39,30 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
+
+    seabird-proxy-plugin-release = {
+      url = "github:seabird-chat/seabird-proxy-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-proxy-plugin-dev = {
+      url = "github:seabird-chat/seabird-proxy-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-plugin-bundle-release = {
+      url = "github:seabird-chat/seabird-plugin-bundle/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-plugin-bundle-dev = {
+      url = "github:seabird-chat/seabird-plugin-bundle";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs =

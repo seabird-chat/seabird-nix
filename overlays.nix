@@ -18,9 +18,13 @@ inputs@{
     {
       seabird = seabirdPackages // {
         seabird-core = inputs.seabird-core-release.packages.${system}.default;
+        seabird-proxy-plugin = inputs.seabird-proxy-plugin-release.packages.${system}.default;
+        seabird-plugin-bundle = inputs.seabird-plugin-bundle-release.packages.${system}.default;
       };
       seabird-staging = {
         seabird-core = inputs.seabird-core-dev.packages.${system}.default;
+        seabird-proxy-plugin = inputs.seabird-proxy-plugin-dev.packages.${system}.default;
+        seabird-plugin-bundle = inputs.seabird-plugin-bundle-dev.packages.${system}.default;
       };
     };
 

@@ -199,7 +199,11 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "seabird-core-dev": "seabird-core-dev",
-        "seabird-core-release": "seabird-core-release"
+        "seabird-core-release": "seabird-core-release",
+        "seabird-plugin-bundle-dev": "seabird-plugin-bundle-dev",
+        "seabird-plugin-bundle-release": "seabird-plugin-bundle-release",
+        "seabird-proxy-plugin-dev": "seabird-proxy-plugin-dev",
+        "seabird-proxy-plugin-release": "seabird-proxy-plugin-release"
       }
     },
     "seabird-core-dev": {
@@ -248,6 +252,100 @@
         "owner": "seabird-chat",
         "ref": "release",
         "repo": "seabird-core",
+        "type": "github"
+      }
+    },
+    "seabird-plugin-bundle-dev": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786440377,
+        "narHash": "sha256-PjxDWPzRcV9ZviKBwPS8vcoz9tXXS1k476aAQ7aNs0s=",
+        "owner": "seabird-chat",
+        "repo": "seabird-plugin-bundle",
+        "rev": "071844861ff35bd205650fea42c81c4946571271",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "repo": "seabird-plugin-bundle",
+        "type": "github"
+      }
+    },
+    "seabird-plugin-bundle-release": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786440339,
+        "narHash": "sha256-4fUZ1tC9eGBOxJ6PiueXktJE7ieNSrLM/cIDqEDS8GY=",
+        "owner": "seabird-chat",
+        "repo": "seabird-plugin-bundle",
+        "rev": "e6fd5ead3324d01b8441cfb8634920eaeef96af5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "ref": "release",
+        "repo": "seabird-plugin-bundle",
+        "type": "github"
+      }
+    },
+    "seabird-proxy-plugin-dev": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786174227,
+        "narHash": "sha256-y2+HPQ6aOcfYTVfRqB9mxFGUQFyv2m7Byc9DfOLDMMc=",
+        "owner": "seabird-chat",
+        "repo": "seabird-proxy-plugin",
+        "rev": "6a46cb1e636182e186ffda1d7f8857fc4854f833",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "repo": "seabird-proxy-plugin",
+        "type": "github"
+      }
+    },
+    "seabird-proxy-plugin-release": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786174583,
+        "narHash": "sha256-y2+HPQ6aOcfYTVfRqB9mxFGUQFyv2m7Byc9DfOLDMMc=",
+        "owner": "seabird-chat",
+        "repo": "seabird-proxy-plugin",
+        "rev": "257daccabeceea8e92400c687972492c8cbcd719",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "ref": "release",
+        "repo": "seabird-proxy-plugin",
         "type": "github"
       }
     },
