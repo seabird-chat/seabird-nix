@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-stock-plugin = {
       enable = lib.mkEnableOption "seabird-stock-plugin";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-stock-plugin;
+      };
     };
   };
 
@@ -26,7 +30,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-stock-plugin}/bin/seabird-stock-plugin";
+        ExecStart = "${cfg.package}/bin/seabird-stock-plugin";
         EnvironmentFile = [
           config.age.secrets."seabird-stock-plugin".path
         ];

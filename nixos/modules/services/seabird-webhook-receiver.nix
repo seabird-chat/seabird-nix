@@ -13,6 +13,11 @@ in
     seabird.services.seabird-webhook-receiver = {
       enable = lib.mkEnableOption "seabird-webhook-receiver";
 
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-webhook-receiver;
+      };
+
       hosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;
       };
@@ -36,7 +41,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-webhook-receiver}/bin/seabird-webhook-receiver";
+        ExecStart = "${cfg.package}/bin/seabird-webhook-receiver";
         EnvironmentFile = [
           config.age.secrets."seabird-webhook-receiver".path
         ];

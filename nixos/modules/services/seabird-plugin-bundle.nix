@@ -12,6 +12,11 @@ in
     seabird.services.seabird-plugin-bundle = {
       enable = lib.mkEnableOption "seabird-plugin-bundle";
 
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-plugin-bundle;
+      };
+
       enabledPlugins = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [ ];
@@ -39,7 +44,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-plugin-bundle}/bin/seabird-plugin-bundle";
+        ExecStart = "${cfg.package}/bin/seabird-plugin-bundle";
         EnvironmentFile = [
           config.age.secrets."seabird-plugin-bundle".path
         ];

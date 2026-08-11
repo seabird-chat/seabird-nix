@@ -16,6 +16,10 @@ in
           {
             options = {
               enable = lib.mkEnableOption "seabird-irc-backend";
+              package = lib.mkOption {
+                type = lib.types.package;
+                default = pkgs.seabird.seabird-irc-backend;
+              };
               name = lib.mkOption {
                 default = name;
                 type = lib.types.str;
@@ -52,7 +56,7 @@ in
           serviceConfig = {
             DynamicUser = true;
             Restart = "always";
-            ExecStart = "${pkgs.seabird.seabird-irc-backend}/bin/seabird-irc-backend";
+            ExecStart = "${value.package}/bin/seabird-irc-backend";
             EnvironmentFile = [
               config.age.secrets."seabird-irc-backend-${value.name}".path
             ];

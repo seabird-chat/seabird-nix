@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-github-plugin = {
       enable = lib.mkEnableOption "seabird-github-plugin";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-github-plugin;
+      };
       repos = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
       };
@@ -32,7 +36,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-github-plugin}/bin/seabird-github-plugin";
+        ExecStart = "${cfg.package}/bin/seabird-github-plugin";
         EnvironmentFile = [
           config.age.secrets."seabird-github-plugin".path
         ];

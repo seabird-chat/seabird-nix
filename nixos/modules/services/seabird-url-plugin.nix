@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-url-plugin = {
       enable = lib.mkEnableOption "seabird-url-plugin";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-url-plugin;
+      };
     };
   };
 
@@ -27,7 +31,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-url-plugin}/bin/seabird-url-plugin";
+        ExecStart = "${cfg.package}/bin/seabird-url-plugin";
         EnvironmentFile = [
           config.age.secrets."seabird-url-plugin".path
         ];

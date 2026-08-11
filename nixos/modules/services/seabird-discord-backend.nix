@@ -11,6 +11,10 @@ in
   options = {
     seabird.services.seabird-discord-backend = {
       enable = lib.mkEnableOption "seabird-discord-backend";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-discord-backend;
+      };
     };
   };
 
@@ -27,7 +31,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-discord-backend}/bin/seabird-discord-backend";
+        ExecStart = "${cfg.package}/bin/seabird-discord-backend";
         EnvironmentFile = [
           config.age.secrets."seabird-discord-backend".path
         ];

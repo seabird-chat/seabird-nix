@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-proxy-plugin = {
       enable = lib.mkEnableOption "seabird-proxy-plugin";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-proxy-plugin;
+      };
       channelGroups = lib.mkOption {
         type = lib.types.listOf (lib.types.listOf lib.types.str);
       };
@@ -94,7 +98,7 @@ in
         serviceConfig = {
           DynamicUser = true;
           Restart = "always";
-          ExecStart = "${pkgs.seabird.seabird-proxy-plugin}/bin/seabird-proxy-plugin";
+          ExecStart = "${cfg.package}/bin/seabird-proxy-plugin";
           EnvironmentFile = [
             config.age.secrets."seabird-proxy-plugin".path
           ];

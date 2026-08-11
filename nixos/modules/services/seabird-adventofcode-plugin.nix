@@ -11,6 +11,10 @@ in
   options = {
     seabird.services.seabird-adventofcode-plugin = {
       enable = lib.mkEnableOption "seabird-adventofcode-plugin";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-adventofcode-plugin;
+      };
     };
   };
 
@@ -28,7 +32,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-adventofcode-plugin}/bin/seabird-adventofcode-plugin";
+        ExecStart = "${cfg.package}/bin/seabird-adventofcode-plugin";
         EnvironmentFile = [
           config.age.secrets."seabird-adventofcode-plugin".path
         ];

@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-core = {
       enable = lib.mkEnableOption "seabird-core";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-core;
+      };
       hosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;
       };
@@ -30,7 +34,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-core}/bin/seabird-core";
+        ExecStart = "${cfg.package}/bin/seabird-core";
         StateDirectory = "seabird-core";
       };
     };

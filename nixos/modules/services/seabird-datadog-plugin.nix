@@ -12,6 +12,10 @@ in
   options = {
     seabird.services.seabird-datadog-plugin = {
       enable = lib.mkEnableOption "seabird-datadog-plugin";
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.seabird.seabird-datadog-plugin;
+      };
     };
   };
 
@@ -27,7 +31,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        ExecStart = "${pkgs.seabird.seabird-datadog-plugin}/bin/seabird-datadog-plugin";
+        ExecStart = "${cfg.package}/bin/seabird-datadog-plugin";
         EnvironmentFile = [
           config.age.secrets."seabird-datadog-plugin".path
         ];
