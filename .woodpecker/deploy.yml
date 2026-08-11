@@ -18,6 +18,8 @@ steps:
     commands:
       - |
         nix develop .#deploy --command bash -euo pipefail -c '
+          # TODO: switch to deploy-rs --groups (node tags) once nixpkgs has a
+          # groups-capable build (https://github.com/NixOS/nixpkgs/pull/547959).
           case "$CI_PIPELINE_DEPLOY_TARGET" in
             staging)    node=".#stiltzkin" ;;
             production) node=".#kupo" ;;
