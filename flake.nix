@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # All seabird inputs
+    # Seabird core
     seabird-core-release = {
       url = "github:seabird-chat/seabird-core/release";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +36,80 @@
 
     seabird-core-dev = {
       url = "github:seabird-chat/seabird-core";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    # Seabird backends
+    seabird-discord-backend-release = {
+      url = "github:seabird-chat/seabird-discord-backend/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-discord-backend-dev = {
+      url = "github:seabird-chat/seabird-discord-backend";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-irc-backend-release = {
+      url = "github:seabird-chat/seabird-irc-backend/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-irc-backend-dev = {
+      url = "github:seabird-chat/seabird-irc-backend";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    # Seabird plugins
+    seabird-datadog-plugin-release = {
+      url = "github:seabird-chat/seabird-datadog-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-datadog-plugin-dev = {
+      url = "github:seabird-chat/seabird-datadog-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-adventofcode-plugin-release = {
+      url = "github:seabird-chat/seabird-adventofcode-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-adventofcode-plugin-dev = {
+      url = "github:seabird-chat/seabird-adventofcode-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-github-plugin-release = {
+      url = "github:seabird-chat/seabird-github-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-github-plugin-dev = {
+      url = "github:seabird-chat/seabird-github-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-plugin-bundle-release = {
+      url = "github:seabird-chat/seabird-plugin-bundle/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-plugin-bundle-dev = {
+      url = "github:seabird-chat/seabird-plugin-bundle";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
@@ -52,14 +126,51 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    seabird-plugin-bundle-release = {
-      url = "github:seabird-chat/seabird-plugin-bundle/release";
+    seabird-nwwsio-plugin-release = {
+      url = "github:seabird-chat/seabird-nwwsio-plugin/release";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    seabird-plugin-bundle-dev = {
-      url = "github:seabird-chat/seabird-plugin-bundle";
+    seabird-nwwsio-plugin-dev = {
+      url = "github:seabird-chat/seabird-nwwsio-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-stock-plugin-release = {
+      url = "github:seabird-chat/seabird-stock-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-stock-plugin-dev = {
+      url = "github:seabird-chat/seabird-stock-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-url-plugin-release = {
+      url = "github:seabird-chat/seabird-url-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-url-plugin-dev = {
+      url = "github:seabird-chat/seabird-url-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    # Other
+    seabird-webhook-receiver-release = {
+      url = "github:seabird-chat/seabird-webhook-receiver/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-webhook-receiver-dev = {
+      url = "github:seabird-chat/seabird-webhook-receiver";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };

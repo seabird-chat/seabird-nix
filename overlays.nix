@@ -17,14 +17,46 @@ inputs@{
     in
     {
       seabird = seabirdPackages // {
+        # Core
         seabird-core = inputs.seabird-core-release.packages.${system}.default;
-        seabird-proxy-plugin = inputs.seabird-proxy-plugin-release.packages.${system}.default;
+
+        # Backends
+        seabird-discord-backend = inputs.seabird-discord-backend-release.packages.${system}.default;
+        seabird-irc-backend = inputs.seabird-irc-backend-release.packages.${system}.default;
+
+        # Plugins
+        seabird-adventofcode-plugin = inputs.seabird-adventofcode-plugin-release.packages.${system}.default;
+        seabird-datadog-plugin = inputs.seabird-datadog-plugin-release.packages.${system}.default;
+        seabird-github-plugin = inputs.seabird-github-plugin-release.packages.${system}.default;
+        seabird-nwwsio-plugin = inputs.seabird-nwwsio-plugin-release.packages.${system}.default;
         seabird-plugin-bundle = inputs.seabird-plugin-bundle-release.packages.${system}.default;
+        seabird-proxy-plugin = inputs.seabird-proxy-plugin-release.packages.${system}.default;
+        seabird-stock-plugin = inputs.seabird-stock-plugin-release.packages.${system}.default;
+        seabird-url-plugin = inputs.seabird-url-plugin-release.packages.${system}.default;
+
+        # Other
+        seabird-webhook-receiver = inputs.seabird-webhook-receiver-release.packages.${system}.default;
       };
       seabird-staging = {
+        # Core
         seabird-core = inputs.seabird-core-dev.packages.${system}.default;
-        seabird-proxy-plugin = inputs.seabird-proxy-plugin-dev.packages.${system}.default;
+
+        # Backends
+        seabird-discord-backend = inputs.seabird-discord-backend-dev.packages.${system}.default;
+        seabird-irc-backend = inputs.seabird-irc-backend-dev.packages.${system}.default;
+
+        # Plugins
+        seabird-adventofcode-plugin = inputs.seabird-adventofcode-plugin-dev.packages.${system}.default;
+        seabird-datadog-plugin = inputs.seabird-datadog-plugin-dev.packages.${system}.default;
+        seabird-github-plugin = inputs.seabird-github-plugin-dev.packages.${system}.default;
+        seabird-nwwsio-plugin = inputs.seabird-nwwsio-plugin-dev.packages.${system}.default;
         seabird-plugin-bundle = inputs.seabird-plugin-bundle-dev.packages.${system}.default;
+        seabird-proxy-plugin = inputs.seabird-proxy-plugin-dev.packages.${system}.default;
+        seabird-stock-plugin = inputs.seabird-stock-plugin-dev.packages.${system}.default;
+        seabird-url-plugin = inputs.seabird-url-plugin-dev.packages.${system}.default;
+
+        # Other
+        seabird-webhook-receiver = inputs.seabird-webhook-receiver-dev.packages.${system}.default;
       };
     };
 
