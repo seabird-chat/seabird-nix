@@ -158,6 +158,38 @@
         "type": "github"
       }
     },
+    "proto": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768811799,
+        "narHash": "sha256-aMSPMDerLgMUnrwOCYWOgTg7r4unHnpFoHPklU7wJag=",
+        "owner": "seabird-chat",
+        "repo": "proto",
+        "rev": "3df738ff76a1d0b673974733e1a560bc7b567998",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "repo": "proto",
+        "type": "github"
+      }
+    },
+    "proto_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768811799,
+        "narHash": "sha256-aMSPMDerLgMUnrwOCYWOgTg7r4unHnpFoHPklU7wJag=",
+        "owner": "seabird-chat",
+        "repo": "proto",
+        "rev": "3df738ff76a1d0b673974733e1a560bc7b567998",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "repo": "proto",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -165,7 +197,58 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "seabird-core-dev": "seabird-core-dev",
+        "seabird-core-release": "seabird-core-release"
+      }
+    },
+    "seabird-core-dev": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "proto": "proto"
+      },
+      "locked": {
+        "lastModified": 1786439222,
+        "narHash": "sha256-wIcmZxplP5DgJsJvEoRtoc1lxRUi3qF0fh6x3B5h8pI=",
+        "owner": "seabird-chat",
+        "repo": "seabird-core",
+        "rev": "0c3054d676abdd28c9ab87c42cea4a1334e03429",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "repo": "seabird-core",
+        "type": "github"
+      }
+    },
+    "seabird-core-release": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "proto": "proto_2"
+      },
+      "locked": {
+        "lastModified": 1786439129,
+        "narHash": "sha256-2lONISYMnQsikxNAsEMwWnUIhuIjs44gkJuFThkVagU=",
+        "owner": "seabird-chat",
+        "repo": "seabird-core",
+        "rev": "fed524a09e33dd7aa7f5d122dba3f81ec4321e6b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "ref": "release",
+        "repo": "seabird-core",
+        "type": "github"
       }
     },
     "systems": {

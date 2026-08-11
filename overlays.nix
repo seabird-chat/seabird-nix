@@ -1,4 +1,4 @@
-{
+inputs@{
   self,
   nixpkgs-unstable,
   agenix,
@@ -6,9 +6,23 @@
   ...
 }:
 {
-  seabird = final: _prev: {
-    seabird = self.packages.${final.stdenv.hostPlatform.system};
-  };
+  seabird =
+    final: _prev:
+    let
+      system = final.stdenv.hostPlatform.system;
+      seabirdPackages = final.lib.packagesFromDirectoryRecursive {
+        inherit (final) callPackage;
+        directory = ./pkgs;
+      };
+    in
+    {
+      seabird = seabirdPackages // {
+        seabird-core = inputs.seabird-core-release.packages.${system}.default;
+      };
+      seabird-staging = {
+        seabird-core = inputs.seabird-core-dev.packages.${system}.default;
+      };
+    };
 
   go = _final: prev: {
     seabirdBuildGoModule = prev.buildGoModule.override { go = prev.go_1_26; };

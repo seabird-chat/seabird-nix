@@ -26,6 +26,19 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # All seabird inputs
+    seabird-core-release = {
+      url = "github:seabird-chat/seabird-core/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-core-dev = {
+      url = "github:seabird-chat/seabird-core";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs =
@@ -101,12 +114,6 @@
           lib,
           ...
         }:
-        let
-          seabirdPackages = lib.packagesFromDirectoryRecursive {
-            inherit (pkgs) callPackage;
-            directory = ./pkgs;
-          };
-        in
         {
           _module.args.pkgs = import nixpkgs {
             inherit system;
@@ -129,10 +136,12 @@
             };
           };
 
-          packages = seabirdPackages // {
+          packages = pkgs.seabird // {
             # Aggregate target so CI can build every seabird package (and
             # push their closures to the attic cache) in one derivation.
-            all = pkgs.linkFarmFromDrvs "seabird-all" (lib.attrValues seabirdPackages);
+            all = pkgs.linkFarmFromDrvs "seabird-all" (
+              (lib.attrValues pkgs.seabird) ++ (lib.attrValues pkgs.seabird-staging)
+            );
           };
 
           devShells.default = pkgs.mkShell {
