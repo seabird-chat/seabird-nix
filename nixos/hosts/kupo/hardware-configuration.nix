@@ -26,6 +26,10 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  # This JMicron JMS578 bridge drops the disk under UAS the same way
+  # stiltzkin's does. Force bulk-only transport.
+  boot.kernelParams = [ "usb-storage.quirks=152d:a578:u" ];
+
   # The sd-image module (imported by ./default.nix) provides its own
   # fileSystems."/" — don't duplicate it here or the build conflicts.
   swapDevices = [ ];

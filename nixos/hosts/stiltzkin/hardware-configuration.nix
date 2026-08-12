@@ -26,6 +26,10 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  # This Sabrent bridge intermittently drops the disk under UAS, stranding
+  # the root filesystem mid-boot. Force bulk-only transport.
+  boot.kernelParams = [ "usb-storage.quirks=5910:13fd:u" ];
+
   # The sd-image module (imported by ./default.nix) provides its own
   # fileSystems."/" — don't duplicate it here or the build conflicts.
   swapDevices = [ ];
