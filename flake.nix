@@ -199,22 +199,6 @@
         nixosModules.default = import ./nixos/modules;
 
         nixosConfigurations = {
-          "kupo" = myLib.mkNixosSystem {
-            modules = [
-              ./nixos/hosts/kupo
-              ./nixos/users/belak
-              ./nixos/users/ghavil
-            ];
-          };
-
-          "stiltzkin" = myLib.mkNixosSystem {
-            modules = [
-              ./nixos/hosts/stiltzkin
-              ./nixos/users/belak
-              ./nixos/users/ghavil
-            ];
-          };
-
           "vivi" = myLib.mkNixosSystem {
             modules = [
               ./nixos/hosts/vivi
@@ -225,16 +209,6 @@
         };
 
         deploy.nodes = {
-          "kupo" = {
-            hostname = "kupo.infra.seabird.chat";
-            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
-          };
-
-          "stiltzkin" = {
-            hostname = "stiltzkin.infra.seabird.chat";
-            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."stiltzkin";
-          };
-
           "vivi" = {
             hostname = "vivi.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."vivi";
