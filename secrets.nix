@@ -9,9 +9,11 @@ let
     user-belak-zagreus
   ];
 
+  system-eiko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFpH5p7ODkUq0kLqda1/fghcCo+MxvCZLdKOfhZCtK+";
   system-vivi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDx5Y7VvA9CUdrsiVpNbRufBdJdvJZEfRQXIGnPgqynH";
 
   systems = [
+    system-eiko
     system-vivi
   ];
 in
@@ -20,6 +22,7 @@ in
   "secrets/ghavil-password.age".publicKeys = users ++ systems;
 
   # Kept for reuse on future hosts; rekey once a host owns them again.
+  "secrets/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
   "secrets/datadog-key-kupo.age".publicKeys = users;
   "secrets/datadog-key-stiltzkin.age".publicKeys = users;
   "secrets/datadog-key-vivi.age".publicKeys = users ++ [ system-vivi ];

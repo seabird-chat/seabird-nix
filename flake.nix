@@ -199,6 +199,13 @@
         nixosModules.default = import ./nixos/modules;
 
         nixosConfigurations = {
+          "eiko" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/eiko
+              ./nixos/users/belak
+            ];
+          };
+
           "vivi" = myLib.mkNixosSystem {
             modules = [
               ./nixos/hosts/vivi
@@ -209,6 +216,13 @@
         };
 
         deploy.nodes = {
+          # eiko sits on the homelab network rather than behind the seabird
+          # edge, so it is reached by its internal name.
+          "eiko" = {
+            hostname = "eiko.infra.seabird.chat";
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."eiko";
+          };
+
           "vivi" = {
             hostname = "vivi.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."vivi";
