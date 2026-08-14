@@ -18,10 +18,6 @@
       ];
       auto-optimise-store = true;
       warn-dirty = false;
-
-      # Machine-wide credentials for private substituters (e.g. the seabird
-      # attic cache).
-      netrc-file = config.age.secrets.nix-netrc.path;
     };
 
     gc = {
@@ -30,8 +26,6 @@
       options = "--delete-older-than 2d";
     };
   };
-
-  age.secrets.nix-netrc.file = ../../secrets/nix-netrc.age;
 
   users.mutableUsers = false;
 

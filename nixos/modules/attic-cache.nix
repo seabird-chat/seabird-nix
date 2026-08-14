@@ -34,11 +34,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # The cache is private; the pull token lives in the machine-wide netrc
-    # (nix.settings.netrc-file in common.nix).
+    # The cache is private, so the pull token comes from a machine-wide netrc.
+    # It lives here rather than in common.nix because it is the only thing that
+    # needs it: a host with no private substituter needs no secret at all, and
+    # that is what lets a fresh MicroVM guest boot before it has an agenix key.
     nix.settings = {
       substituters = [ "${cfg.endpoint}/${cfg.cacheName}" ];
       trusted-public-keys = [ cfg.publicKey ];
+      netrc-file = config.age.secrets.nix-netrc.path;
     };
+
+    age.secrets.nix-netrc.file = ../../secrets/nix-netrc.age;
   };
 }
