@@ -32,6 +32,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Seabird core
     seabird-core-release = {
       url = "github:seabird-chat/seabird-core/release";
@@ -206,8 +211,18 @@
         nixosConfigurations = {
           "eiko" = myLib.mkNixosSystem {
             modules = [
+              inputs.microvm.nixosModules.host
               ./nixos/hosts/eiko
               ./nixos/users/belak
+            ];
+          };
+
+          # A MicroVM guest on eiko. No users module: belak's password is an
+          # agenix secret, and this guest has no key until it has booted once.
+          "kupo" = myLib.mkNixosSystem {
+            modules = [
+              inputs.microvm.nixosModules.microvm
+              ./nixos/hosts/kupo
             ];
           };
 
@@ -226,6 +241,14 @@
           "eiko" = {
             hostname = "eiko.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."eiko";
+          };
+
+          # Reached over SSH like any other host once it has a lease. The host
+          # owns the runner, so a change to kernel or initrd needs eiko
+          # deployed as well.
+          "kupo" = {
+            hostname = "kupo.infra.seabird.chat";
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
           };
 
           "vivi" = {
