@@ -2,6 +2,7 @@
   self,
   nixpkgs,
   agenix,
+  disko,
   ...
 }:
 {
@@ -15,6 +16,7 @@
       modules = [
         self.nixosModules.default
         agenix.nixosModules.default
+        disko.nixosModules.disko
       ]
       ++ modules;
     };

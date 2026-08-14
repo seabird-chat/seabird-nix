@@ -18,15 +18,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-partlabel/root";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-partlabel/boot";
-    fsType = "vfat";
-  };
+  # Filesystems come from ./disko.nix.
 
   swapDevices = [ ];
 
