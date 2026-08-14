@@ -1,5 +1,7 @@
 {
   config,
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -34,6 +36,13 @@
     file = ../../../secrets/datadog-key-eiko.age;
     owner = "datadog";
   };
+
+  # The MicroVM guests mount this host's /nix/store read-only, so every
+  # closure they run has to be here first. Building it into eiko's own system
+  # closure warms the store and keeps nix.gc from collecting it between the
+  # time a guest is defined and the time its services are enabled. Staging is
+  # included so stiltzkin costs nothing extra later.
+  system.extraDependencies = lib.attrValues pkgs.seabird ++ lib.attrValues pkgs.seabird-staging;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
