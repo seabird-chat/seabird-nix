@@ -187,7 +187,6 @@
 
       hosts = [
         "webhooks.seabird.chat"
-        "seabird-webhooks.elwert.cloud"
       ];
 
       target = "discord://seabird/721047808077070446";
