@@ -208,6 +208,7 @@
             modules = [
               ./nixos/hosts/eiko
               ./nixos/users/belak
+              ./nixos/users/ghavil
             ];
           };
 
@@ -226,6 +227,7 @@
             modules = [
               ./nixos/hosts/kupo
               ./nixos/users/belak
+              ./nixos/users/ghavil
             ];
           };
 
@@ -233,6 +235,7 @@
             modules = [
               ./nixos/hosts/stiltzkin
               ./nixos/users/belak
+              ./nixos/users/ghavil
             ];
           };
 
