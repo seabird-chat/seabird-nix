@@ -306,6 +306,10 @@
           };
 
           packages =
+            let
+              all-prod = pkgs.linkFarmFromDrvs "seabird-all-prod" (lib.attrValues pkgs.seabird);
+              all-staging = pkgs.linkFarmFromDrvs "seabird-all-staging" (lib.attrValues pkgs.seabird-staging);
+            in
             pkgs.seabird
             # Disk image for first provisioning of a VM guest. One image serves
             # every guest: the reservation is per MAC, so it lands on the right
@@ -316,11 +320,16 @@
               bootstrap-image = self.nixosConfigurations."bootstrap".config.system.build.diskoImages;
             }
             // {
-              # Aggregate target so CI can build every seabird package (and
-              # push their closures to the attic cache) in one derivation.
-              all = pkgs.linkFarmFromDrvs "seabird-all" (
-                (lib.attrValues pkgs.seabird) ++ (lib.attrValues pkgs.seabird-staging)
-              );
+              # Per-environment aggregates, so a host can pin the set it actually
+              # runs rather than both.
+              inherit all-prod all-staging;
+
+              # Everything, for the CI pipeline that pushes closures to the
+              # attic cache in one build.
+              all = pkgs.linkFarmFromDrvs "seabird-all" [
+                all-prod
+                all-staging
+              ];
             };
 
           devShells.default = pkgs.mkShell {
