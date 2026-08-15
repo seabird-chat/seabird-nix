@@ -21,8 +21,9 @@ way.
 `bootstrap` is not a host. It is the configuration a new guest is provisioned
 from, described below.
 
-`vivi` still runs the production seabird stack today. Moving it to `kupo` is the
-next step.
+`vivi` used to run the production stack and is no longer managed here. It was
+handed back to `belak/dotfiles` once `kupo` took over, so this flake describes
+only the seabird machines.
 
 ## Deploying
 
@@ -114,8 +115,8 @@ Secrets are agenix files under `secrets/`, decrypted with each host's SSH host
 key. `secrets.nix` groups the recipients:
 
 - `systems` is every host, for the login passwords and the nix daemon's netrc.
-- `env-prod` is the hosts that run production seabird services, currently `kupo`
-  and `vivi`.
+- `env-prod` is the hosts that run production seabird services, currently just
+  `kupo`.
 - `env-staging` is `stiltzkin`, which gets its own copies of the seabird
   credentials rather than production's. Sharing them would put one bot identity
   on the network twice.

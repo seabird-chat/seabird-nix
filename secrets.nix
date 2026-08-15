@@ -12,18 +12,15 @@ let
   system-eiko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFpH5p7ODkUq0kLqda1/fghcCo+MxvCZLdKOfhZCtK+";
   system-kupo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE679sZWB/+sWPM/W29xxB/NKopAkE13daMDXlRsecEE";
   system-stiltzkin = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPY4Di/gKC190MFcJrPtMGgXhP1CeKtLrIQuBopvquG";
-  system-vivi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDx5Y7VvA9CUdrsiVpNbRufBdJdvJZEfRQXIGnPgqynH";
 
   systems = [
     system-eiko
     system-kupo
     system-stiltzkin
-    system-vivi
   ];
 
   env-prod = [
     system-kupo
-    system-vivi
   ];
 
   env-staging = [
@@ -38,7 +35,8 @@ in
   "secrets/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
   "secrets/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
   "secrets/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
-  "secrets/datadog-key-vivi.age".publicKeys = users ++ [ system-vivi ];
+  # Kept for reuse; vivi is no longer managed here.
+  "secrets/datadog-key-vivi.age".publicKeys = users;
 
   # nix daemon netrc, holding the seabird attic cache pull token
   "secrets/nix-netrc.age".publicKeys = users ++ systems;

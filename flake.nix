@@ -239,13 +239,6 @@
             ];
           };
 
-          "vivi" = myLib.mkNixosSystem {
-            modules = [
-              ./nixos/hosts/vivi
-              ./nixos/users/belak
-              ./nixos/users/ghavil
-            ];
-          };
         };
 
         deploy.nodes = {
@@ -269,10 +262,6 @@
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."stiltzkin";
           };
 
-          "vivi" = {
-            hostname = "vivi.infra.seabird.chat";
-            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."vivi";
-          };
         };
       };
 
