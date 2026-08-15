@@ -22,8 +22,8 @@ steps:
     commands:
       - |
         nix develop .#ci --command bash -euo pipefail -c '
-          attic login elwert "$ATTIC_ENDPOINT" "$ATTIC_TOKEN"
-          attic use elwert:seabird
+          #attic login elwert "$ATTIC_ENDPOINT" "$ATTIC_TOKEN"
+          #attic use elwert:seabird
           nix build .#all
-          attic push elwert:seabird ./result
+          #attic push elwert:seabird ./result
         '
