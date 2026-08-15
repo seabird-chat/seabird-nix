@@ -1,13 +1,26 @@
 {
-  self,
   config,
   lib,
-  pkgs,
+  mkLibvirtDomain,
   ...
 }:
+
+let
+  guests = {
+    kupo = {
+      uuid = "7c1f4a52-2f0e-4a6b-9d55-2b8c5d4f1a01";
+      mac = "02:00:00:00:40:01";
+    };
+
+    stiltzkin = {
+      uuid = "7c1f4a52-2f0e-4a6b-9d55-2b8c5d4f1a02";
+      mac = "02:00:00:00:40:02";
+    };
+  };
+in
 {
   imports = [
-    ./disko.nix
+    ./disko-config.nix
     ./hardware-configuration.nix
   ];
 
@@ -15,8 +28,8 @@
     hostName = "eiko";
     domain = "infra.seabird.chat";
 
-    # systemd-networkd allows for easier bridge configuration, which we need for
-    # when we start introducing microvms.
+    # systemd-networkd makes the bridge and the guest taps much easier to
+    # configure than scripted networking does.
     useNetworkd = true;
 
     # The global DHCP client is off so no lease is requested for the bridge
@@ -42,28 +55,6 @@
   # identify by MAC instead: with the MAC pinned above, the lease keeps working.
   systemd.network.networks."40-br-seabird".dhcpV4Config.ClientIdentifier = "mac";
 
-  # Guest taps are created by microvm-tap-interfaces@ at VM start, so match on
-  # the name prefix rather than naming each guest here. Scripted networking
-  # cannot do this, which is why the host runs networkd.
-  systemd.network.networks."11-microvm-seabird" = {
-    matchConfig.Name = "vm-*";
-    networkConfig.Bridge = "br-seabird";
-    linkConfig.RequiredForOnline = "no";
-  };
-
-  microvm = {
-    autostart = [ "kupo" ];
-
-    # `flake = self` deploys the guest from this flake's nixosConfigurations.
-    # /var/lib/microvms/kupo is only created if absent, so later guest changes
-    # go out with `deploy .#kupo`; the host only owns the kernel, the initrd,
-    # and the runner.
-    vms.kupo = {
-      flake = self;
-      updateFlake = "github:seabird-chat/seabird-nix";
-    };
-  };
-
   services.datadog-agent = {
     enable = true;
     site = "datadoghq.com";
@@ -79,12 +70,44 @@
     owner = "datadog";
   };
 
-  # The MicroVM guests mount this host's /nix/store read-only, so every
-  # closure they run has to be here first. Building it into eiko's own system
-  # closure warms the store and keeps nix.gc from collecting it between the
-  # time a guest is defined and the time its services are enabled. Staging is
-  # included so stiltzkin costs nothing extra later.
-  system.extraDependencies = lib.attrValues pkgs.seabird ++ lib.attrValues pkgs.seabird-staging;
+  # libvirt creates each guest's tap as vm-<name> when the domain starts, so
+  # match on the prefix rather than naming every guest here.
+  systemd.network.networks."11-vm-seabird" = {
+    matchConfig.Name = "vm-*";
+    networkConfig.Bridge = "br-seabird";
+    linkConfig.RequiredForOnline = "no";
+  };
+
+  # eiko is the hypervisor and the bridge host, nothing more. The guests are
+  # ordinary NixOS nodes deployed over SSH, so a deploy activates in place and
+  # restarts only the units that changed.
+  #
+  # The domains are generated into /etc/seabird/domains and defined by hand,
+  # once per guest, along with their disk images.
+  environment.etc = lib.mapAttrs' (
+    name: guest:
+    lib.nameValuePair "seabird/domains/${name}.xml" {
+      text = mkLibvirtDomain (
+        guest
+        // {
+          inherit name;
+          bridge = "br-seabird";
+        }
+      );
+    }
+  ) guests;
+
+  # Boot state is decided only by each domain's autostart flag, so
+  # libvirt-guests must not also restore whatever happened to be running. It
+  # keeps its job on the way down, where an ACPI shutdown lets each guest stop
+  # seabird cleanly and close its SQLite databases.
+  virtualisation.libvirtd = {
+    enable = true;
+    onBoot = "ignore";
+    onShutdown = "shutdown";
+    shutdownTimeout = 120;
+    parallelShutdown = 2;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

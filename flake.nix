@@ -32,11 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    microvm = {
-      url = "github:microvm-nix/microvm.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Seabird core
     seabird-core-release = {
       url = "github:seabird-chat/seabird-core/release";
@@ -211,18 +206,22 @@
         nixosConfigurations = {
           "eiko" = myLib.mkNixosSystem {
             modules = [
-              inputs.microvm.nixosModules.host
               ./nixos/hosts/eiko
               ./nixos/users/belak
             ];
           };
 
-          # A MicroVM guest on eiko. No users module: belak's password is an
-          # agenix secret, and this guest has no key until it has booted once.
+          # VM guests on eiko. No users module: belak's password is an agenix
+          # secret, and a fresh guest has no key until it has booted once.
           "kupo" = myLib.mkNixosSystem {
             modules = [
-              inputs.microvm.nixosModules.microvm
               ./nixos/hosts/kupo
+            ];
+          };
+
+          "stiltzkin" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/stiltzkin
             ];
           };
 
@@ -249,6 +248,11 @@
           "kupo" = {
             hostname = "kupo.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
+          };
+
+          "stiltzkin" = {
+            hostname = "stiltzkin.infra.seabird.chat";
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."stiltzkin";
           };
 
           "vivi" = {
@@ -287,13 +291,22 @@
             };
           };
 
-          packages = pkgs.seabird // {
-            # Aggregate target so CI can build every seabird package (and
-            # push their closures to the attic cache) in one derivation.
-            all = pkgs.linkFarmFromDrvs "seabird-all" (
-              (lib.attrValues pkgs.seabird) ++ (lib.attrValues pkgs.seabird-staging)
-            );
-          };
+          packages =
+            pkgs.seabird
+            # Disk images for first provisioning of the VM guests only. After a
+            # guest boots, its disk is state and deploy-rs owns updates; writing
+            # a fresh image over it would roll the guest back to birth.
+            // lib.optionalAttrs (system == "x86_64-linux") {
+              kupo-image = self.nixosConfigurations."kupo".config.system.build.diskoImages;
+              stiltzkin-image = self.nixosConfigurations."stiltzkin".config.system.build.diskoImages;
+            }
+            // {
+              # Aggregate target so CI can build every seabird package (and
+              # push their closures to the attic cache) in one derivation.
+              all = pkgs.linkFarmFromDrvs "seabird-all" (
+                (lib.attrValues pkgs.seabird) ++ (lib.attrValues pkgs.seabird-staging)
+              );
+            };
 
           devShells.default = pkgs.mkShell {
             packages = [

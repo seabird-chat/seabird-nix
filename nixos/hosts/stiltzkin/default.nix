@@ -7,10 +7,11 @@
     ./hardware-configuration.nix
   ];
 
-  # Seabird production. No agenix secrets yet: the host key is generated at
-  # first boot, then added to secrets.nix and rekeyed.
+  # Seabird staging, deliberately the same shape as kupo. Staging will need its
+  # own credentials rather than prod's, or one bot identity ends up connected
+  # twice.
   networking = {
-    hostName = "kupo";
+    hostName = "stiltzkin";
     domain = "infra.seabird.chat";
 
     useNetworkd = true;
