@@ -4,9 +4,8 @@ when:
     branch: main
   - event: manual
 
-# Route to an aarch64 agent (quina); the seabird hosts are aarch64.
 labels:
-  platform: linux/arm64
+  platform: linux/amd64
 
 steps:
   - name: build-and-push
@@ -22,8 +21,8 @@ steps:
     commands:
       - |
         nix develop .#ci --command bash -euo pipefail -c '
-          #attic login elwert "$ATTIC_ENDPOINT" "$ATTIC_TOKEN"
-          #attic use elwert:seabird
+          attic login elwert "$ATTIC_ENDPOINT" "$ATTIC_TOKEN"
+          attic use elwert:seabird
           nix build .#all
-          #attic push elwert:seabird ./result
+          attic push elwert:seabird ./result
         '
