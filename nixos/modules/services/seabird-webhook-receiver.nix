@@ -25,6 +25,15 @@ in
       target = lib.mkOption {
         type = lib.types.str;
       };
+
+      port = lib.mkOption {
+        type = lib.types.port;
+        default = 3000;
+        description = ''
+          Port the receiver listens on, and the one Caddy proxies to. Not 8080:
+          that belongs to seabird-core, which this service connects to.
+        '';
+      };
     };
   };
 
@@ -34,8 +43,10 @@ in
       wants = [ "network-online.target" ];
       after = [ "network-online.target" ];
       environment = {
+        # seabird-core, which this connects to as a client.
         SEABIRD_HOST = "http://localhost:8080";
-        SEABIRD_BIND_HOST = "127.0.0.1:8080";
+
+        SEABIRD_BIND_HOST = "127.0.0.1:${toString cfg.port}";
         SEABIRD_CHANNEL = cfg.target;
       };
       serviceConfig = {
@@ -53,7 +64,7 @@ in
     seabird.caddy.virtualHosts.seabird-webhook-receiver = {
       inherit (cfg) hosts;
 
-      backend = "http://localhost:3000"; # TODO: this is hard coded
+      backend = "http://localhost:${toString cfg.port}";
     };
   };
 }
