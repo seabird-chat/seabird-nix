@@ -24,7 +24,7 @@ in
 
     publicKey = lib.mkOption {
       type = lib.types.str;
-      default = "seabird:FGiZCzPjPpnQHwe3RuxA88OpfhjWEHYC6CQwRlgRbag=";
+      default = "seabird:9xBUvbtK5/HKJWcGGkDVYIXjMY3r5irQf9bciAOJeHQ=";
       description = ''
         Public key used to verify signatures on paths served by the cache,
         in `<name>:<base64>` form. Not secret. Obtain it with
