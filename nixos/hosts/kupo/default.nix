@@ -1,4 +1,5 @@
 {
+  self,
   ...
 }:
 {
@@ -25,6 +26,11 @@
     # valid across rebuilds and reinstalls.
     dhcpV4Config.ClientIdentifier = "mac";
   };
+
+  # Builds the release packages into this guest's store ahead of needing them,
+  # so the deploy that enables the services only has to activate. Costs one long
+  # deploy now, since --build-on remote means the guest builds them itself.
+  system.extraDependencies = [ self.packages.x86_64-linux.all-prod ];
 
   system.stateVersion = "26.05";
 }
