@@ -211,17 +211,28 @@
             ];
           };
 
-          # VM guests on eiko. No users module: belak's password is an agenix
-          # secret, and a fresh guest has no key until it has booted once.
+          # The image a new guest is provisioned from, before it has an SSH
+          # host key and therefore before agenix can decrypt anything. Not a
+          # host: it is replaced by the real configuration on first deploy.
+          "bootstrap" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/bootstrap
+            ];
+          };
+
+          # VM guests on eiko. Both carry the belak user, so its agenix password
+          # has to be readable by them before a deploy will activate.
           "kupo" = myLib.mkNixosSystem {
             modules = [
               ./nixos/hosts/kupo
+              ./nixos/users/belak
             ];
           };
 
           "stiltzkin" = myLib.mkNixosSystem {
             modules = [
               ./nixos/hosts/stiltzkin
+              ./nixos/users/belak
             ];
           };
 
@@ -293,12 +304,13 @@
 
           packages =
             pkgs.seabird
-            # Disk images for first provisioning of the VM guests only. After a
+            # Disk image for first provisioning of a VM guest. One image serves
+            # every guest: the reservation is per MAC, so it lands on the right
+            # address, and the first deploy gives it its real identity. After a
             # guest boots, its disk is state and deploy-rs owns updates; writing
             # a fresh image over it would roll the guest back to birth.
             // lib.optionalAttrs (system == "x86_64-linux") {
-              kupo-image = self.nixosConfigurations."kupo".config.system.build.diskoImages;
-              stiltzkin-image = self.nixosConfigurations."stiltzkin".config.system.build.diskoImages;
+              bootstrap-image = self.nixosConfigurations."bootstrap".config.system.build.diskoImages;
             }
             // {
               # Aggregate target so CI can build every seabird package (and
