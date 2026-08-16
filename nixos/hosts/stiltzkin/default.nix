@@ -1,6 +1,7 @@
 {
   self,
   config,
+  pkgs,
   ...
 }:
 {
@@ -9,9 +10,6 @@
     ./hardware-configuration.nix
   ];
 
-  # Seabird staging, deliberately the same shape as kupo. Staging will need its
-  # own credentials rather than prod's, or one bot identity ends up connected
-  # twice.
   networking = {
     hostName = "stiltzkin";
     domain = "infra.seabird.chat";
@@ -45,6 +43,34 @@
     file = ../../../secrets/hosts/datadog-key-stiltzkin.age;
     owner = "datadog";
   };
+
+  seabird.caddy.enable = true;
+  seabird.caddy.package = pkgs.unstable.caddy;
+
+  seabird.services = {
+    seabird-core = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-core;
+
+      hosts = [
+        "api.staging.seabird.chat"
+      ];
+    };
+
+    # Backends
+
+    seabird-discord-backend = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-discord-backend;
+      secretFile = ../../../secrets/staging/seabird-discord-backend.age;
+    };
+  };
+
+  # Tokens are rows in core's database and there is no CLI to add them, so the
+  # host needs a sqlite client to issue one.
+  environment.systemPackages = [
+    pkgs.sqlite
+  ];
 
   # Builds the staging packages into this guest's store ahead of needing them,
   # so the deploy that enables the services only has to activate. Costs one long
