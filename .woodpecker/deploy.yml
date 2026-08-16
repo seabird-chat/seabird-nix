@@ -2,9 +2,9 @@
 when:
   - event: deployment
 
-# Route to an aarch64 agent (quina); the seabird hosts are aarch64.
+# Route to an amd64 agent; the seabird hosts are x86_64.
 labels:
-  platform: linux/arm64
+  platform: linux/amd64
 
 steps:
   - name: deploy
