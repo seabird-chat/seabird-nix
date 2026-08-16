@@ -1,5 +1,6 @@
 {
   self,
+  config,
   ...
 }:
 {
@@ -26,6 +27,21 @@
     # The domain fixes the MAC, so identifying by it keeps the DHCP reservation
     # valid across rebuilds and reinstalls.
     dhcpV4Config.ClientIdentifier = "mac";
+  };
+
+  services.datadog-agent = {
+    enable = true;
+    site = "datadoghq.com";
+    apiKeyFile = config.age.secrets.datadog-api-key.path;
+    extraConfig = {
+      env = "staging";
+      dogstatsd_port = 8125;
+    };
+  };
+
+  age.secrets.datadog-api-key = {
+    file = ../../../secrets/hosts/datadog-key-stiltzkin.age;
+    owner = "datadog";
   };
 
   # Builds the staging packages into this guest's store ahead of needing them,

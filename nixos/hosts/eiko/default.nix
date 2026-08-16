@@ -60,7 +60,7 @@ in
     site = "datadoghq.com";
     apiKeyFile = config.age.secrets.datadog-api-key.path;
     extraConfig = {
-      env = "production";
+      env = "prod";
       dogstatsd_port = 8125;
     };
   };
