@@ -49,5 +49,7 @@ in
   "secrets/prod/seabird-url-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-webhook-receiver.age".publicKeys = users ++ env-prod;
 
+  "secrets/staging/seabird-discord-backend.age".publicKeys = users ++ env-staging;
+
   # TODO: move common API keys into separate files
 }
