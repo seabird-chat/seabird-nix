@@ -22,7 +22,7 @@ steps:
           # groups-capable build (https://github.com/NixOS/nixpkgs/pull/547959).
           case "$CI_PIPELINE_DEPLOY_TARGET" in
             staging)    node=".#stiltzkin" ;;
-            production) node=".#kupo" ;;
+            prod)       node=".#kupo" ;;
             hypervisor) node=".#eiko" ;;
             *) echo "unknown deploy target: $CI_PIPELINE_DEPLOY_TARGET" >&2; exit 1 ;;
           esac
