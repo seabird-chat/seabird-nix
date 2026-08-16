@@ -29,6 +29,8 @@
     dhcpV4Config.ClientIdentifier = "mac";
   };
 
+  seabird.atticCache.enable = true;
+
   services.datadog-agent = {
     enable = true;
     site = "datadoghq.com";

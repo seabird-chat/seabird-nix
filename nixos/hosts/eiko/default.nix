@@ -55,6 +55,8 @@ in
   # identify by MAC instead: with the MAC pinned above, the lease keeps working.
   systemd.network.networks."40-br-seabird".dhcpV4Config.ClientIdentifier = "mac";
 
+  seabird.atticCache.enable = true;
+
   services.datadog-agent = {
     enable = true;
     site = "datadoghq.com";
