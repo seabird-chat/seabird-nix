@@ -35,8 +35,6 @@ in
   "secrets/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
   "secrets/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
   "secrets/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
-  # Kept for reuse; vivi is no longer managed here.
-  "secrets/datadog-key-vivi.age".publicKeys = users;
 
   # nix daemon netrc, holding the seabird attic cache pull token
   "secrets/nix-netrc.age".publicKeys = users ++ systems;
