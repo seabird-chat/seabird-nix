@@ -1,0 +1,49 @@
+# Bump a single flake input and push the result to main.
+#
+# Triggered by a service repo's CI after it pushes to main or release (see
+# that repo's .woodpecker/trigger-bump.yml), which passes SEABIRD_CI_TASK and
+# INPUT_NAME as pipeline parameters. SEABIRD_CI_TASK is what keeps this apart
+# from build.yml, since both run on the manual event: an undefined variable
+# doesn't match, so a plain manual run builds and doesn't bump.
+when:
+  - event: manual
+    evaluate: 'SEABIRD_CI_TASK == "nix-input-bump"'
+
+labels:
+  platform: linux/amd64
+
+steps:
+  - name: bump-input
+    image: nixos/nix:latest
+    environment:
+      NIX_CONFIG: |
+        experimental-features = nix-command flakes
+        accept-flake-config = true
+      FORGEJO_TOKEN:
+        from_secret: seabird_bot_forgejo_token
+    commands:
+      - |
+        # `nix flake update` only warns and still exits 0 when the name isn't
+        # an input, so check the lock file first — otherwise a bad INPUT_NAME
+        # looks like a clean bump that happened to change nothing.
+        nix eval --impure --raw --expr '
+          let
+            lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+            inputs = (builtins.getAttr lock.root lock.nodes).inputs;
+            name = builtins.getEnv "INPUT_NAME";
+          in
+          if builtins.hasAttr name inputs then
+            "ok"
+          else
+            throw ("INPUT_NAME is not a flake input of this repo: " + name)
+        '
+      - nix flake update "$INPUT_NAME"
+      - |
+        if git diff --quiet flake.lock; then
+          echo "flake.lock is already current for $INPUT_NAME"
+        else
+          git config user.name seabird-bot
+          git config user.email seabird-bot@elwert.cloud
+          git commit -m "flake: bump $INPUT_NAME" flake.lock
+          git push "https://seabird-bot:$FORGEJO_TOKEN@forgejo.elwert.cloud/seabird-chat/seabird-nix.git" HEAD:main
+        fi

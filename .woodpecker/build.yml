@@ -2,7 +2,11 @@
 when:
   - event: push
     branch: main
+  # Manual runs are also how other pipelines are triggered (see
+  # bump-input.yml), so only claim the runs meant for this one. An unset
+  # variable reads as an empty string, which keeps plain manual runs working.
   - event: manual
+    evaluate: 'SEABIRD_CI_TASK == "" or SEABIRD_CI_TASK == "build"'
 
 labels:
   platform: linux/amd64
