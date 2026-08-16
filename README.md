@@ -112,16 +112,27 @@ virsh dumpxml kupo | diff -u /etc/seabird/domains/kupo.xml -
 ## Secrets
 
 Secrets are agenix files under `secrets/`, decrypted with each host's SSH host
-key. `secrets.nix` groups the recipients:
+key, and grouped into a directory per scope:
 
-- `systems` is every host, for the login passwords and the nix daemon's netrc.
-- `env-prod` is the hosts that run production seabird services, currently just
-  `kupo`.
-- `env-staging` is `stiltzkin`, which gets its own copies of the seabird
-  credentials rather than production's. Sharing them would put one bot identity
-  on the network twice.
+- `common/` is readable by every host: the login passwords and the nix daemon's
+  netrc.
+- `hosts/` is one file per machine, readable only by that machine. The Datadog
+  keys live here so a compromised guest cannot report as another.
+- `prod/` and `staging/` hold the seabird service credentials for each
+  environment. Staging gets its own copies rather than sharing prod's, since
+  sharing them would put one bot identity on the network twice.
 
-Per-host Datadog keys are readable only by the host they belong to.
+The same service appears under both `prod/` and `staging/` with the same
+filename, so `diff <(ls secrets/prod) <(ls secrets/staging)` shows what staging
+still needs.
+
+`secrets.nix` names the recipients per file. `env-prod` is currently just
+`kupo`, and `env-staging` just `stiltzkin`.
+
+Every service module takes a required `secretFile`, so a host states which file
+it uses and there is no default to fall back to. `package` does default, to the
+prod build, which a staging host overrides with the matching
+`pkgs.seabird-staging` package.
 
 Note that a host keeps its SSH host key across reinstalls if it is provisioned
 with `--copy-host-keys`, so removing a host from a group does nothing until the
