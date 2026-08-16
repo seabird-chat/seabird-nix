@@ -28,32 +28,26 @@ let
   ];
 in
 {
-  "secrets/belak-password.age".publicKeys = users ++ systems;
-  "secrets/ghavil-password.age".publicKeys = users ++ systems;
+  # Readable by every host.
+  "secrets/common/belak-password.age".publicKeys = users ++ systems;
+  "secrets/common/ghavil-password.age".publicKeys = users ++ systems;
+  "secrets/common/nix-netrc.age".publicKeys = users ++ systems;
 
   # One per host, so a compromised guest cannot report as another.
-  "secrets/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
-  "secrets/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
-  "secrets/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
+  "secrets/hosts/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
+  "secrets/hosts/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
+  "secrets/hosts/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
 
-  # nix daemon netrc, holding the seabird attic cache pull token
-  "secrets/nix-netrc.age".publicKeys = users ++ systems;
-
-  # Backends
-  "secrets/seabird-discord-backend.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-irc-backend-whyte.age".publicKeys = users ++ env-prod;
-
-  # Plugins
-  "secrets/seabird-adventofcode-plugin.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-datadog-plugin.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-github-plugin.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-plugin-bundle.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-proxy-plugin.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-stock-plugin.age".publicKeys = users ++ env-prod;
-  "secrets/seabird-url-plugin.age".publicKeys = users ++ env-prod;
-
-  # Other
-  "secrets/seabird-webhook-receiver.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-adventofcode-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-datadog-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-discord-backend.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-github-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-irc-backend-whyte.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-plugin-bundle.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-proxy-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-stock-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-url-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-webhook-receiver.age".publicKeys = users ++ env-prod;
 
   # TODO: move common API keys into separate files
 }

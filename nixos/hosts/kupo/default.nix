@@ -44,12 +44,12 @@
 
     seabird-discord-backend = {
       enable = true;
-      secretFile = ../../../secrets/seabird-discord-backend.age;
+      secretFile = ../../../secrets/prod/seabird-discord-backend.age;
     };
 
     seabird-irc-backend.instances.whyte = {
       enable = true;
-      secretFile = ../../../secrets/seabird-irc-backend-whyte.age;
+      secretFile = ../../../secrets/prod/seabird-irc-backend-whyte.age;
       channels = [
         "#adventofcode"
         "#ai"
@@ -76,17 +76,17 @@
 
     seabird-adventofcode-plugin = {
       enable = true;
-      secretFile = ../../../secrets/seabird-adventofcode-plugin.age;
+      secretFile = ../../../secrets/prod/seabird-adventofcode-plugin.age;
     };
 
     seabird-datadog-plugin = {
       enable = true;
-      secretFile = ../../../secrets/seabird-datadog-plugin.age;
+      secretFile = ../../../secrets/prod/seabird-datadog-plugin.age;
     };
 
     seabird-github-plugin = {
       enable = true;
-      secretFile = ../../../secrets/seabird-github-plugin.age;
+      secretFile = ../../../secrets/prod/seabird-github-plugin.age;
 
       repos = {
         default = "seabird-chat/seabird-plugin-bundle";
@@ -107,12 +107,12 @@
 
     seabird-plugin-bundle = {
       enable = true;
-      secretFile = ../../../secrets/seabird-plugin-bundle.age;
+      secretFile = ../../../secrets/prod/seabird-plugin-bundle.age;
     };
 
     seabird-proxy-plugin = {
       enable = true;
-      secretFile = ../../../secrets/seabird-proxy-plugin.age;
+      secretFile = ../../../secrets/prod/seabird-proxy-plugin.age;
 
       channelGroups = [
         [
@@ -193,19 +193,19 @@
 
     seabird-stock-plugin = {
       enable = true;
-      secretFile = ../../../secrets/seabird-stock-plugin.age;
+      secretFile = ../../../secrets/prod/seabird-stock-plugin.age;
     };
 
     seabird-url-plugin = {
       enable = true;
-      secretFile = ../../../secrets/seabird-url-plugin.age;
+      secretFile = ../../../secrets/prod/seabird-url-plugin.age;
     };
 
     # Other
 
     seabird-webhook-receiver = {
       enable = true;
-      secretFile = ../../../secrets/seabird-webhook-receiver.age;
+      secretFile = ../../../secrets/prod/seabird-webhook-receiver.age;
 
       hosts = [
         "webhooks.seabird.chat"

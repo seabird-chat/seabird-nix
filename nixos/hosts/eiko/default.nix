@@ -66,7 +66,7 @@ in
   };
 
   age.secrets.datadog-api-key = {
-    file = ../../../secrets/datadog-key-eiko.age;
+    file = ../../../secrets/hosts/datadog-key-eiko.age;
     owner = "datadog";
   };
 

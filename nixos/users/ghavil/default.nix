@@ -10,5 +10,5 @@
     ];
   };
 
-  age.secrets.ghavil-password.file = ../../../secrets/ghavil-password.age;
+  age.secrets.ghavil-password.file = ../../../secrets/common/ghavil-password.age;
 }

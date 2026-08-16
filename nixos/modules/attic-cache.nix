@@ -44,6 +44,6 @@ in
       netrc-file = config.age.secrets.nix-netrc.path;
     };
 
-    age.secrets.nix-netrc.file = ../../secrets/nix-netrc.age;
+    age.secrets.nix-netrc.file = ../../secrets/common/nix-netrc.age;
   };
 }

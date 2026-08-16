@@ -10,5 +10,5 @@
     ];
   };
 
-  age.secrets.belak-password.file = ../../../secrets/belak-password.age;
+  age.secrets.belak-password.file = ../../../secrets/common/belak-password.age;
 }
