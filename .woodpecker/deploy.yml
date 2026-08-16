@@ -23,6 +23,7 @@ steps:
           case "$CI_PIPELINE_DEPLOY_TARGET" in
             staging)    node=".#stiltzkin" ;;
             production) node=".#kupo" ;;
+            hypervisor) node=".#eiko" ;;
             *) echo "unknown deploy target: $CI_PIPELINE_DEPLOY_TARGET" >&2; exit 1 ;;
           esac
           eval "$(ssh-agent -s)"
