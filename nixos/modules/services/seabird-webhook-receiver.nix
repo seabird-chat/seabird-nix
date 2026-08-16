@@ -18,6 +18,10 @@ in
         default = pkgs.seabird.seabird-webhook-receiver;
       };
 
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
+
       hosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;
       };
@@ -59,7 +63,7 @@ in
       };
     };
 
-    age.secrets."seabird-webhook-receiver".file = ../../../secrets + "/seabird-webhook-receiver.age";
+    age.secrets."seabird-webhook-receiver".file = cfg.secretFile;
 
     seabird.caddy.virtualHosts.seabird-webhook-receiver = {
       inherit (cfg) hosts;

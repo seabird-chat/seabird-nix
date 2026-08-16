@@ -42,10 +42,14 @@
 
     # Backends
 
-    seabird-discord-backend.enable = true;
+    seabird-discord-backend = {
+      enable = true;
+      secretFile = ../../../secrets/seabird-discord-backend.age;
+    };
 
     seabird-irc-backend.instances.whyte = {
       enable = true;
+      secretFile = ../../../secrets/seabird-irc-backend-whyte.age;
       channels = [
         "#adventofcode"
         "#ai"
@@ -70,12 +74,19 @@
 
     # Plugins
 
-    seabird-adventofcode-plugin.enable = true;
+    seabird-adventofcode-plugin = {
+      enable = true;
+      secretFile = ../../../secrets/seabird-adventofcode-plugin.age;
+    };
 
-    seabird-datadog-plugin.enable = true;
+    seabird-datadog-plugin = {
+      enable = true;
+      secretFile = ../../../secrets/seabird-datadog-plugin.age;
+    };
 
     seabird-github-plugin = {
       enable = true;
+      secretFile = ../../../secrets/seabird-github-plugin.age;
 
       repos = {
         default = "seabird-chat/seabird-plugin-bundle";
@@ -94,10 +105,14 @@
       };
     };
 
-    seabird-plugin-bundle.enable = true;
+    seabird-plugin-bundle = {
+      enable = true;
+      secretFile = ../../../secrets/seabird-plugin-bundle.age;
+    };
 
     seabird-proxy-plugin = {
       enable = true;
+      secretFile = ../../../secrets/seabird-proxy-plugin.age;
 
       channelGroups = [
         [
@@ -176,14 +191,21 @@
       ];
     };
 
-    seabird-stock-plugin.enable = true;
+    seabird-stock-plugin = {
+      enable = true;
+      secretFile = ../../../secrets/seabird-stock-plugin.age;
+    };
 
-    seabird-url-plugin.enable = true;
+    seabird-url-plugin = {
+      enable = true;
+      secretFile = ../../../secrets/seabird-url-plugin.age;
+    };
 
     # Other
 
     seabird-webhook-receiver = {
       enable = true;
+      secretFile = ../../../secrets/seabird-webhook-receiver.age;
 
       hosts = [
         "webhooks.seabird.chat"

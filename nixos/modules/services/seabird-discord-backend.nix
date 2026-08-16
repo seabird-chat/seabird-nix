@@ -15,6 +15,10 @@ in
         type = lib.types.package;
         default = pkgs.seabird.seabird-discord-backend;
       };
+
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
     };
   };
 
@@ -38,6 +42,6 @@ in
       };
     };
 
-    age.secrets.seabird-discord-backend.file = ../../../secrets/seabird-discord-backend.age;
+    age.secrets.seabird-discord-backend.file = cfg.secretFile;
   };
 }

@@ -16,6 +16,10 @@ in
         type = lib.types.package;
         default = pkgs.seabird.seabird-datadog-plugin;
       };
+
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
     };
   };
 
@@ -38,6 +42,6 @@ in
       };
     };
 
-    age.secrets."seabird-datadog-plugin".file = ../../../secrets + "/seabird-datadog-plugin.age";
+    age.secrets."seabird-datadog-plugin".file = cfg.secretFile;
   };
 }

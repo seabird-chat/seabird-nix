@@ -15,6 +15,10 @@ in
         type = lib.types.package;
         default = pkgs.seabird.seabird-adventofcode-plugin;
       };
+
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
     };
   };
 
@@ -40,6 +44,6 @@ in
       };
     };
 
-    age.secrets.seabird-adventofcode-plugin.file = ../../../secrets/seabird-adventofcode-plugin.age;
+    age.secrets.seabird-adventofcode-plugin.file = cfg.secretFile;
   };
 }

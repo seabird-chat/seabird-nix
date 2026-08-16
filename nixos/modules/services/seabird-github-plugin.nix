@@ -16,6 +16,10 @@ in
         type = lib.types.package;
         default = pkgs.seabird.seabird-github-plugin;
       };
+
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
       repos = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
       };
@@ -43,6 +47,6 @@ in
       };
     };
 
-    age.secrets."seabird-github-plugin".file = ../../../secrets + "/seabird-github-plugin.age";
+    age.secrets."seabird-github-plugin".file = cfg.secretFile;
   };
 }

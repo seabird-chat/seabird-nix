@@ -16,6 +16,10 @@ in
         type = lib.types.package;
         default = pkgs.seabird.seabird-url-plugin;
       };
+
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
     };
   };
 
@@ -38,6 +42,6 @@ in
       };
     };
 
-    age.secrets."seabird-url-plugin".file = ../../../secrets + "/seabird-url-plugin.age";
+    age.secrets."seabird-url-plugin".file = cfg.secretFile;
   };
 }

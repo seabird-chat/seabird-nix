@@ -16,6 +16,10 @@ in
         type = lib.types.package;
         default = pkgs.seabird.seabird-proxy-plugin;
       };
+
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
       channelGroups = lib.mkOption {
         type = lib.types.listOf (lib.types.listOf lib.types.str);
       };
@@ -105,6 +109,6 @@ in
         };
       };
 
-    age.secrets."seabird-proxy-plugin".file = ../../../secrets + "/seabird-proxy-plugin.age";
+    age.secrets."seabird-proxy-plugin".file = cfg.secretFile;
   };
 }

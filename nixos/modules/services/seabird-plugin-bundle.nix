@@ -17,6 +17,10 @@ in
         default = pkgs.seabird.seabird-plugin-bundle;
       };
 
+      secretFile = lib.mkOption {
+        type = lib.types.path;
+      };
+
       enabledPlugins = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [ ];
@@ -52,6 +56,6 @@ in
       };
     };
 
-    age.secrets.seabird-plugin-bundle.file = ../../../secrets/seabird-plugin-bundle.age;
+    age.secrets.seabird-plugin-bundle.file = cfg.secretFile;
   };
 }

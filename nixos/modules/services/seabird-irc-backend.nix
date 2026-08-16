@@ -30,6 +30,9 @@ in
                   default = name;
                   type = lib.types.str;
                 };
+                secretFile = lib.mkOption {
+                  type = lib.types.path;
+                };
                 channels = lib.mkOption {
                   type = lib.types.listOf lib.types.str;
                 };
@@ -76,8 +79,7 @@ in
     age.secrets = lib.attrsets.concatMapAttrs (
       name: value:
       lib.mkIf value.enable {
-        "seabird-irc-backend-${value.name}".file =
-          ../../../secrets + "/seabird-irc-backend-${value.name}.age";
+        "seabird-irc-backend-${value.name}".file = value.secretFile;
       }
     ) cfg.instances;
   };
