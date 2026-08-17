@@ -727,11 +727,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786929302,
-        "narHash": "sha256-Q1Ojk28b5dwpYWoNts/bANqwNy96LlGR/QVacS6ESa4=",
+        "lastModified": 1787003037,
+        "narHash": "sha256-W611RsjxtEKA+5easltFl4XhFmfo1es78H/nOiE9AFU=",
         "owner": "seabird-chat",
         "repo": "seabird-url-plugin",
-        "rev": "9df2fe0fcaa35d9f6aab0fd445068645aba1e8a7",
+        "rev": "99a3aed94f1b53927bf01c59cf01d11fb22a6f8a",
         "type": "github"
       },
       "original": {
@@ -750,11 +750,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786482611,
-        "narHash": "sha256-7NuBaJEpNscm1YOtOoUkxV7orkrhK5fLEqAnVxswS/A=",
+        "lastModified": 1787003037,
+        "narHash": "sha256-4pQ4UetBJJ2Qm5+XBLPNfUkG3PQHRC7pMk9J6uh8HLA=",
         "owner": "seabird-chat",
         "repo": "seabird-url-plugin",
-        "rev": "3470fe7bf9c6d688981d49b42acb4577391a4325",
+        "rev": "503099972109b4d147abc08376159e64274d814a",
         "type": "github"
       },
       "original": {
