@@ -57,6 +57,7 @@ in
   "secrets/staging/seabird-datadog-plugin.age".publicKeys = users ++ env-staging;
   "secrets/staging/seabird-plugin-bundle.age".publicKeys = users ++ env-staging;
   "secrets/staging/seabird-proxy-plugin.age".publicKeys = users ++ env-staging;
+  "secrets/staging/seabird-url-plugin.age".publicKeys = users ++ env-staging;
 
   # TODO: move common API keys into separate files
 }

@@ -114,6 +114,12 @@
         ]
       ];
     };
+
+    seabird-url-plugin = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-url-plugin;
+      secretFile = ../../../secrets/staging/seabird-url-plugin.age;
+    };
   };
 
   # Tokens are rows in core's database and there is no CLI to add them, so the
