@@ -37,6 +37,7 @@ in
       wantedBy = [ "multi-user.target" ];
       wants = [ "network-online.target" ];
       after = [ "network-online.target" ];
+      restartTriggers = [ (builtins.hashFile "sha256" cfg.secretFile) ];
 
       environment = {
         DATABASE_URL = "sqlite:///var/lib/seabird-plugin-bundle/seabird-plugin-bundle.db";

@@ -57,6 +57,7 @@ in
           wantedBy = [ "multi-user.target" ];
           wants = [ "network-online.target" ];
           after = [ "network-online.target" ];
+          restartTriggers = [ (builtins.hashFile "sha256" value.secretFile) ];
 
           environment = {
             SEABIRD_HOST = "http://localhost:8080";

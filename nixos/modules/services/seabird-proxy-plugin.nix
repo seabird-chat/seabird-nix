@@ -95,6 +95,7 @@ in
         wantedBy = [ "multi-user.target" ];
         wants = [ "network-online.target" ];
         after = [ "network-online.target" ];
+        restartTriggers = [ (builtins.hashFile "sha256" cfg.secretFile) ];
         environment = {
           SEABIRD_HOST = "http://localhost:8080";
           PROXY_CONFIG_FILE = "${configFile}";

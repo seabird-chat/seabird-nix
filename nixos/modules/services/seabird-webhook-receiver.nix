@@ -46,6 +46,7 @@ in
       wantedBy = [ "multi-user.target" ];
       wants = [ "network-online.target" ];
       after = [ "network-online.target" ];
+      restartTriggers = [ (builtins.hashFile "sha256" cfg.secretFile) ];
       environment = {
         # seabird-core, which this connects to as a client.
         SEABIRD_HOST = "http://localhost:8080";
