@@ -16,6 +16,13 @@ let
       uuid = "7c1f4a52-2f0e-4a6b-9d55-2b8c5d4f1a02";
       mac = "02:00:00:00:40:02";
     };
+
+    # Staging's dependencies, not a third seabird environment, so it sits at
+    # .6 beside eiko rather than continuing the .10 / .20 run.
+    monty = {
+      uuid = "7c1f4a52-2f0e-4a6b-9d55-2b8c5d4f1a03";
+      mac = "02:00:00:00:40:03";
+    };
   };
 in
 {

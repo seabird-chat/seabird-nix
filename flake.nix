@@ -239,6 +239,16 @@
             ];
           };
 
+          # Staging's dependencies: an IRC daemon to test against, so staging
+          # never has to touch the real network.
+          "monty" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/monty
+              ./nixos/users/belak
+              ./nixos/users/ghavil
+            ];
+          };
+
         };
 
         deploy.nodes = {
@@ -260,6 +270,11 @@
           "stiltzkin" = {
             hostname = "stiltzkin.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."stiltzkin";
+          };
+
+          "monty" = {
+            hostname = "monty.infra.seabird.chat";
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."monty";
           };
 
         };
