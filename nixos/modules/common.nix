@@ -18,6 +18,13 @@
       ];
       auto-optimise-store = true;
       warn-dirty = false;
+
+      # The guests substitute from the attic cache and are not meant to build,
+      # but a cache miss falls back to building locally. Unbounded, that starts
+      # one job per core, and eiko's largest process is a qemu guest running
+      # production seabird, so an out-of-memory kill lands on prod rather than
+      # on the build. Two jobs keeps a miss slow instead of fatal.
+      max-jobs = 2;
     };
 
     gc = {
@@ -26,6 +33,13 @@
       options = "--delete-older-than 2d";
     };
   };
+
+  # With no swap at all, anonymous pages cannot be evicted anywhere: once page
+  # cache is gone the next allocation goes straight to the OOM killer, with no
+  # slower-but-alive state in between. zram is compressed swap in RAM, so it
+  # costs no disk and gives the kernel somewhere to put cold pages during a
+  # spike.
+  zramSwap.enable = true;
 
   users.mutableUsers = false;
 
