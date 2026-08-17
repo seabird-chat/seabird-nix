@@ -68,6 +68,13 @@ in
           serviceConfig = {
             DynamicUser = true;
             Restart = "always";
+
+            # An unreachable IRC server at startup is fatal to this backend, so
+            # the default 100ms restart burns systemd's five-starts-in-ten
+            # seconds allowance and the unit gives up for good. Five seconds
+            # keeps it under the limit indefinitely, which is what should happen
+            # when the other end is merely restarting.
+            RestartSec = 5;
             ExecStart = "${value.package}/bin/seabird-irc-backend";
             EnvironmentFile = [
               config.age.secrets."seabird-irc-backend-${value.name}".path
