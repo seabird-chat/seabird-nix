@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -64,8 +65,19 @@
 
         # Plaintext, because this is reachable only from the seabird VLAN and
         # zidane terminates TLS for everything that faces outward. A client
-        # elsewhere comes in through soju on zidane rather than directly.
+        # elsewhere comes in through soju on zidane rather than directly. The
+        # seabird backend uses this one.
         listeners.":6667" = { };
+
+        # TLS, for the one thing plaintext cannot do: SASL EXTERNAL. Ergo
+        # rejects an EXTERNAL attempt from a session with no client
+        # certificate, so certificate login needs a TLS listener even on a
+        # private network. The cert is self-signed and soju pins it by
+        # fingerprint, which is why no CA and no ACME credential are involved.
+        listeners.":6697".tls = {
+          cert = "/var/lib/ergo/tls.crt";
+          key = "/var/lib/ergo/tls.key";
+        };
       };
 
       # The module defaults to always-on for registered accounts, which makes a
@@ -77,7 +89,35 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 6667 ];
+  networking.firewall.allowedTCPPorts = [
+    6667
+    6697
+  ];
+
+  # Generated once, on first start, and then left alone: soju pins this cert by
+  # fingerprint, so replacing it means re-pinning. `ergo mkcerts` would do the
+  # same job but issues 365-day certs and aborts when the files already exist,
+  # neither of which suits something pinned and long-lived.
+  systemd.services.ergochat.serviceConfig.ExecStartPre = [
+    (pkgs.writeShellScript "ergo-self-signed-cert" ''
+      set -eu
+      cert="$STATE_DIRECTORY/tls.crt"
+      key="$STATE_DIRECTORY/tls.key"
+
+      if [ -f "$cert" ] && [ -f "$key" ]; then
+        exit 0
+      fi
+
+      ${pkgs.openssl}/bin/openssl req -x509 -newkey rsa:4096 -sha256 \
+        -days 3650 -nodes \
+        -keyout "$key" -out "$cert" \
+        -subj "/CN=monty.infra.seabird.chat/O=seabird-staging" \
+        -addext "subjectAltName=DNS:monty.infra.seabird.chat,IP:192.168.40.6"
+
+      chmod 0600 "$key"
+      chmod 0644 "$cert"
+    '')
+  ];
 
   system.stateVersion = "26.05";
 }
