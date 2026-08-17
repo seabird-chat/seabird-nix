@@ -25,6 +25,14 @@
       # production seabird, so an out-of-memory kill lands on prod rather than
       # on the build. Two jobs keeps a miss slow instead of fatal.
       max-jobs = 2;
+
+      # A deploy can outrun the CI build that pushes its closures, and nix
+      # remembers "the cache doesn't have this" for an hour by default, so one
+      # early query means an hour of building from source after the closure has
+      # landed. A minute is short enough to be invisible and still batches the
+      # misses of a nixpkgs bump, where the seabird cache is asked first and has
+      # none of them.
+      narinfo-cache-negative-ttl = 60;
     };
 
     gc = {
