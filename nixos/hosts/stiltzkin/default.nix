@@ -88,6 +88,32 @@
       package = pkgs.seabird-staging.seabird-plugin-bundle;
       secretFile = ../../../secrets/staging/seabird-plugin-bundle.age;
     };
+
+    seabird-datadog-plugin = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-datadog-plugin;
+      secretFile = ../../../secrets/staging/seabird-datadog-plugin.age;
+    };
+
+    # The pair the private IRC network was built for. Both backends default
+    # their id to "seabird", the same as prod, which is unambiguous because each
+    # environment has its own core. The Discord ids are staging's own guild.
+    seabird-proxy-plugin = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-proxy-plugin;
+      secretFile = ../../../secrets/staging/seabird-proxy-plugin.age;
+
+      channelGroups = [
+        [
+          "irc://seabird/%23general"
+          "discord://seabird/969285588383592471"
+        ]
+        [
+          "irc://seabird/%23botspam"
+          "discord://seabird/1538982707730718830"
+        ]
+      ];
+    };
   };
 
   # Tokens are rows in core's database and there is no CLI to add them, so the
