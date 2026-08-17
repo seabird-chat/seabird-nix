@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -42,6 +43,23 @@
   };
 
   seabird.atticCache.enable = true;
+
+  # Staging's dependencies are part of staging as far as monitoring is
+  # concerned, so this reports under the same env as stiltzkin.
+  services.datadog-agent = {
+    enable = true;
+    site = "datadoghq.com";
+    apiKeyFile = config.age.secrets.datadog-api-key.path;
+    extraConfig = {
+      env = "staging";
+      dogstatsd_port = 8125;
+    };
+  };
+
+  age.secrets.datadog-api-key = {
+    file = ../../../secrets/hosts/datadog-key-monty.age;
+    owner = "datadog";
+  };
 
   # Staging's IRC network. Ergo rather than UnrealIRCd, which the real network
   # runs: Unreal is not in nixpkgs and needs Atheme alongside it for services,
