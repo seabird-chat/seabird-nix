@@ -77,6 +77,17 @@
         "#botspam"
       ];
     };
+
+    # Plugins
+
+    # No plugin list, matching prod: staging runs the same set, so a command
+    # that works here is a command that works there. forecast is the only one
+    # needing third-party credentials, and staging has its own.
+    seabird-plugin-bundle = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-plugin-bundle;
+      secretFile = ../../../secrets/staging/seabird-plugin-bundle.age;
+    };
   };
 
   # Tokens are rows in core's database and there is no CLI to add them, so the
