@@ -38,6 +38,7 @@ in
   # One per host, so a compromised guest cannot report as another.
   "secrets/hosts/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
   "secrets/hosts/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
+  "secrets/hosts/datadog-key-monty.age".publicKeys = users ++ [ system-monty ];
   "secrets/hosts/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
 
   "secrets/prod/seabird-adventofcode-plugin.age".publicKeys = users ++ env-prod;
