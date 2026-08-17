@@ -12,11 +12,13 @@ let
   system-eiko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFpH5p7ODkUq0kLqda1/fghcCo+MxvCZLdKOfhZCtK+";
   system-kupo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE679sZWB/+sWPM/W29xxB/NKopAkE13daMDXlRsecEE";
   system-stiltzkin = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPY4Di/gKC190MFcJrPtMGgXhP1CeKtLrIQuBopvquG";
+  system-monty = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoM1CNyWuMFMkG2QC4/1ef4nJXAG+zVdl5CsmbO1NAZ";
 
   systems = [
     system-eiko
     system-kupo
     system-stiltzkin
+    system-monty
   ];
 
   env-prod = [
