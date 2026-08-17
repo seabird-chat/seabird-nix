@@ -11,13 +11,18 @@
 #   woodpecker-cli pipeline create seabird-chat/seabird-nix --branch main \
 #     --var SEABIRD_CI_TASK=nix-input-bump-seabird
 #
+# ...or on a schedule: a repo cron sets the same variable, so any cron that
+# wants a bump only has to name a task, and this file doesn't care which
+# cron it was. The daily one runs the seabird-wide bump, which is what picks
+# up bumps that lost a push race — so the script doesn't retry.
+#
 # The task variable is also what keeps this apart from build.yml, since both
 # run on the manual event.
 #
 # Don't turn on "cancel previous pipelines" for manual events on this repo:
 # concurrent bumps are expected, and cancelling them drops bumps outright.
 when:
-  - event: manual
+  - event: [manual, cron]
     evaluate: 'SEABIRD_CI_TASK in ["nix-input-bump", "nix-input-bump-seabird", "nix-input-bump-all"]'
 
 labels:
