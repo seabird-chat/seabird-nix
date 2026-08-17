@@ -255,11 +255,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786479668,
-        "narHash": "sha256-hOc8GCfjeOsiFtydOqMKSr4VCvUo4PFUa2yNBTYJO7M=",
+        "lastModified": 1786924538,
+        "narHash": "sha256-+6ion8T1D0cE8QTEa4AJgI7qLrlBV8zsIsJoFUc3dCc=",
         "owner": "seabird-chat",
         "repo": "seabird-adventofcode-plugin",
-        "rev": "a645351af709c868d69e6865663074fc6de9af7c",
+        "rev": "1165352a45e939f32909f285fd87fe78561da8db",
         "type": "github"
       },
       "original": {
