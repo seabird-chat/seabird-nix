@@ -93,7 +93,7 @@ while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
     exit 0
   fi
 
-  git -c user.name=seabird-bot -c user.email=seabird-bot@elwert.cloud \
+  git -c user.name=seabird-bot -c user.email=belak+seabird-bot@coded.io \
     commit -q -m "$subject" flake.lock
 
   if git push "$REPO_URL" HEAD:main; then
