@@ -64,6 +64,19 @@
       package = pkgs.seabird-staging.seabird-discord-backend;
       secretFile = ../../../secrets/staging/seabird-discord-backend.age;
     };
+
+    # Named for the network it connects to, the way prod's instance is named
+    # for whyte. That network is the Ergo instance on monty, so this backend
+    # reaches no real users and can be restarted freely.
+    seabird-irc-backend.instances.monty = {
+      enable = true;
+      package = pkgs.seabird-staging.seabird-irc-backend;
+      secretFile = ../../../secrets/staging/seabird-irc-backend-monty.age;
+      channels = [
+        "#general"
+        "#botspam"
+      ];
+    };
   };
 
   # Tokens are rows in core's database and there is no CLI to add them, so the
