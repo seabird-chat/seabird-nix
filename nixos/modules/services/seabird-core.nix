@@ -7,6 +7,8 @@
 
 let
   cfg = config.seabird.services.seabird-core;
+
+  bindHost = "0.0.0.0:8080";
 in
 {
   options = {
@@ -29,7 +31,13 @@ in
       after = [ "network-online.target" ];
       environment = {
         DATABASE_URL = "sqlite:///var/lib/seabird-core/seabird-core.db";
-        SEABIRD_BIND_HOST = "0.0.0.0:8080";
+
+        # The Rust implementation reads SEABIRD_BIND_HOST and the Go one reads
+        # BIND_HOST. Both are set so either package can be deployed here without
+        # silently falling back to a different port. Drop SEABIRD_BIND_HOST once
+        # the Go implementation is the only one left.
+        SEABIRD_BIND_HOST = bindHost;
+        BIND_HOST = bindHost;
       };
       serviceConfig = {
         DynamicUser = true;
