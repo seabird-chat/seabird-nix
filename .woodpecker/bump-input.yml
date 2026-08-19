@@ -25,12 +25,9 @@ when:
   - event: [manual, cron]
     evaluate: 'SEABIRD_CI_TASK in ["nix-input-bump", "nix-input-bump-seabird", "nix-input-bump-all"]'
 
-labels:
-  platform: linux/amd64
-
 steps:
   - name: bump-inputs
-    image: nixos/nix:latest
+    image: nixos/nix:2.35.1
     environment:
       NIX_CONFIG: |
         experimental-features = nix-command flakes

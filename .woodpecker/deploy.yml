@@ -2,13 +2,9 @@
 when:
   - event: deployment
 
-# Route to an amd64 agent; the seabird hosts are x86_64.
-labels:
-  platform: linux/amd64
-
 steps:
   - name: deploy
-    image: nixos/nix:latest
+    image: nixos/nix:2.35.1
     environment:
       NIX_CONFIG: |
         experimental-features = nix-command flakes
@@ -28,6 +24,10 @@ steps:
           esac
           eval "$(ssh-agent -s)"
           ssh-add - <<< "$DEPLOY_SSH_KEY"
+          # --remote-build is also what makes this agent's architecture
+          # irrelevant: it only evaluates and connects, the target builds.
+          # Dropping it means the agent builds and holds every target's
+          # closure, and would then have to match the target's arch.
           deploy --remote-build --skip-checks \
             --ssh-opts "-o StrictHostKeyChecking=accept-new" \
             "$node"
