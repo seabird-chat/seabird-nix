@@ -55,8 +55,15 @@ in
       lib.mkIf value.enable {
         "seabird-irc-backend-${value.name}" = {
           wantedBy = [ "multi-user.target" ];
-          wants = [ "network-online.target" ];
-          after = [ "network-online.target" ];
+          wants = [
+            "network-online.target"
+            "seabird-core.service"
+          ];
+          after = [
+            "network-online.target"
+            "seabird-core.service"
+          ];
+          startLimitIntervalSec = 0;
           restartTriggers = [ (builtins.hashFile "sha256" value.secretFile) ];
 
           environment = {
@@ -68,12 +75,6 @@ in
           serviceConfig = {
             DynamicUser = true;
             Restart = "always";
-
-            # An unreachable IRC server at startup is fatal to this backend, so
-            # the default 100ms restart burns systemd's five-starts-in-ten
-            # seconds allowance and the unit gives up for good. Five seconds
-            # keeps it under the limit indefinitely, which is what should happen
-            # when the other end is merely restarting.
             RestartSec = 5;
             ExecStart = "${value.package}/bin/seabird-irc-backend";
             EnvironmentFile = [

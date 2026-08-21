@@ -44,8 +44,15 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services.seabird-webhook-receiver = {
       wantedBy = [ "multi-user.target" ];
-      wants = [ "network-online.target" ];
-      after = [ "network-online.target" ];
+      wants = [
+        "network-online.target"
+        "seabird-core.service"
+      ];
+      after = [
+        "network-online.target"
+        "seabird-core.service"
+      ];
+      startLimitIntervalSec = 0;
       restartTriggers = [ (builtins.hashFile "sha256" cfg.secretFile) ];
       environment = {
         # seabird-core, which this connects to as a client.
@@ -57,6 +64,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
+        RestartSec = 5;
         ExecStart = "${cfg.package}/bin/seabird-webhook-receiver";
         EnvironmentFile = [
           config.age.secrets."seabird-webhook-receiver".path

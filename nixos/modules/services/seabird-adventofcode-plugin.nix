@@ -25,8 +25,15 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services.seabird-adventofcode-plugin = {
       wantedBy = [ "multi-user.target" ];
-      wants = [ "network-online.target" ];
-      after = [ "network-online.target" ];
+      wants = [
+        "network-online.target"
+        "seabird-core.service"
+      ];
+      after = [
+        "network-online.target"
+        "seabird-core.service"
+      ];
+      startLimitIntervalSec = 0;
       restartTriggers = [ (builtins.hashFile "sha256" cfg.secretFile) ];
 
       environment = {
@@ -37,6 +44,7 @@ in
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
+        RestartSec = 5;
         ExecStart = "${cfg.package}/bin/seabird-adventofcode-plugin";
         EnvironmentFile = [
           config.age.secrets."seabird-adventofcode-plugin".path

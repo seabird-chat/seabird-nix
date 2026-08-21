@@ -25,6 +25,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Restarting core drops every other seabird service, all of which exit when
+    # the connection goes. At the default 100ms restart they spend systemd's
+    # five-starts-in-ten-seconds allowance before core is listening again, end
+    # up in failed, and deploy-rs rolls the deploy back.
+    #
+    # Every service that connects to core needs to set RestartSec = 5 and
+    # startLimitIntervalSec = 0, and orders itself after seabird-core.service.
     systemd.services.seabird-core = {
       wantedBy = [ "multi-user.target" ];
       wants = [ "network-online.target" ];
