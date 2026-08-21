@@ -1,32 +1,14 @@
 let
-  user-belak-work = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFUSx9TTTHUq4GOkeBU4Ga03QombEBiZLqqa8KIqnnUy";
-  user-belak-melinoe = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMzuXboQDv2VCig0+A780O0+sKs1euw+3OafnRA6z14P";
-  user-belak-zagreus = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGNHMEfjGg5ek6OtbFytZ/zCSZosT8aHqHRfnufb3gIi";
+  keys = import ./secrets/keys.nix;
 
-  users = [
-    user-belak-work
-    user-belak-melinoe
-    user-belak-zagreus
-  ];
-
-  system-eiko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFpH5p7ODkUq0kLqda1/fghcCo+MxvCZLdKOfhZCtK+";
-  system-kupo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE679sZWB/+sWPM/W29xxB/NKopAkE13daMDXlRsecEE";
-  system-stiltzkin = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPY4Di/gKC190MFcJrPtMGgXhP1CeKtLrIQuBopvquG";
-  system-monty = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoM1CNyWuMFMkG2QC4/1ef4nJXAG+zVdl5CsmbO1NAZ";
-
-  systems = [
-    system-eiko
-    system-kupo
-    system-stiltzkin
-    system-monty
-  ];
+  inherit (keys) users systems;
 
   env-prod = [
-    system-kupo
+    keys.system-kupo
   ];
 
   env-staging = [
-    system-stiltzkin
+    keys.system-stiltzkin
   ];
 in
 {
@@ -36,10 +18,10 @@ in
   "secrets/common/nix-netrc.age".publicKeys = users ++ systems;
 
   # One per host, so a compromised guest cannot report as another.
-  "secrets/hosts/datadog-key-eiko.age".publicKeys = users ++ [ system-eiko ];
-  "secrets/hosts/datadog-key-kupo.age".publicKeys = users ++ [ system-kupo ];
-  "secrets/hosts/datadog-key-monty.age".publicKeys = users ++ [ system-monty ];
-  "secrets/hosts/datadog-key-stiltzkin.age".publicKeys = users ++ [ system-stiltzkin ];
+  "secrets/hosts/datadog-key-eiko.age".publicKeys = users ++ [ keys.system-eiko ];
+  "secrets/hosts/datadog-key-kupo.age".publicKeys = users ++ [ keys.system-kupo ];
+  "secrets/hosts/datadog-key-monty.age".publicKeys = users ++ [ keys.system-monty ];
+  "secrets/hosts/datadog-key-stiltzkin.age".publicKeys = users ++ [ keys.system-stiltzkin ];
 
   "secrets/prod/seabird-adventofcode-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-datadog-plugin.age".publicKeys = users ++ env-prod;
