@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   mkLibvirtDomain,
   ...
 }:
@@ -63,6 +64,35 @@ in
   systemd.network.networks."40-br-seabird".dhcpV4Config.ClientIdentifier = "mac";
 
   seabird.atticCache.enable = true;
+
+  # eiko is the only machine here with physical hardware, and its disks hold
+  # every guest's state, so the disk and firmware bits live on this host rather
+  # than in common.nix.
+
+  # Disk health is only useful if something is actually watching it, so run
+  # smartd rather than relying on manual smartctl runs.
+  services.smartd.enable = true;
+
+  # Firmware updates without a USB stick or a Windows install. This only runs the
+  # daemon and the metadata refresh; applying an update still needs an explicit
+  # fwupdmgr run and a reboot.
+  services.fwupd.enable = true;
+
+  # Keep memtest a boot menu entry away rather than needing a USB stick.
+  boot.loader.systemd-boot.memtest86.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    dmidecode
+    ethtool
+    fio
+    lm_sensors
+    memtester
+    nvme-cli
+    pciutils
+    smartmontools
+    stress-ng
+    usbutils
+  ];
 
   services.datadog-agent = {
     enable = true;

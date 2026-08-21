@@ -233,10 +233,6 @@
     };
   };
 
-  environment.systemPackages = [
-    pkgs.sqlite
-  ];
-
   # Builds the release packages into this guest's store ahead of needing them,
   # so the deploy that enables the services only has to activate. Costs one long
   # deploy now, since --build-on remote means the guest builds them itself.

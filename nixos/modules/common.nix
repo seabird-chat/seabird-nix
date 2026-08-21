@@ -68,10 +68,20 @@ in
 
   environment.enableAllTerminfo = true;
 
+  # sqlite is here because tokens are rows in core's database and there is no CLI
+  # to add them, so a host running core needs a client to issue one. The rest is
+  # what it takes to answer "why is this service unhappy" over SSH.
   environment.systemPackages = with pkgs; [
+    dig
     git
     htop
+    iotop
     jq
+    lsof
+    sqlite
+    strace
+    sysstat
+    tcpdump
     tmux
     vim
     yq
