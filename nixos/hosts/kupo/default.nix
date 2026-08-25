@@ -86,6 +86,7 @@
         "#rocketcraft"
         "#rust"
         "#stonks"
+        "#techsmix"
         "#weight-loss-challenge"
       ];
     };
