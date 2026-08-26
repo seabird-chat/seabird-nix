@@ -75,6 +75,7 @@
       channels = [
         "#general"
         "#botspam"
+        "#monitoring"
       ];
     };
 
@@ -95,7 +96,7 @@
       secretFile = ../../../secrets/staging/seabird-datadog-plugin.age;
     };
 
-    # The pair the private IRC network was built for. Both backends default
+    # The groups the private IRC network was built for. Both backends default
     # their id to "seabird", the same as prod, which is unambiguous because each
     # environment has its own core. The Discord ids are staging's own guild.
     seabird-proxy-plugin = {
@@ -111,6 +112,10 @@
         [
           "irc://seabird/%23botspam"
           "discord://seabird/1538982707730718830"
+        ]
+        [
+          "irc://seabird/%23monitoring"
+          "discord://seabird/1542270600440193166"
         ]
       ];
     };
