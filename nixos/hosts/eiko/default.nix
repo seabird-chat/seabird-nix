@@ -63,6 +63,40 @@ in
   # identify by MAC instead: with the MAC pinned above, the lease keeps working.
   systemd.network.networks."40-br-seabird".dhcpV4Config.ClientIdentifier = "mac";
 
+  # This I217-LM wedges its transmit ring while TCP segmentation offload is on,
+  # logging "Detected Hardware Unit Hang" until the box is rebooted. Intel would
+  # rather not disable the offload upstream for these parts, and point at ethtool
+  # instead:
+  # https://lists.osuosl.org/pipermail/intel-wired-lan/Week-of-Mon-20190520/016133.html
+  #
+  # It's treated as a guess: the reports name neighbouring chips, not this one.
+  #
+  # Deliberately not a .link file. Systemd applies one per device, so it would
+  # shadow 99-default.link and cost eno1 the NamePolicy that gives it that name,
+  # and putting it under /etc/systemd/network restarts networkd on every deploy,
+  # which moves the address and breaks deploy-rs's confirmation.
+  systemd.services.eno1-disable-tso = {
+    description = "Disable TCP segmentation offload on eno1";
+
+    # Wanted by multi-user.target as well as the device, because a deploy only
+    # starts new units that a target it activates pulls in. Hanging this off the
+    # device alone left it enabled but never run until the next reboot. The
+    # device dependency is still what re-runs it when the driver is reloaded,
+    # which is the one thing that resets the flag.
+    bindsTo = [ "sys-subsystem-net-devices-eno1.device" ];
+    after = [ "sys-subsystem-net-devices-eno1.device" ];
+    wantedBy = [
+      "multi-user.target"
+      "sys-subsystem-net-devices-eno1.device"
+    ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -K eno1 tso off";
+    };
+  };
+
   seabird.atticCache.enable = true;
 
   # eiko is the only machine here with physical hardware, and its disks hold
