@@ -539,11 +539,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787162420,
-        "narHash": "sha256-dj99Z8IlidBD4JhEtQ+4CxVgXyMauARXG9mc2+241hY=",
+        "lastModified": 1788526724,
+        "narHash": "sha256-iEoXzU/9zWXjzbnkd/FIUler0pGQFU1hZK5ITs6mgJ8=",
         "owner": "seabird-chat",
         "repo": "seabird-nwwsio-plugin",
-        "rev": "5fc097c88598985eabd24f8a882c52a34847152d",
+        "rev": "8e66191927e85e208f49012abff3e87b7dbfd583",
         "type": "github"
       },
       "original": {
