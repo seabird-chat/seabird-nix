@@ -124,6 +124,11 @@
       };
     };
 
+    seabird-nwwsio-plugin = {
+      enable = true;
+      secretFile = ../../../secrets/prod/seabird-nwwsio-plugin.age;
+    };
+
     seabird-plugin-bundle = {
       enable = true;
       secretFile = ../../../secrets/prod/seabird-plugin-bundle.age;

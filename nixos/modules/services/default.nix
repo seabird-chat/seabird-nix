@@ -10,6 +10,7 @@
     ./seabird-adventofcode-plugin.nix
     ./seabird-datadog-plugin.nix
     ./seabird-github-plugin.nix
+    ./seabird-nwwsio-plugin.nix
     ./seabird-plugin-bundle.nix
     ./seabird-proxy-plugin.nix
     ./seabird-stock-plugin.nix

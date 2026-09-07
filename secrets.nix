@@ -28,6 +28,7 @@ in
   "secrets/prod/seabird-discord-backend.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-github-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-irc-backend-whyte.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-nwwsio-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-plugin-bundle.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-proxy-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-stock-plugin.age".publicKeys = users ++ env-prod;
