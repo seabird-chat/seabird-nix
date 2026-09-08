@@ -24,10 +24,12 @@ steps:
           esac
           eval "$(ssh-agent -s)"
           ssh-add - <<< "$DEPLOY_SSH_KEY"
-          # --remote-build is also what makes this agent's architecture
+          # --remote-build is also what makes the agent architecture
           # irrelevant: it only evaluates and connects, the target builds.
-          # Dropping it means the agent builds and holds every target's
-          # closure, and would then have to match the target's arch.
+          # Dropping it means the agent builds and holds every target
+          # closure, and would then have to match the target arch.
+          # NOTE: keep this block free of single quotes, it is embedded in
+          # a single-quoted bash -c string.
           deploy --remote-build --skip-checks \
             --ssh-opts "-o StrictHostKeyChecking=accept-new" \
             "$node"
