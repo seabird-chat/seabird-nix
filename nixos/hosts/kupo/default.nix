@@ -78,6 +78,7 @@
         "#gemini"
         "#hamateurs"
         "#homelab"
+        "#monitoring"
         "#mtg"
         "#osrs"
         "#parenting"
