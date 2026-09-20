@@ -61,7 +61,14 @@ in
   # identifier is DUID+IAID, where the IAID depends on the interface. That
   # would present eiko as a new client and could change its address, so
   # identify by MAC instead: with the MAC pinned above, the lease keeps working.
-  systemd.network.networks."40-br-seabird".dhcpV4Config.ClientIdentifier = "mac";
+  #
+  # A networkd restart drops the lease by default, and a nixpkgs bump can trigger
+  # one on its own by changing the systemd store path. eiko is reached over that
+  # lease, so keep it across the stop.
+  systemd.network.networks."40-br-seabird" = {
+    dhcpV4Config.ClientIdentifier = "mac";
+    networkConfig.KeepConfiguration = "dynamic-on-stop";
+  };
 
   # This I217-LM wedges its transmit ring while TCP segmentation offload is on,
   # logging "Detected Hardware Unit Hang" until the box is rebooted. Intel would
