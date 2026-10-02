@@ -242,17 +242,17 @@
 
         };
 
+        # Note: access to these requires users to either have access to the
+        # seabird vlan in my homelab, or have their ssh config set up to connect
+        # via eiko directly and use it as a jump-host for the VMs. I tend to
+        # prefer ssh config-based setups as they work both inside and outside my
+        # home network.
         deploy.nodes = {
-          # eiko sits on the homelab network rather than behind the seabird
-          # edge, so it is reached by its internal name.
           "eiko" = {
             hostname = "eiko.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."eiko";
           };
 
-          # Reached over SSH like any other host once it has a lease. The host
-          # owns the runner, so a change to kernel or initrd needs eiko
-          # deployed as well.
           "kupo" = {
             hostname = "kupo.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."kupo";
