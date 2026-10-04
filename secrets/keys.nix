@@ -11,12 +11,14 @@ rec {
     user-belak-zagreus
   ];
 
+  system-atla = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWRXYt2cEr59j/GbKn9jDydqlVdSg62bLf28xiHYKrp";
   system-eiko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFpH5p7ODkUq0kLqda1/fghcCo+MxvCZLdKOfhZCtK+";
   system-kupo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE679sZWB/+sWPM/W29xxB/NKopAkE13daMDXlRsecEE";
   system-stiltzkin = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPY4Di/gKC190MFcJrPtMGgXhP1CeKtLrIQuBopvquG";
   system-monty = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoM1CNyWuMFMkG2QC4/1ef4nJXAG+zVdl5CsmbO1NAZ";
 
   systems = [
+    system-atla
     system-eiko
     system-kupo
     system-stiltzkin

@@ -18,8 +18,12 @@ deploy that restarted the whole guest would drop every IRC and Discord
 connection, and both MicroVMs and NixOS containers can only apply a change that
 way.
 
-`bootstrap` is not a host. It is the configuration a new guest is provisioned
-from, described below.
+`atla` is a Vultr instance using the raw UEFI `vultr-bootstrap-image` layout.
+The image and host share `nixos/profiles/vultr.nix` for their disk and boot
+settings, separate from the libvirt guests' Disko layout.
+
+`bootstrap` is not a host. It is the configuration a new libvirt guest is
+provisioned from, described below.
 
 `vivi` used to run the production stack and is no longer managed here. It was
 handed back to `belak/dotfiles` once `kupo` took over, so this flake describes
@@ -36,7 +40,59 @@ Linux closures, so the target builds its own. Guests have two virtual CPUs, so
 this is slow. Giving `eiko` a role as a remote builder would fix it and has not
 been done yet.
 
-## Bringing up a new guest
+### Deploying atla
+
+Atla mounts its existing ext4 root by filesystem label `nixos` and its EFI
+partition by label `ESP`. Keep those labels: the snapshot does not have the
+`disk-main-root` and `disk-main-ESP` partition labels used by the libvirt guests.
+Do not run Disko or repartition the instance when deploying this configuration.
+
+Systemd-boot keeps the UEFI fallback boot path without writing firmware
+variables. Its menu is limited to two generations for the small EFI partition.
+The root partition and filesystem grow to use the available disk space on boot.
+
+Register the instance's SSH host key and rekey its agenix secrets before the
+first deploy, then run:
+
+``` shell
+deploy --remote-build -s .#atla
+```
+
+The Seabird services are disabled in Atla's initial configuration. Stop the old
+production services before enabling the same bot identities on Atla.
+
+## Bringing up a Vultr instance
+
+Build the secret-free image on an x86-64 Linux machine:
+
+``` shell
+nix build .#vultr-bootstrap-image
+```
+
+The output is `result/nixos-vultr.img`, a raw UEFI disk image sized for its
+contents. Building requires an x86-64 Linux builder; it cannot run directly on
+macOS. The image uses the same filesystem labels, bootloader, disk expansion,
+and VirtIO support as Atla.
+
+Root SSH accepts the public keys in `secrets/keys.nix`'s `users` list at build
+time. Password login is disabled, and SSH host keys are generated on boot.
+The image contains no agenix secrets or Seabird services. It uses DHCP without
+cloud-init, so Vultr-selected SSH keys, passwords, and user-data are not applied.
+
+Host the raw image at a URL Vultr can download, then import it as a snapshot:
+
+``` shell
+vultr-cli snapshot create-url --url https://example.com/nixos-vultr.img --uefi
+```
+
+Launch an instance from the snapshot with a disk at least as large as the image
+and inbound TCP port 22 allowed. Remove the hosted copy once Vultr finishes
+importing it. Connect as root, register the new SSH host key, and follow
+[Deploying atla](#deploying-atla) to replace the bootstrap configuration.
+Use the image only for new instances; deploy-rs updates existing installations
+without replacing their disks.
+
+## Bringing up a libvirt guest
 
 A guest cannot be provisioned directly from its own configuration, because that
 configuration needs an agenix secret and agenix decrypts with the guest's SSH

@@ -18,6 +18,7 @@ in
   "secrets/common/nix-netrc.age".publicKeys = users ++ systems;
 
   # One per host, so a compromised guest cannot report as another.
+  "secrets/hosts/datadog-key-atla.age".publicKeys = users ++ [ keys.system-atla ];
   "secrets/hosts/datadog-key-eiko.age".publicKeys = users ++ [ keys.system-eiko ];
   "secrets/hosts/datadog-key-kupo.age".publicKeys = users ++ [ keys.system-kupo ];
   "secrets/hosts/datadog-key-monty.age".publicKeys = users ++ [ keys.system-monty ];

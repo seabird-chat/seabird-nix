@@ -212,6 +212,19 @@
             ];
           };
 
+          "vultr-bootstrap" = nixpkgs.lib.nixosSystem {
+            modules = [ ./nixos/hosts/vultr-bootstrap ];
+          };
+
+          # Atla is deployed as a VPS
+          "atla" = myLib.mkNixosSystem {
+            modules = [
+              ./nixos/hosts/atla
+              ./nixos/users/belak
+              ./nixos/users/ghavil
+            ];
+          };
+
           # VM guests on eiko. Both carry the belak user, so its agenix password
           # has to be readable by them before a deploy will activate.
           "kupo" = myLib.mkNixosSystem {
@@ -251,6 +264,11 @@
           "eiko" = {
             hostname = "eiko.infra.seabird.chat";
             profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."eiko";
+          };
+
+          "atla" = {
+            hostname = "atla.infra.seabird.chat";
+            profiles.system = myLib.mkNixosDeploy self.nixosConfigurations."atla";
           };
 
           "kupo" = {
@@ -313,6 +331,7 @@
             # a fresh image over it would roll the guest back to birth.
             // lib.optionalAttrs (system == "x86_64-linux") {
               bootstrap-image = self.nixosConfigurations."bootstrap".config.system.build.diskoImages;
+              vultr-bootstrap-image = self.nixosConfigurations."vultr-bootstrap".config.system.build.image;
             }
             // {
               # Per-environment aggregates, so a host can pin the set it actually
