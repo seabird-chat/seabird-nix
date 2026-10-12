@@ -216,15 +216,6 @@
             modules = [ ./nixos/hosts/vultr-bootstrap ];
           };
 
-          # Atla is deployed as a VPS
-          "atla" = myLib.mkNixosSystem {
-            modules = [
-              ./nixos/hosts/atla
-              ./nixos/users/belak
-              ./nixos/users/ghavil
-            ];
-          };
-
           # VM guests on eiko. Both carry the belak user, so its agenix password
           # has to be readable by them before a deploy will activate.
           "kupo" = myLib.mkNixosSystem {
