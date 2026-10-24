@@ -71,6 +71,7 @@
       channels = [
         "#adventofcode"
         "#ai"
+        "#books"
         "#botspam"
         "#coffee"
         "#encoded"
@@ -148,6 +149,10 @@
         [
           "irc://seabird/%23main"
           "discord://seabird/1314229653170290718"
+        ]
+        [
+          "irc://seabird/%23books"
+          "discord://seabird/1563591242086875236"
         ]
         [
           "irc://seabird/%23parenting"
