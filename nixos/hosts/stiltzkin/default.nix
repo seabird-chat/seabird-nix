@@ -112,6 +112,7 @@
         [
           "irc://seabird/%23botspam"
           "discord://seabird/1538982707730718830"
+          "minecraft://minecraft/minecraft"
         ]
         [
           "irc://seabird/%23monitoring"

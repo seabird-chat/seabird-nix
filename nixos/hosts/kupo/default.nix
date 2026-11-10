@@ -218,6 +218,12 @@
           "irc://seabird/%23stonks"
           "discord://seabird/1519542812293730314"
         ]
+
+        # cozy-calzones
+        [
+          "minecraft://calzones/cozy%2Dcalzones"
+          "discord://seabird/1409444083880951940"
+        ]
       ];
     };
 

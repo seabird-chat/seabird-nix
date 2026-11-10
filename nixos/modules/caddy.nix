@@ -45,6 +45,8 @@ in
         auto_https off
         servers {
           trusted_proxies static private_ranges
+          # The edge proxies over h2c so gRPC streams stay full duplex.
+          protocols h1 h2c
         }
       '';
 
