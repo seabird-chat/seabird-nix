@@ -25,6 +25,7 @@ in
   "secrets/hosts/datadog-key-stiltzkin.age".publicKeys = users ++ [ keys.system-stiltzkin ];
 
   "secrets/prod/seabird-adventofcode-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-archipelago-backend-nickdavies.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-datadog-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-discord-backend.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-github-plugin.age".publicKeys = users ++ env-prod;

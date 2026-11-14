@@ -60,6 +60,15 @@
 
     # Backends
 
+    # One instance per Archipelago room. The server address lives in the
+    # secret file along with the token and room password.
+    seabird-archipelago-backend.instances.nickdavies = {
+      enable = true;
+      secretFile = ../../../secrets/prod/seabird-archipelago-backend-nickdavies.age;
+      slot = "BelakRac2";
+      itemFilter = [ "progression" ];
+    };
+
     seabird-discord-backend = {
       enable = true;
       secretFile = ../../../secrets/prod/seabird-discord-backend.age;
@@ -223,6 +232,12 @@
         [
           "minecraft://calzones/cozy%2Dcalzones"
           "discord://seabird/1409444083880951940"
+        ]
+
+        # archipelago
+        [
+          "archipelago://nickdavies/room"
+          "discord://seabird/1226390253686882357"
         ]
       ];
     };
