@@ -172,6 +172,8 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "seabird-adventofcode-plugin-dev": "seabird-adventofcode-plugin-dev",
         "seabird-adventofcode-plugin-release": "seabird-adventofcode-plugin-release",
+        "seabird-archipelago-backend-dev": "seabird-archipelago-backend-dev",
+        "seabird-archipelago-backend-release": "seabird-archipelago-backend-release",
         "seabird-core-dev": "seabird-core-dev",
         "seabird-core-release": "seabird-core-release",
         "seabird-datadog-plugin-dev": "seabird-datadog-plugin-dev",
@@ -240,6 +242,53 @@
         "owner": "seabird-chat",
         "ref": "release",
         "repo": "seabird-adventofcode-plugin",
+        "type": "github"
+      }
+    },
+    "seabird-archipelago-backend-dev": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794693217,
+        "narHash": "sha256-8q6vMNKbF0o2uiVPRt+qLHMPCwVRXzhh8tGCEvqt7+w=",
+        "owner": "seabird-chat",
+        "repo": "seabird-archipelago-backend",
+        "rev": "df00d455e4c8f39db3c56fe618058968eee134b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "repo": "seabird-archipelago-backend",
+        "type": "github"
+      }
+    },
+    "seabird-archipelago-backend-release": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794693217,
+        "narHash": "sha256-19XD4Va5/783J0VyCb9ar6BE2KQON6sgPJdjR/v+gro=",
+        "owner": "seabird-chat",
+        "repo": "seabird-archipelago-backend",
+        "rev": "e3f5ea056b9e2b36c811e3d50db789eb84d38d61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seabird-chat",
+        "ref": "release",
+        "repo": "seabird-archipelago-backend",
         "type": "github"
       }
     },

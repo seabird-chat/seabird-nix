@@ -21,6 +21,7 @@ inputs@{
         seabird-core = inputs.seabird-core-release.packages.${system}.default;
 
         # Backends
+        seabird-archipelago-backend = inputs.seabird-archipelago-backend-release.packages.${system}.default;
         seabird-discord-backend = inputs.seabird-discord-backend-release.packages.${system}.default;
         seabird-irc-backend = inputs.seabird-irc-backend-release.packages.${system}.default;
 
@@ -42,6 +43,7 @@ inputs@{
         seabird-core = inputs.seabird-core-dev.packages.${system}.default;
 
         # Backends
+        seabird-archipelago-backend = inputs.seabird-archipelago-backend-dev.packages.${system}.default;
         seabird-discord-backend = inputs.seabird-discord-backend-dev.packages.${system}.default;
         seabird-irc-backend = inputs.seabird-irc-backend-dev.packages.${system}.default;
 

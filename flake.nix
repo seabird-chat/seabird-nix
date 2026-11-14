@@ -37,6 +37,18 @@
     };
 
     # Seabird backends
+    seabird-archipelago-backend-release = {
+      url = "github:seabird-chat/seabird-archipelago-backend/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-archipelago-backend-dev = {
+      url = "github:seabird-chat/seabird-archipelago-backend";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     seabird-discord-backend-release = {
       url = "github:seabird-chat/seabird-discord-backend/release";
       inputs.nixpkgs.follows = "nixpkgs";
