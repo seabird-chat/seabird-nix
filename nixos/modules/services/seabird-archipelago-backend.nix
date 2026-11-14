@@ -60,10 +60,14 @@ in
                   type = lib.types.str;
                   default = ".";
                 };
+                # Item classes to announce, for both sends and hints.
+                # progression_skip_balancing is progression the generator
+                # leaves unbalanced, usually currency or shards.
                 itemFilter = lib.mkOption {
                   type = lib.types.listOf (
                     lib.types.enum [
                       "progression"
+                      "progression_skip_balancing"
                       "useful"
                       "filler"
                       "trap"
@@ -71,12 +75,19 @@ in
                   );
                   default = [
                     "progression"
+                    "progression_skip_balancing"
                     "useful"
                     "filler"
                     "trap"
                   ];
                 };
                 deathlink = lib.mkOption {
+                  type = lib.types.bool;
+                  default = true;
+                };
+                # Relay player chat and allow seabird to chat in the room.
+                # When off, only game events are announced.
+                chat = lib.mkOption {
                   type = lib.types.bool;
                   default = true;
                 };
@@ -112,6 +123,7 @@ in
           ARCHIPELAGO_COMMAND_PREFIX = value.commandPrefix;
           ARCHIPELAGO_ITEM_FILTER = lib.strings.concatStringsSep "," value.itemFilter;
           ARCHIPELAGO_DEATHLINK = lib.boolToString value.deathlink;
+          ARCHIPELAGO_CHAT = lib.boolToString value.chat;
         };
 
         serviceConfig = {
