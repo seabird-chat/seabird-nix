@@ -255,11 +255,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794693217,
-        "narHash": "sha256-8q6vMNKbF0o2uiVPRt+qLHMPCwVRXzhh8tGCEvqt7+w=",
+        "lastModified": 1794697086,
+        "narHash": "sha256-uruB24uB2kdsQPWrWHQiwUMiK+TYGo4jf2GGQuYM8A0=",
         "owner": "seabird-chat",
         "repo": "seabird-archipelago-backend",
-        "rev": "df00d455e4c8f39db3c56fe618058968eee134b1",
+        "rev": "c7180b8aa1074286d58797e28a08d74087ffa292",
         "type": "github"
       },
       "original": {
