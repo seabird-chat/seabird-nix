@@ -3,6 +3,7 @@
     ./seabird-core.nix
 
     # Backends
+    ./seabird-archipelago-backend.nix
     ./seabird-discord-backend.nix
     ./seabird-irc-backend.nix
 

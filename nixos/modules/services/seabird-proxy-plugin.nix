@@ -31,7 +31,9 @@ in
       let
         formatForId = (
           id:
-          if lib.strings.hasPrefix "discord://" id then
+          if lib.strings.hasPrefix "archipelago://" id then
+            "Archipelago"
+          else if lib.strings.hasPrefix "discord://" id then
             "Discord"
           else if lib.strings.hasPrefix "irc://" id then
             "IRC"
@@ -46,6 +48,7 @@ in
             ircBold = builtins.fromJSON ''"\u0002" '';
           in
           {
+            Archipelago = "";
             Discord = "**";
             IRC = "${ircBold}";
             Minecraft = "";
@@ -57,6 +60,7 @@ in
             ircReset = builtins.fromJSON ''"\u000f" '';
           in
           {
+            Archipelago = " (${name})";
             Discord = " (${name})**";
             IRC = "[${name}]${ircReset}";
             Minecraft = " (${name})";
