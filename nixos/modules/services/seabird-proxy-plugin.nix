@@ -42,27 +42,21 @@ in
           else
             abort "id prefix is invalid"
         );
-        lookupUserPrefix =
-          format: name:
-          let
-            ircBold = builtins.fromJSON ''"\u0002" '';
-          in
+        lookupUserStyle =
+          format:
           {
-            Archipelago = "";
-            Discord = "**";
-            IRC = "${ircBold}";
-            Minecraft = "";
+            Archipelago = [ ];
+            Discord = [ "bold" ];
+            IRC = [ "bold" ];
+            Minecraft = [ ];
           }
           ."${format}";
         lookupUserSuffix =
           format: name:
-          let
-            ircReset = builtins.fromJSON ''"\u000f" '';
-          in
           {
             Archipelago = " (${name})";
-            Discord = " (${name})**";
-            IRC = "[${name}]${ircReset}";
+            Discord = " (${name})";
+            IRC = "[${name}]";
             Minecraft = " (${name})";
           }
           ."${format}";
@@ -80,7 +74,7 @@ in
                   {
                     source = source;
                     target = target;
-                    user_prefix = lookupUserPrefix targetFormat sourceFormat;
+                    user_style = lookupUserStyle targetFormat;
                     user_suffix = lookupUserSuffix targetFormat sourceFormat;
                   }
                 )
