@@ -492,11 +492,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787162419,
-        "narHash": "sha256-7DkKFzOuyPNasieHMhGNJfe8sTMQSAcUCmZ3ocuyDZE=",
+        "lastModified": 1794853318,
+        "narHash": "sha256-rT5POwju2DrLo7PoFaFKnkqjP/QIjTdIZEi/NOkWxXI=",
         "owner": "seabird-chat",
         "repo": "seabird-irc-backend",
-        "rev": "e7fd584bc09a328d80c375ddbdd64825d0e26802",
+        "rev": "143fa16c8af988d9503db1253f0dc2ef9367f8c5",
         "type": "github"
       },
       "original": {
