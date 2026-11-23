@@ -146,6 +146,18 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
+    seabird-rcon-plugin-release = {
+      url = "github:seabird-chat/seabird-rcon-plugin/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    seabird-rcon-plugin-dev = {
+      url = "github:seabird-chat/seabird-rcon-plugin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     seabird-stock-plugin-release = {
       url = "github:seabird-chat/seabird-stock-plugin/release";
       inputs.nixpkgs.follows = "nixpkgs";
