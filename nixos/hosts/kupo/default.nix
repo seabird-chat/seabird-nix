@@ -242,6 +242,20 @@
       ];
     };
 
+    seabird-rcon-plugin = {
+      enable = true;
+      secretFile = ../../../secrets/prod/seabird-rcon-plugin.age;
+
+      servers.cozy-calzones = {
+        address = "freya.elwert.dev:25575";
+        passwordSecretFile = ../../../secrets/prod/seabird-rcon-plugin-cozy-calzones.age;
+        mapUrl = "https://mc-calzone.elwert.cloud";
+        channels = [ "discord://seabird/1409444083880951940" ];
+        operatorChannels = [ "discord://seabird/1409444083880951940" ];
+        admins = [ "discord://seabird/107685126950891520" ];
+      };
+    };
+
     seabird-stock-plugin = {
       enable = true;
       secretFile = ../../../secrets/prod/seabird-stock-plugin.age;

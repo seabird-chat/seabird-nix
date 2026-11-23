@@ -33,6 +33,8 @@ in
   "secrets/prod/seabird-nwwsio-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-plugin-bundle.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-proxy-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-rcon-plugin.age".publicKeys = users ++ env-prod;
+  "secrets/prod/seabird-rcon-plugin-cozy-calzones.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-stock-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-url-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-webhook-receiver.age".publicKeys = users ++ env-prod;
