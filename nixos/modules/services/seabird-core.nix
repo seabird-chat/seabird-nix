@@ -23,13 +23,8 @@ in
       };
       databaseUrl = lib.mkOption {
         type = lib.types.str;
-        default = "sqlite:///var/lib/seabird-core/seabird-core.db";
-        description = ''
-          SQLite database holding the auth tokens. Rust takes a sqlite: URL and
-          Go a filename or file: URI. Go can't open a database Rust created, so
-          switching a host's package means a new file, with the tokens copied
-          across, e.g. file:/var/lib/seabird-core/seabird-go.db.
-        '';
+        default = "file:/var/lib/seabird-core/seabird-go.db";
+        description = "SQLite database holding the auth tokens, as a filename or file: URI.";
       };
     };
   };
@@ -49,15 +44,10 @@ in
       environment = {
         SEABIRD_DATABASE_URL = cfg.databaseUrl;
         SEABIRD_BIND_HOST = bindHost;
-
-        # The Rust implementation reads this one instead.
-        DATABASE_URL = cfg.databaseUrl;
       };
       serviceConfig = {
         DynamicUser = true;
         Restart = "always";
-        # The Rust implementation ignores its arguments; the Go one needs the
-        # subcommand.
         ExecStart = "${cfg.package}/bin/seabird-core serve";
         StateDirectory = "seabird-core";
       };
