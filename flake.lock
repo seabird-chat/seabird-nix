@@ -305,11 +305,11 @@
         "proto": "proto"
       },
       "locked": {
-        "lastModified": 1795592220,
-        "narHash": "sha256-rAk59vncheHW2xcZvkocYvrx0OzAvPEFdLoNzzPfLxU=",
+        "lastModified": 1795593468,
+        "narHash": "sha256-UTt2jk0FwMMv2jzE31UfzVWQI/7O4KGQJ93KsF4ns2I=",
         "owner": "seabird-chat",
         "repo": "seabird-core",
-        "rev": "976411c91aea3be992ebc2c1f3381ffd081577d0",
+        "rev": "b4dd72b7f995672199d627564d192eb2b7b73139",
         "type": "github"
       },
       "original": {
