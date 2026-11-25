@@ -50,7 +50,8 @@
   seabird.services = {
     seabird-core = {
       enable = true;
-      package = pkgs.seabird-staging.seabird-core;
+      package = pkgs.seabird-staging.seabird-core-go;
+      databaseUrl = "file:/var/lib/seabird-core/seabird-go.db";
 
       hosts = [
         "api.staging.seabird.chat"
