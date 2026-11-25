@@ -42,6 +42,7 @@ inputs@{
       seabird-staging = {
         # Core
         seabird-core = inputs.seabird-core-dev.packages.${system}.default;
+        seabird-core-go = inputs.seabird-core-dev.packages.${system}.seabird-core-go;
 
         # Backends
         seabird-archipelago-backend = inputs.seabird-archipelago-backend-dev.packages.${system}.default;
