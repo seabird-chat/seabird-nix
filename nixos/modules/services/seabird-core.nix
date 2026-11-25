@@ -23,7 +23,7 @@ in
       };
       databaseUrl = lib.mkOption {
         type = lib.types.str;
-        default = "file:/var/lib/seabird-core/seabird-go.db";
+        default = "file:/var/lib/seabird-core/seabird-core.db";
         description = "SQLite database holding the auth tokens, as a filename or file: URI.";
       };
     };
