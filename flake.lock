@@ -130,22 +130,6 @@
         "type": "github"
       }
     },
-    "proto": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768811799,
-        "narHash": "sha256-aMSPMDerLgMUnrwOCYWOgTg7r4unHnpFoHPklU7wJag=",
-        "owner": "seabird-chat",
-        "repo": "proto",
-        "rev": "3df738ff76a1d0b673974733e1a560bc7b567998",
-        "type": "github"
-      },
-      "original": {
-        "owner": "seabird-chat",
-        "repo": "proto",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -308,15 +292,14 @@
         ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "proto": "proto"
+        ]
       },
       "locked": {
-        "lastModified": 1795593468,
-        "narHash": "sha256-8hOdbzI6FdCDPGNPqfYTEfJ8e6SDWjEXv8l5Q5QesjQ=",
+        "lastModified": 1795674706,
+        "narHash": "sha256-yvZ2OXEdtpLPkaLf61JUxoCqWoZzGZfNM0nPPPa4FMY=",
         "owner": "seabird-chat",
         "repo": "seabird-core",
-        "rev": "127c8d04844f216640e8eb246b378d3b2bb85ed1",
+        "rev": "20c79b9599b3d567a29fcd03ec0d20045e0eb9c0",
         "type": "github"
       },
       "original": {
