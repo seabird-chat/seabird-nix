@@ -104,8 +104,9 @@
 
     # Plugins
 
+    # Off until AOC_CHANNEL in its secret is moved to the channel's new ID.
     seabird-adventofcode-plugin = {
-      enable = true;
+      enable = false;
       secretFile = ../../../secrets/prod/seabird-adventofcode-plugin.age;
     };
 
