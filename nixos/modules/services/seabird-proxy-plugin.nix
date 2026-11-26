@@ -20,8 +20,29 @@ in
       secretFile = lib.mkOption {
         type = lib.types.path;
       };
+      # Each group is proxied to each other. IDs don't say which backend a
+      # channel is on, so each one is given with its backend's type, which
+      # decides how usernames are shown there.
       channelGroups = lib.mkOption {
-        type = lib.types.listOf (lib.types.listOf lib.types.str);
+        type = lib.types.listOf (
+          lib.types.listOf (
+            lib.types.submodule {
+              options = {
+                type = lib.mkOption {
+                  type = lib.types.enum [
+                    "archipelago"
+                    "discord"
+                    "irc"
+                    "minecraft"
+                  ];
+                };
+                id = lib.mkOption {
+                  type = lib.types.str;
+                };
+              };
+            }
+          )
+        );
       };
     };
   };
@@ -29,19 +50,15 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services.seabird-proxy-plugin =
       let
-        formatForId = (
-          id:
-          if lib.strings.hasPrefix "archipelago://" id then
-            "Archipelago"
-          else if lib.strings.hasPrefix "discord://" id then
-            "Discord"
-          else if lib.strings.hasPrefix "irc://" id then
-            "IRC"
-          else if lib.strings.hasPrefix "minecraft://" id then
-            "Minecraft"
-          else
-            abort "id prefix is invalid"
-        );
+        formatForType =
+          type:
+          {
+            archipelago = "Archipelago";
+            discord = "Discord";
+            irc = "IRC";
+            minecraft = "Minecraft";
+          }
+          ."${type}";
         lookupUserStyle =
           format:
           {
@@ -68,12 +85,12 @@ in
                 (
                   { source, target }:
                   let
-                    targetFormat = formatForId target;
-                    sourceFormat = formatForId source;
+                    targetFormat = formatForType target.type;
+                    sourceFormat = formatForType source.type;
                   in
                   {
-                    source = source;
-                    target = target;
+                    source = source.id;
+                    target = target.id;
                     user_style = lookupUserStyle targetFormat;
                     user_suffix = lookupUserSuffix targetFormat sourceFormat;
                   }
