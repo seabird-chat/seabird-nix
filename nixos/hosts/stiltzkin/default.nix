@@ -106,37 +106,39 @@
 
       channelGroups = [
         [
+          # #general
           {
             type = "irc";
-            id = "irc://seabird/%23general";
+            id = "sbc_a3nsjz0g3bcpm";
           }
+          # #general
           {
             type = "discord";
-            id = "discord://seabird/969285588383592471";
+            id = "sbc_vrknf1k36hsj0";
           }
         ]
         [
+          # #botspam
           {
             type = "irc";
-            id = "irc://seabird/%23botspam";
+            id = "sbc_w5e602pa5hty8";
           }
+          # #botspam
           {
             type = "discord";
-            id = "discord://seabird/1538982707730718830";
-          }
-          {
-            type = "minecraft";
-            id = "minecraft://minecraft/minecraft";
+            id = "sbc_gj41dww00m7ar";
           }
         ]
         [
+          # #monitoring
           {
             type = "irc";
-            id = "irc://seabird/%23monitoring";
+            id = "sbc_dwmekc2q1qfee";
           }
+          # #monitoring
           {
             type = "discord";
-            id = "discord://seabird/1542270600440193166";
+            id = "sbc_rvf6z84ms3eq0";
           }
         ]
       ];
