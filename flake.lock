@@ -648,11 +648,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795412911,
-        "narHash": "sha256-p1j90vo7oXP3Atx84h9UNLrr8Kq1HIYAc71cNoZ+qz8=",
+        "lastModified": 1795689822,
+        "narHash": "sha256-Caz43m3ZObto0XsjEVsjEUXgcoQhNuS4CeaWF+da4RA=",
         "owner": "seabird-chat",
         "repo": "seabird-rcon-plugin",
-        "rev": "1392673d03e016b168e1ec5e5f29c83bfea8fedc",
+        "rev": "f31c5a258ef8358fb443984dbccf77001aacdb60",
         "type": "github"
       },
       "original": {
