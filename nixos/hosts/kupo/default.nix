@@ -151,87 +151,241 @@
 
       channelGroups = [
         [
-          "irc://seabird/%23minecraft"
-          "discord://seabird/854033690669744148"
-          "minecraft://minecraft/minecraft"
+          # Techies Be Craftin' #minecraft
+          {
+            type = "discord";
+            id = "sbc_5apc0ymd86xkc";
+          }
         ]
         [
-          "irc://seabird/%23main"
-          "discord://seabird/1314229653170290718"
+          # #main
+          {
+            type = "irc";
+            id = "sbc_r7mn7h863jvb8";
+          }
+          # #main
+          {
+            type = "discord";
+            id = "sbc_jhh1jvfqh8ntg";
+          }
         ]
         [
-          "irc://seabird/%23books"
-          "discord://seabird/1563591242086875236"
+          # #books
+          {
+            type = "irc";
+            id = "sbc_7w18vpjg4gm9m";
+          }
+          # #books
+          {
+            type = "discord";
+            id = "sbc_cc9hej3e2999a";
+          }
         ]
         [
-          "irc://seabird/%23parenting"
-          "discord://seabird/1259864065673531565"
+          # #parenting
+          {
+            type = "irc";
+            id = "sbc_7m5ph6efbv8jj";
+          }
+          # #parenting
+          {
+            type = "discord";
+            id = "sbc_wb0zexa4vz9kp";
+          }
         ]
         [
-          "irc://seabird/%23osrs"
-          "discord://seabird/1308611261449113671"
+          # #osrs
+          {
+            type = "irc";
+            id = "sbc_k6jgbz6qetrk4";
+          }
+          # #osrs
+          {
+            type = "discord";
+            id = "sbc_khnwzrdd71ana";
+          }
         ]
         [
-          "irc://seabird/%23rocketcraft"
-          "discord://seabird/695070284935593998"
+          # #rocketcraft
+          {
+            type = "irc";
+            id = "sbc_cwh0ymeyjmawm";
+          }
+          # #rocketcraft
+          {
+            type = "discord";
+            id = "sbc_2h5j9wxz36d60";
+          }
         ]
         [
-          "irc://seabird/%23encoded%2Dtest"
-          "discord://seabird/721047808077070446"
+          # #encoded-test
+          {
+            type = "irc";
+            id = "sbc_4zaka0td6y8bm";
+          }
+          # #encoded-test
+          {
+            type = "discord";
+            id = "sbc_89n3r40dqm4k2";
+          }
         ]
         [
-          "irc://seabird/%23encoded"
-          "discord://seabird/708529666251554868"
+          # #encoded
+          {
+            type = "irc";
+            id = "sbc_bw1v6fekp1b1w";
+          }
+          # #encoded
+          {
+            type = "discord";
+            id = "sbc_5y05dm4kzn6va";
+          }
         ]
         [
-          "irc://seabird/%23hamateurs"
-          "discord://seabird/1368239310322794567"
+          # #hamateurs
+          {
+            type = "irc";
+            id = "sbc_98vjhhvtmjx98";
+          }
+          # #hamateurs
+          {
+            type = "discord";
+            id = "sbc_jhgd9n78z1m1a";
+          }
         ]
         [
-          "irc://seabird/%23homelab"
-          "discord://seabird/739188060171927633"
+          # #homelab
+          {
+            type = "irc";
+            id = "sbc_64vfxxkkgnsgt";
+          }
+          # #homelab
+          {
+            type = "discord";
+            id = "sbc_kb8avsh2r0hvr";
+          }
         ]
         [
-          "irc://seabird/%23mtg"
-          "discord://seabird/759988791510695976"
+          # #mtg
+          {
+            type = "irc";
+            id = "sbc_jszb1hm8hhqxe";
+          }
+          # #mtg
+          {
+            type = "discord";
+            id = "sbc_z2han3nb3hscy";
+          }
         ]
         [
-          "irc://seabird/%23rust"
-          "discord://seabird/779077982916444299"
+          # #rust
+          {
+            type = "irc";
+            id = "sbc_y83t6ck2a1adw";
+          }
+          # #rust
+          {
+            type = "discord";
+            id = "sbc_gtg03pjk9nam2";
+          }
         ]
         [
-          "irc://seabird/%23politics"
-          "discord://seabird/773402198222307332"
+          # #politics
+          {
+            type = "irc";
+            id = "sbc_fvmqayxj0ntc8";
+          }
+          # #strongly-held-opinions
+          {
+            type = "discord";
+            id = "sbc_tnqnyz4899wep";
+          }
         ]
         [
-          "irc://seabird/%23music"
-          "discord://seabird/788837956101865472"
+          # #music
+          {
+            type = "irc";
+            id = "sbc_vxarfjk6gb07e";
+          }
+          # #music
+          {
+            type = "discord";
+            id = "sbc_qp2c2d0c9kvtc";
+          }
         ]
         [
-          "irc://seabird/%23weight%2Dloss%2Dchallenge"
-          "discord://seabird/1453170802404102174"
+          # #weight-loss-challenge
+          {
+            type = "irc";
+            id = "sbc_n0az4m4sbrz6p";
+          }
+          # #weight-loss-challenge
+          {
+            type = "discord";
+            id = "sbc_j309f8vbfsw68";
+          }
         ]
         [
-          "irc://seabird/%23adventofcode"
-          "discord://seabird/779077086244503623"
+          # #adventofcode
+          {
+            type = "irc";
+            id = "sbc_jz2p3ab499xpt";
+          }
+          # #advent-of-code
+          {
+            type = "discord";
+            id = "sbc_50x22m6zpqhca";
+          }
         ]
         [
-          "irc://seabird/%23ai"
-          "discord://seabird/1493422104593301524"
+          # #ai
+          {
+            type = "irc";
+            id = "sbc_px826hya0sxbw";
+          }
+          # #ai
+          {
+            type = "discord";
+            id = "sbc_5htwjzs3tawga";
+          }
         ]
         [
-          "irc://seabird/%23botspam"
-          "discord://seabird/1503211422522413297"
+          # #botspam
+          {
+            type = "irc";
+            id = "sbc_nejm6z4q8frha";
+          }
+          # #botspam
+          {
+            type = "discord";
+            id = "sbc_a250a54b663nm";
+          }
         ]
         [
-          "irc://seabird/%23stonks"
-          "discord://seabird/1519542812293730314"
+          # #stonks
+          {
+            type = "irc";
+            id = "sbc_xfpg7cszyeerj";
+          }
+          # #stonks
+          {
+            type = "discord";
+            id = "sbc_d2gfg6mrq1v9m";
+          }
         ]
 
         # cozy-calzones
         [
-          "minecraft://calzones/cozy%2Dcalzones"
-          "discord://seabird/1409444083880951940"
+          # cozy-calzones
+          {
+            type = "minecraft";
+            id = "sbc_hew5d2a6gb0zc";
+          }
+          # Calzone #minecraft
+          {
+            type = "discord";
+            id = "sbc_yrndjamz1xqxe";
+          }
         ]
       ];
     };
@@ -244,9 +398,9 @@
         address = "freya.elwert.dev:25575";
         passwordSecretFile = ../../../secrets/prod/seabird-rcon-plugin-cozy-calzones.age;
         mapUrl = "https://mc-calzone.elwert.cloud";
-        channels = [ "discord://seabird/1409444083880951940" ];
-        operatorChannels = [ "discord://seabird/1409444083880951940" ];
-        admins = [ "discord://seabird/107685126950891520" ];
+        channels = [ "sbc_yrndjamz1xqxe" ]; # Calzone #minecraft
+        operatorChannels = [ "sbc_yrndjamz1xqxe" ]; # Calzone #minecraft
+        admins = [ "sbu_mmzmawqd97qp6" ]; # discord user belak
       };
     };
 
@@ -270,7 +424,7 @@
         "webhooks.seabird.chat"
       ];
 
-      target = "discord://seabird/721047808077070446";
+      target = "sbc_89n3r40dqm4k2"; # #encoded-test
     };
   };
 
