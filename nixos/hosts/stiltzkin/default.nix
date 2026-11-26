@@ -100,7 +100,8 @@
     # their id to "seabird", the same as prod, which is unambiguous because each
     # environment has its own core. The Discord ids are staging's own guild.
     seabird-proxy-plugin = {
-      enable = true;
+      # Replaced by channel groups in core; kept for its channel IDs until prod moves.
+      enable = false;
       package = pkgs.seabird-staging.seabird-proxy-plugin;
       secretFile = ../../../secrets/staging/seabird-proxy-plugin.age;
 
