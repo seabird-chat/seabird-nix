@@ -342,11 +342,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786483301,
-        "narHash": "sha256-dBohcFAULHHuPQ1iwtxJs0fEVSZ50zTIjMq7pBGYfag=",
+        "lastModified": 1795690409,
+        "narHash": "sha256-ed/+i4SsyzZ6tkACLnRMyu4z/ZQTbs7arfAr/PLcUp8=",
         "owner": "seabird-chat",
         "repo": "seabird-datadog-plugin",
-        "rev": "63d1229450862a9809331ef7e9c1ffc61d5ce8f0",
+        "rev": "e59e5d87ee2993bc1efb857aa07b2731ce3c5725",
         "type": "github"
       },
       "original": {
