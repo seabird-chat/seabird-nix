@@ -38,7 +38,6 @@ in
       restartTriggers = [ (builtins.hashFile "sha256" cfg.secretFile) ];
       environment = {
         SEABIRD_HOST = "http://localhost:8080";
-        IGNORED_BACKENDS = "discord,minecraft";
       };
       serviceConfig = {
         DynamicUser = true;
