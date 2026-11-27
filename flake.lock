@@ -156,8 +156,6 @@
         "seabird-nwwsio-plugin-release": "seabird-nwwsio-plugin-release",
         "seabird-plugin-bundle-dev": "seabird-plugin-bundle-dev",
         "seabird-plugin-bundle-release": "seabird-plugin-bundle-release",
-        "seabird-proxy-plugin-dev": "seabird-proxy-plugin-dev",
-        "seabird-proxy-plugin-release": "seabird-proxy-plugin-release",
         "seabird-rcon-plugin-dev": "seabird-rcon-plugin-dev",
         "seabird-rcon-plugin-release": "seabird-rcon-plugin-release",
         "seabird-stock-plugin-dev": "seabird-stock-plugin-dev",
@@ -588,53 +586,6 @@
         "owner": "seabird-chat",
         "ref": "release",
         "repo": "seabird-plugin-bundle",
-        "type": "github"
-      }
-    },
-    "seabird-proxy-plugin-dev": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1795689116,
-        "narHash": "sha256-Mf/7+PCJbQdFmLcTetwRqfU+f253OvDcYA/jA+Xo/SU=",
-        "owner": "seabird-chat",
-        "repo": "seabird-proxy-plugin",
-        "rev": "5d370c180bb4ac2f070c34419307f33fdd663498",
-        "type": "github"
-      },
-      "original": {
-        "owner": "seabird-chat",
-        "repo": "seabird-proxy-plugin",
-        "type": "github"
-      }
-    },
-    "seabird-proxy-plugin-release": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1795689114,
-        "narHash": "sha256-ZN0aviaMO+2EWySROjKB4OHIBsTEHiMcfXK0/zMoS5g=",
-        "owner": "seabird-chat",
-        "repo": "seabird-proxy-plugin",
-        "rev": "fe20971555c03b68e61ef8357effd6afe321c312",
-        "type": "github"
-      },
-      "original": {
-        "owner": "seabird-chat",
-        "ref": "release",
-        "repo": "seabird-proxy-plugin",
         "type": "github"
       }
     },

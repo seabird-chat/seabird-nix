@@ -96,55 +96,6 @@
       secretFile = ../../../secrets/staging/seabird-datadog-plugin.age;
     };
 
-    # The groups the private IRC network was built for. Both backends default
-    # their id to "seabird", the same as prod, which is unambiguous because each
-    # environment has its own core. The Discord ids are staging's own guild.
-    seabird-proxy-plugin = {
-      # Replaced by channel groups in core; kept for its channel IDs until prod moves.
-      enable = false;
-      package = pkgs.seabird-staging.seabird-proxy-plugin;
-      secretFile = ../../../secrets/staging/seabird-proxy-plugin.age;
-
-      channelGroups = [
-        [
-          # #general
-          {
-            type = "irc";
-            id = "sbc_a3nsjz0g3bcpm";
-          }
-          # #general
-          {
-            type = "discord";
-            id = "sbc_vrknf1k36hsj0";
-          }
-        ]
-        [
-          # #botspam
-          {
-            type = "irc";
-            id = "sbc_w5e602pa5hty8";
-          }
-          # #botspam
-          {
-            type = "discord";
-            id = "sbc_gj41dww00m7ar";
-          }
-        ]
-        [
-          # #monitoring
-          {
-            type = "irc";
-            id = "sbc_dwmekc2q1qfee";
-          }
-          # #monitoring
-          {
-            type = "discord";
-            id = "sbc_rvf6z84ms3eq0";
-          }
-        ]
-      ];
-    };
-
     seabird-url-plugin = {
       enable = true;
       package = pkgs.seabird-staging.seabird-url-plugin;

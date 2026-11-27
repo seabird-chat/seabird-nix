@@ -32,7 +32,6 @@ in
   "secrets/prod/seabird-irc-backend-whyte.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-nwwsio-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-plugin-bundle.age".publicKeys = users ++ env-prod;
-  "secrets/prod/seabird-proxy-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-rcon-plugin.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-rcon-plugin-cozy-calzones.age".publicKeys = users ++ env-prod;
   "secrets/prod/seabird-stock-plugin.age".publicKeys = users ++ env-prod;
@@ -43,7 +42,6 @@ in
   "secrets/staging/seabird-irc-backend-monty.age".publicKeys = users ++ env-staging;
   "secrets/staging/seabird-datadog-plugin.age".publicKeys = users ++ env-staging;
   "secrets/staging/seabird-plugin-bundle.age".publicKeys = users ++ env-staging;
-  "secrets/staging/seabird-proxy-plugin.age".publicKeys = users ++ env-staging;
   "secrets/staging/seabird-url-plugin.age".publicKeys = users ++ env-staging;
 
   # TODO: move common API keys into separate files

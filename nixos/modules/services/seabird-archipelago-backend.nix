@@ -34,8 +34,7 @@ in
                   type = lib.types.str;
                 };
                 # Backend ID as seen by seabird-core. Defaults to the instance
-                # name so every room is unique; the proxy plugin addresses the
-                # room as archipelago://<id>/<channel>.
+                # name so every room is unique.
                 id = lib.mkOption {
                   type = lib.types.str;
                   default = config.name;

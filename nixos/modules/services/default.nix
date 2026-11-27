@@ -13,7 +13,6 @@
     ./seabird-github-plugin.nix
     ./seabird-nwwsio-plugin.nix
     ./seabird-plugin-bundle.nix
-    ./seabird-proxy-plugin.nix
     ./seabird-rcon-plugin.nix
     ./seabird-stock-plugin.nix
     ./seabird-url-plugin.nix

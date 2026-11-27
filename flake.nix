@@ -122,18 +122,6 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    seabird-proxy-plugin-release = {
-      url = "github:seabird-chat/seabird-proxy-plugin/release";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
-
-    seabird-proxy-plugin-dev = {
-      url = "github:seabird-chat/seabird-proxy-plugin";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
-
     seabird-nwwsio-plugin-release = {
       url = "github:seabird-chat/seabird-nwwsio-plugin/release";
       inputs.nixpkgs.follows = "nixpkgs";

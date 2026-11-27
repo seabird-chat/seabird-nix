@@ -31,7 +31,6 @@ inputs@{
         seabird-github-plugin = inputs.seabird-github-plugin-release.packages.${system}.default;
         seabird-nwwsio-plugin = inputs.seabird-nwwsio-plugin-release.packages.${system}.default;
         seabird-plugin-bundle = inputs.seabird-plugin-bundle-release.packages.${system}.default;
-        seabird-proxy-plugin = inputs.seabird-proxy-plugin-release.packages.${system}.default;
         seabird-rcon-plugin = inputs.seabird-rcon-plugin-release.packages.${system}.default;
         seabird-stock-plugin = inputs.seabird-stock-plugin-release.packages.${system}.default;
         seabird-url-plugin = inputs.seabird-url-plugin-release.packages.${system}.default;
@@ -54,7 +53,6 @@ inputs@{
         seabird-github-plugin = inputs.seabird-github-plugin-dev.packages.${system}.default;
         seabird-nwwsio-plugin = inputs.seabird-nwwsio-plugin-dev.packages.${system}.default;
         seabird-plugin-bundle = inputs.seabird-plugin-bundle-dev.packages.${system}.default;
-        seabird-proxy-plugin = inputs.seabird-proxy-plugin-dev.packages.${system}.default;
         seabird-rcon-plugin = inputs.seabird-rcon-plugin-dev.packages.${system}.default;
         seabird-stock-plugin = inputs.seabird-stock-plugin-dev.packages.${system}.default;
         seabird-url-plugin = inputs.seabird-url-plugin-dev.packages.${system}.default;
