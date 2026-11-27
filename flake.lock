@@ -763,11 +763,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795595285,
-        "narHash": "sha256-o2vTvlq43qJLONumXzWSBJTvdi3wZErXK8KoWX1/hDM=",
+        "lastModified": 1795747494,
+        "narHash": "sha256-GH9mE3ywh1eTJTeVx+vPhXRAMqYMQlRN6H/NXXYBl9o=",
         "owner": "seabird-chat",
         "repo": "seabird-webhook-receiver",
-        "rev": "620003e61103c104ecd3aa5bc9ef6d46595d650b",
+        "rev": "fc6c65dc1c72486e1aacb9d7340808db355774b3",
         "type": "github"
       },
       "original": {
